@@ -35,7 +35,8 @@ class Database:
                 start_time TEXT,
                 end_time TEXT,
                 location TEXT,
-                has_ticket INTEGER DEFAULT 0,
+                campus TEXT,
+                ticket_type TEXT,
                 ticket_info TEXT,
                 volunteer_hours REAL,
                 recruit_deadline TEXT,
@@ -74,9 +75,9 @@ class Database:
         conn.execute(
             """INSERT INTO events
             (article_id, category, title, organizer, date, start_time, end_time,
-             location, has_ticket, ticket_info, volunteer_hours, recruit_deadline,
+             location, campus, ticket_type, ticket_info, volunteer_hours, recruit_deadline,
              description, source_name, source_url)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 article_id,
                 ev.get("category", "other"),
@@ -86,7 +87,8 @@ class Database:
                 ev.get("start_time"),
                 ev.get("end_time"),
                 ev.get("location", ""),
-                1 if ev.get("has_ticket") else 0,
+                ev.get("campus"),
+                ev.get("ticket_type"),
                 ev.get("ticket_info", ""),
                 ev.get("volunteer_hours"),
                 ev.get("recruit_deadline"),
