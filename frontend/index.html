@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校园活动聚合</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    line-height: 1.5;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 16px; }
+
+  /* Header */
+  header {
+    text-align: center; padding: 24px 0 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff; margin-bottom: 16px; border-radius: 0 0 20px 20px;
+  }
+  header h1 { font-size: 24px; font-weight: 700; }
+  header p { font-size: 13px; opacity: .85; margin-top: 4px; }
+
+  /* Search */
+  .search-bar {
+    display: flex; gap: 8px; margin-bottom: 12px;
+  }
+  .search-bar input {
+    flex: 1; padding: 10px 14px; border: 1px solid #d2d2d7; border-radius: 10px;
+    font-size: 14px; outline: none; background: #fff;
+  }
+  .search-bar input:focus { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,.15); }
+  .search-bar button {
+    padding: 10px 18px; border: none; border-radius: 10px; background: #667eea;
+    color: #fff; font-size: 14px; cursor: pointer; white-space: nowrap;
+  }
+  .search-bar button:hover { background: #5a6fd6; }
+
+  /* Tabs */
+  .tabs {
+    display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px;
+  }
+  .tab {
+    padding: 8px 16px; border-radius: 20px; border: 1px solid #d2d2d7;
+    background: #fff; cursor: pointer; font-size: 13px; white-space: nowrap;
+    transition: all .15s;
+  }
+  .tab:hover { border-color: #667eea; }
+  .tab.active { background: #667eea; color: #fff; border-color: #667eea; }
+  .tab .count { font-size: 11px; opacity: .6; margin-left: 4px; }
+  .tab.active .count { opacity: .8; }
+
+  /* Filters */
+  .filters {
+    display: flex; gap: 10px; margin-bottom: 12px; align-items: center;
+    font-size: 13px;
+  }
+  .filters label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+  .filters input[type="checkbox"] { accent-color: #667eea; }
+
+  /* Stats bar */
+  .stats-bar {
+    font-size: 12px; color: #86868b; margin-bottom: 12px; text-align: center;
+  }
+
+  /* Event card */
+  .event-card {
+    background: #fff; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06); transition: box-shadow .15s;
+    border-left: 4px solid #667eea;
+  }
+  .event-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,.1); }
+  .event-card.lecture { border-left-color: #4facfe; }
+  .event-card.event { border-left-color: #f093fb; }
+  .event-card.volunteer { border-left-color: #43e97b; }
+  .event-card.other { border-left-color: #a0a0a0; }
+
+  .event-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 8px; margin-bottom: 6px;
+  }
+  .event-title {
+    font-size: 15px; font-weight: 600; line-height: 1.3;
+  }
+  .event-badge {
+    font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+  }
+  .badge-lecture { background: #e8f4fd; color: #1a73e8; }
+  .badge-event { background: #fce4f7; color: #c2185b; }
+  .badge-volunteer { background: #e6f7ee; color: #1b8a4b; }
+  .badge-ticket { background: #fff3e0; color: #e65100; }
+  .badge-other { background: #f0f0f0; color: #555; }
+
+  .event-meta {
+    font-size: 12px; color: #666; margin-bottom: 6px;
+  }
+  .event-meta span { margin-right: 12px; }
+  .event-meta .icon { margin-right: 2px; }
+  .event-desc {
+    font-size: 13px; color: #444; margin-bottom: 6px;
+  }
+  .event-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: #86868b; padding-top: 6px; border-top: 1px solid #f0f0f0;
+  }
+  .event-footer a { color: #667eea; text-decoration: none; }
+  .event-footer a:hover { text-decoration: underline; }
+
+  /* Date separator */
+  .date-sep {
+    font-size: 13px; font-weight: 600; color: #555;
+    padding: 12px 0 6px; margin-top: 4px;
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center; padding: 60px 20px; color: #86868b;
+  }
+  .empty-state .emoji { font-size: 48px; margin-bottom: 12px; }
+
+  /* Loading / Error */
+  .loading { text-align: center; padding: 40px; color: #86868b; }
+
+  /* Footer */
+  .page-footer {
+    text-align: center; padding: 20px 0 30px;
+    font-size: 11px; color: #a0a0a0;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .container { padding: 10px; }
+    header { padding: 18px 0 12px; }
+    header h1 { font-size: 20px; }
+    .event-title { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📅 校园活动聚合</h1>
+  <p>讲座 · 活动 · 志愿招募 &mdash; 一目了然</p>
+</header>
+
+<div class="container">
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="搜索活动、地点、组织..." oninput="filterEvents()">
+    <button onclick="refreshData()">刷新</button>
+  </div>
+
+  <div class="tabs" id="tabContainer">
+    <div class="tab active" data-category="all" onclick="switchTab('all', this)">全部</div>
+    <div class="tab" data-category="lecture" onclick="switchTab('lecture', this)">📚 讲座</div>
+    <div class="tab" data-category="event" onclick="switchTab('event', this)">🎭 活动</div>
+    <div class="tab" data-category="volunteer" onclick="switchTab('volunteer', this)">🤝 志愿</div>
+  </div>
+
+  <div class="filters">
+    <label><input type="checkbox" id="ticketFilter" onchange="filterEvents()"> 只看有讲座单</label>
+    <span style="flex:1"></span>
+    <label><input type="checkbox" id="upcomingFilter" checked onchange="filterEvents()"> 只看近期</label>
+  </div>
+
+  <div class="stats-bar" id="statsBar"></div>
+  <div id="eventList"></div>
+  <div class="page-footer" id="footer"></div>
+</div>
+
+<script>
+const DATA_URL = './events.json';
+let allEvents = [];
+let currentTab = 'all';
+
+async function loadData() {
+  const list = document.getElementById('eventList');
+  list.innerHTML = '<div class="loading">加载中...</div>';
+
+  try {
+    const resp = await fetch(DATA_URL + '?t=' + Date.now());
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    allEvents = data.events || [];
+
+    const stats = data.stats || {};
+    const countLabels = {
+      all: stats.total || 0,
+      lecture: stats.lecture || 0,
+      event: stats.event || 0,
+      volunteer: stats.volunteer || 0,
+    };
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      const cat = tab.dataset.category;
+      const cnt = countLabels[cat] || 0;
+      const span = tab.querySelector('.count');
+      if (!span) {
+        const s = document.createElement('span');
+        s.className = 'count';
+        s.textContent = '(' + cnt + ')';
+        tab.appendChild(s);
+      } else {
+        span.textContent = '(' + cnt + ')';
+      }
+    });
+
+    const updatedAt = data.updated_at || '未知';
+    document.getElementById('footer').textContent =
+      '数据更新于 ' + updatedAt + ' · 共 ' + allEvents.length + ' 个活动';
+
+    filterEvents();
+  } catch (e) {
+    list.innerHTML = '<div class="empty-state"><div class="emoji">😅</div><p>数据加载失败，请确认 events.json 文件存在</p><p style="font-size:12px;margin-top:8px">' + e.message + '</p></div>';
+  }
+}
+
+function switchTab(category, el) {
+  currentTab = category;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  filterEvents();
+}
+
+function filterEvents() {
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
+  const ticketOnly = document.getElementById('ticketFilter').checked;
+  const upcomingOnly = document.getElementById('upcomingFilter').checked;
+  const list = document.getElementById('eventList');
+
+  let filtered = allEvents.filter(ev => {
+    if (currentTab !== 'all' && ev.category !== currentTab) return false;
+    if (ticketOnly && !ev.has_ticket) return false;
+    if (upcomingOnly && ev.date && ev.date < getToday()) return false;
+    if (search) {
+      const haystack = (ev.title + ' ' + ev.location + ' ' + ev.organizer + ' ' + ev.description).toLowerCase();
+      if (!haystack.includes(search)) return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (a.date !== b.date) return (a.date || '').localeCompare(b.date || '');
+    return (a.start_time || '').localeCompare(b.start_time || '');
+  });
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="emoji">🔍</div><p>没有匹配的活动</p></div>';
+    return;
+  }
+
+  document.getElementById('statsBar').textContent = '显示 ' + filtered.length + ' / ' + allEvents.length + ' 个活动';
+
+  let html = '';
+  let lastDate = '';
+  for (const ev of filtered) {
+    const d = ev.date || '待定';
+    if (d !== lastDate) {
+      html += '<div class="date-sep">' + formatDate(d) + '</div>';
+      lastDate = d;
+    }
+    html += renderCard(ev);
+  }
+  list.innerHTML = html;
+}
+
+function renderCard(ev) {
+  const catLabel = {lecture:'📚讲座', event:'🎭活动', volunteer:'🤝志愿', other:'📄其他'}[ev.category] || '📄其他';
+  const catClass = ev.category === 'lecture' || ev.category === 'event' || ev.category === 'volunteer' ? ev.category : 'other';
+
+  let badges = '<span class="event-badge badge-' + catClass + '">' + catLabel + '</span>';
+  if (ev.has_ticket) {
+    badges += ' <span class="event-badge badge-ticket">🎫有讲座单</span>';
+  }
+  if (ev.volunteer_hours) {
+    badges += ' <span class="event-badge badge-volunteer">⏱' + ev.volunteer_hours + 'h</span>';
+  }
+
+  const timeStr = [ev.start_time, ev.end_time].filter(Boolean).join(' - ');
+  const meta = [];
+  if (ev.date) meta.push('<span>📅 ' + ev.date + '</span>');
+  if (timeStr) meta.push('<span>⏰ ' + timeStr + '</span>');
+  if (ev.location) meta.push('<span>📍 ' + ev.location + '</span>');
+
+  let desc = '';
+  if (ev.description) desc = '<div class="event-desc">' + escapeHtml(ev.description) + '</div>';
+
+  return '<div class="event-card ' + catClass + '">' +
+    '<div class="event-header">' +
+      '<div class="event-title">' + escapeHtml(ev.title) + '</div>' +
+      '<div>' + badges + '</div>' +
+    '</div>' +
+    '<div class="event-meta">' + meta.join('') + '</div>' +
+    desc +
+    '<div class="event-footer">' +
+      '<span>' + escapeHtml(ev.organizer || ev.source_name) + '</span>' +
+      '<a href="' + escapeHtml(ev.source_url) + '" target="_blank" rel="noopener">查看原文 →</a>' +
+    '</div>' +
+  '</div>';
+}
+
+function formatDate(d) {
+  if (!d) return '待定';
+  const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+  try {
+    const dt = new Date(d + 'T00:00:00');
+    if (isNaN(dt.getTime())) return d;
+    const month = dt.getMonth() + 1;
+    const day = dt.getDate();
+    const wd = weekdays[dt.getDay()];
+    const today = new Date();
+    const diff = Math.floor((dt - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / 86400000);
+    let prefix = '';
+    if (diff === 0) prefix = '今天 · ';
+    else if (diff === 1) prefix = '明天 · ';
+    else if (diff === 2) prefix = '后天 · ';
+    else if (diff > 0 && diff <= 7) prefix = '周' + wd + ' · ';
+    return prefix + month + '月' + day + '日 周' + wd;
+  } catch { return d; }
+}
+
+function getToday() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function refreshData() {
+  loadData();
+}
+
+loadData();
+</script>
+</body>
+</html>

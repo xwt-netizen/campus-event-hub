@@ -1,0 +1,17 @@
+{
+  "llm": {
+    "provider": "deepseek",
+    "api_key": "sk-你的API密钥",
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-chat"
+  },
+  "data": {
+    "input_dir": "data/raw",
+    "db_path": "data/events.db",
+    "output_json": "frontend/events.json"
+  },
+  "wechat_download": {
+    "export_format": "csv",
+    "export_dir": "data/raw"
+  }
+}
