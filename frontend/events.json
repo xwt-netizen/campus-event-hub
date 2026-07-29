@@ -2,33 +2,12 @@
   "updated_at": "2026-07-29",
   "stats": {
     "event": 1,
-    "lecture": 1,
-    "total": 2
+    "total": 1
   },
   "events": [
     {
       "id": 1,
       "article_id": 1,
-      "category": "lecture",
-      "title": "AI与大模型技术前沿讲座",
-      "organizer": "XX大学学生会",
-      "date": "2026-09-20",
-      "start_time": "14:30",
-      "end_time": "16:00",
-      "location": "图书馆报告厅",
-      "campus": "北洋园",
-      "ticket_type": "academic",
-      "ticket_info": "限量150张，请提前到场领取",
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "计算机学院张明教授分享AI与大模型技术前沿",
-      "source_name": "XX大学学生会",
-      "source_url": "raw/XX大学学生会/2026-07-15-AI与大模型技术前沿讲座.md",
-      "created_at": "2026-07-29 16:34:59"
-    },
-    {
-      "id": 2,
-      "article_id": 2,
       "category": "event",
       "title": "第三届海棠音乐节",
       "organizer": "花堤青年工作室",
@@ -44,7 +23,7 @@
       "description": "第三届海棠音乐节倒计时一天",
       "source_name": "青春天大",
       "source_url": "raw/青春天大/[2026-05-28-1837]青春天大精彩艺起来雅观路135号闪耀再出发第三届海棠音乐节倒计时一天.md",
-      "created_at": "2026-07-29 16:40:16"
+      "created_at": "2026-07-29 16:47:44"
     }
   ]
 }

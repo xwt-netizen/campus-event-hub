@@ -53,6 +53,11 @@
     display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; align-items: center;
   }
   .filter-label { font-size: 12px; color: #86868b; margin-right: 4px; }
+  .filters {
+    display: flex; gap: 10px; margin-bottom: 8px; align-items: center; font-size: 13px;
+  }
+  .filters label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+  .filters input[type="checkbox"] { accent-color: #b71c1c; }
   .chip {
     padding: 4px 12px; border-radius: 14px; border: 1px solid #d2d2d7;
     background: #fff; cursor: pointer; font-size: 12px; white-space: nowrap;
@@ -174,6 +179,10 @@
     <div class="chip" data-ticket="theme" onclick="switchTicket('theme', this)">📗主题教育（选修）</div>
   </div>
 
+  <div class="filters">
+    <label><input type="checkbox" id="upcomingFilter" onchange="filterEvents()"> 只看近期</label>
+  </div>
+
   <div class="stats-bar" id="statsBar"></div>
   <div id="eventList"></div>
   <div class="page-footer" id="footer"></div>
@@ -244,7 +253,7 @@ function switchTicket(ticket, el) {
 
 function filterEvents() {
   const search = document.getElementById('searchInput').value.trim().toLowerCase();
-  const upcomingOnly = true;
+  const upcomingOnly = document.getElementById('upcomingFilter').checked;
   const list = document.getElementById('eventList');
 
   let filtered = allEvents.filter(ev => {
@@ -346,7 +355,9 @@ function renderCard(ev) {
     desc +
     '<div class="event-footer">' +
       '<span>' + escapeHtml(ev.organizer || ev.source_name) + ticketNote + '</span>' +
-      '<a href="' + escapeHtml(ev.source_url) + '" target="_blank" rel="noopener">查看原文 →</a>' +
+      (ev.source_url && ev.source_url.startsWith('http') 
+        ? '<a href="' + escapeHtml(ev.source_url) + '" target="_blank" rel="noopener">查看原文 →</a>'
+        : '<span style="color:#aaa">' + escapeHtml(ev.source_name) + ' 发布</span>') +
     '</div>' +
   '</div>';
 }
