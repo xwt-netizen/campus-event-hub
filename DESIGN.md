@@ -18,7 +18,7 @@
 ├─────────────────────────┤
 │   AI 解析层               │
 │   Python Pipeline         │
-│   → 调用 TJU AI API       │
+│   → 调用 DeepSeek API       │
 │   → 提取结构化活动信息      │
 │   → 写入 SQLite           │
 │   → 导出 events.json      │
@@ -36,7 +36,7 @@
 | 组件 | 技术选型 | 说明 |
 |------|----------|------|
 | 数据采集 | wechatDownload | 通过微信桌面版 API 获取公众号文章 |
-| AI 推理 | TJU AI API (`tju-llm`) | 校内大模型服务，兼容 OpenAI 格式 |
+| AI 推理 | DeepSeek API (`deepseek-chat`) | 大模型服务，兼容 OpenAI 格式 |
 | 存储 | SQLite | 本地数据库，零配置 |
 | 后端 | Python (仅脚本，无服务) | 解析流水线，非 Web 服务 |
 | 前端 | 纯静态 HTML/CSS/JS | 无框架，直接部署 |
@@ -47,7 +47,7 @@
 
 ### Prompt 设计
 
-调用 TJU AI API（模型 `tju-llm`），通过精心设计的 system prompt 从文章正文中提取：
+调用 DeepSeek API（模型 `deepseek-chat`），通过精心设计的 system prompt 从文章正文中提取：
 
 ```json
 {
@@ -109,7 +109,7 @@ wechatDownload (每天定时拉取公众号文章)
   → 导出 CSV 到 data/raw/
   → pipeline.py 读取新 CSV
   → 去重（检查 URL 是否已处理）
-  → 调用 TJU AI API 提取结构化信息
+  → 调用 DeepSeek API 提取结构化信息
   → 写入 SQLite
   → 导出 frontend/events.json
   → git push（触发前端更新）
@@ -125,5 +125,5 @@ wechatDownload (每天定时拉取公众号文章)
 ## 使用到的比赛资源
 
 - **代码托管**：天津大学 GitLab（gitlab.tju.edu.cn）
-- **AI API**：TJU AI API（ai.tju.edu.cn），模型 `tju-llm`
+- **AI API**：DeepSeek API（api.deepseek.com），模型 `deepseek-chat`
 - **统一身份认证**：天津大学账号体系

@@ -28,7 +28,7 @@
 ## 技术方案
 
 ```
-公众号文章 → wechatDownload 采集 → TJU AI API 提取结构化信息 → SQLite 存储 → 前端网页展示
+公众号文章 → wechatDownload 采集 → DeepSeek API 提取结构化信息 → SQLite 存储 → 前端网页展示
 ```
 
 详见 [DESIGN.md](DESIGN.md)
@@ -51,7 +51,7 @@
 ## 使用到的比赛资源
 
 - **代码托管**：天津大学 GitLab（gitlab.tju.edu.cn）
-- **AI API**：TJU AI API（ai.tju.edu.cn），模型 `tju-llm`
+- **AI API**：DeepSeek API（api.deepseek.com），模型 `deepseek-chat`
 - **统一身份认证**：天津大学账号体系
 
 ## 开发者
