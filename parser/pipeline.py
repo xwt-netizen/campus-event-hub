@@ -1,5 +1,13 @@
 """
-主流程：读取 wechatDownload 导出的 CSV 文章 → LLM 解析 → 写入 SQLite → 导出 JSON
+主流程：读取 wechatDownload 导出的 Markdown 文章 → LLM 解析 → 写入 SQLite → 导出 JSON
+
+wechatDownload MD 导出格式：
+  data/raw/
+    ├── 公众号A/
+    │   ├── 2026-07-28-文章标题.md
+    │   └── ...
+    └── 公众号B/
+        └── ...
 
 用法：
   python pipeline.py                    # 处理所有新文章
@@ -8,9 +16,9 @@
 """
 
 import argparse
-import csv
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -20,24 +28,62 @@ from config import load as load_config
 from db import Database
 from llm_parser import LLMParser
 
-
-def find_csv_files(input_dir: str) -> list[Path]:
-    return list(Path(input_dir).glob("*.csv"))
+DATE_RE = re.compile(r'^(\d{4}-\d{2}-\d{2})[-_]')
 
 
-def read_csv(filepath: Path) -> list[dict]:
-    rows = []
-    with open(filepath, encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            rows.append(row)
-    return rows
-
-
-def guess_source_name(filepath: Path) -> str:
+def parse_filename(filepath: Path) -> tuple[str | None, str]:
+    """
+    从文件名解析标题和日期。
+    支持格式：2026-07-28-标题.md 或 纯标题.md
+    返回 (date, title)
+    """
     name = filepath.stem
-    name = name.replace("_articles", "").replace("_历史文章", "").replace("_data", "")
-    return name
+    m = DATE_RE.match(name)
+    if m:
+        return m.group(1), name[m.end():].strip()
+    return None, name.strip()
+
+
+def guess_source_name(filepath: Path, input_dir: str) -> str:
+    inp = Path(input_dir).resolve()
+    f = filepath.resolve()
+    try:
+        rel = f.relative_to(inp)
+    except ValueError:
+        return f.parent.name
+    parts = rel.parts
+    if len(parts) >= 2:
+        return parts[0]
+    return "未知公众号"
+
+
+def find_md_files(input_dir: str) -> list[Path]:
+    p = Path(input_dir)
+    if not p.exists():
+        return []
+    files = sorted(p.rglob("*.md"))
+    return [f for f in files if f.name != ".gitkeep"]
+
+
+def read_md(filepath: Path) -> tuple[str, str]:
+    """
+    读取 Markdown 文件，返回 (title, content)。
+    优先用第一个 # 标题，否则用文件名。
+    """
+    with open(filepath, encoding="utf-8") as f:
+        raw = f.read().strip()
+
+    title = filepath.stem
+    content = raw
+
+    for line in raw.split("\n"):
+        stripped = line.strip()
+        if stripped.startswith("# "):
+            title = stripped[2:].strip()
+            content = raw.replace(line, "", 1).strip()
+            break
+
+    return title, content
 
 
 def run_pipeline(cfg, force_all: bool = False):
@@ -58,56 +104,52 @@ def run_pipeline(cfg, force_all: bool = False):
     )
 
     if not llm_cfg.get("api_key"):
-        print("错误：未配置 LLM API key。请先编辑 config.json 或设置环境变量。")
+        print("错误：未配置 LLM API key。")
         print("  1. 复制 config.example.json 为 config.json")
         print("  2. 填入你的 API key")
         sys.exit(1)
 
-    csv_files = find_csv_files(input_dir)
-    if not csv_files:
-        print(f"没有找到 CSV 文件。请将 wechatDownload 导出的 CSV 文件放入: {input_dir}")
+    md_files = find_md_files(input_dir)
+    if not md_files:
+        print(f"没有找到 .md 文件。请将 wechatDownload 导出的 MD 文章放入: {input_dir}")
         return
 
     total_new = 0
     total_events = 0
 
-    for csv_file in csv_files:
-        source_name = guess_source_name(csv_file)
-        print(f"\n处理: {csv_file.name} (公众号: {source_name})")
+    for md_file in md_files:
+        rel_path = str(md_file.relative_to(Path(input_dir).parent))
+        source_name = guess_source_name(md_file, input_dir)
 
-        rows = read_csv(csv_file)
-        print(f"  共 {len(rows)} 篇文章")
+        if not force_all and db.article_exists(rel_path):
+            continue
 
-        for row in rows:
-            source_url = row.get("url", row.get("链接", "")).strip()
-            if not source_url:
-                continue
+        pub_date, fn_title = parse_filename(md_file)
+        md_title, content = read_md(md_file)
+        title = md_title if md_title else fn_title
 
-            if not force_all and db.article_exists(source_url):
-                continue
+        print(f"\n{source_name} · {md_file.name}")
+        print(f"  标题: {title[:50]}")
 
-            title = row.get("title", row.get("标题", ""))
-            content = row.get("content", row.get("正文", row.get("文章内容", "")))
-            publish_date = row.get("date", row.get("发布时间", row.get("日期", "")))
+        events = parser.parse_article(title, content, source_name, rel_path)
 
-            print(f"  解析: {title[:40]}...")
-            events = parser.parse_article(title, content, source_name, source_url)
+        if not events:
+            print(f"    未提取到活动信息")
+            db.insert_article(rel_path, source_name, title, content, pub_date)
+            continue
 
-            if not events:
-                print(f"    未提取到活动信息")
-                article_id = db.insert_article(source_url, source_name, title, content, publish_date)
-                continue
+        article_id = db.insert_article(rel_path, source_name, title, content, pub_date)
+        if not article_id:
+            continue
 
-            article_id = db.insert_article(source_url, source_name, title, content, publish_date)
-            if not article_id:
-                continue
+        for ev in events:
+            ev["source_name"] = source_name
+            ev["source_url"] = rel_path
+            db.insert_event(article_id, ev)
 
-            for ev in events:
-                db.insert_event(article_id, ev)
-
-            print(f"    提取到 {len(events)} 个活动: {', '.join(e.get('title', '?')[:20] for e in events)}")
-            total_new += 1
-            total_events += len(events)
+        print(f"    → {len(events)} 个活动: {', '.join(e.get('title', '?')[:25] for e in events)}")
+        total_new += 1
+        total_events += len(events)
 
     print(f"\n完成！新增文章: {total_new}, 新增活动: {total_events}")
 
@@ -132,7 +174,7 @@ def export_events_json(db: Database, output_path: str):
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"已导出 {len(events)} 个活动到: {output_path}")
+    print(f"\n已导出 {len(events)} 个活动到: {output_path}")
 
 
 def show_stats(cfg):
@@ -147,10 +189,10 @@ def show_stats(cfg):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="校园活动信息提取流水线")
-    parser.add_argument("--force", action="store_true", help="强制重新处理所有文章")
-    parser.add_argument("--stats", action="store_true", help="查看统计信息")
-    args = parser.parse_args()
+    ap = argparse.ArgumentParser(description="校园活动信息提取流水线")
+    ap.add_argument("--force", action="store_true", help="强制重新处理所有文章")
+    ap.add_argument("--stats", action="store_true", help="查看统计信息")
+    args = ap.parse_args()
 
     cfg = load_config()
 
