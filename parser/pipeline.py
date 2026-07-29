@@ -28,7 +28,7 @@ from config import load as load_config
 from db import Database
 from llm_parser import LLMParser
 
-DATE_RE = re.compile(r'^(\d{4}-\d{2}-\d{2})[-_]')
+DATE_RE = re.compile(r'^\[?(\d{4}-\d{2}-\d{2})(?:[-_]\d{4})?\]?[-_]?')
 
 
 def parse_filename(filepath: Path) -> tuple[str | None, str]:
@@ -160,7 +160,7 @@ def export_events_json(db: Database, output_path: str):
     from datetime import date
 
     today = date.today().isoformat()
-    events = db.get_upcoming_events()
+    events = db.get_all_events()
 
     stats = db.get_stats()
 

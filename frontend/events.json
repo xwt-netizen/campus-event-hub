@@ -1,8 +1,9 @@
 {
   "updated_at": "2026-07-29",
   "stats": {
+    "event": 1,
     "lecture": 1,
-    "total": 1
+    "total": 2
   },
   "events": [
     {
@@ -24,6 +25,26 @@
       "source_name": "XX大学学生会",
       "source_url": "raw/XX大学学生会/2026-07-15-AI与大模型技术前沿讲座.md",
       "created_at": "2026-07-29 16:34:59"
+    },
+    {
+      "id": 2,
+      "article_id": 2,
+      "category": "event",
+      "title": "第三届海棠音乐节",
+      "organizer": "花堤青年工作室",
+      "date": "2026-05-28",
+      "start_time": null,
+      "end_time": null,
+      "location": "雅观路135号",
+      "campus": "北洋园",
+      "ticket_type": null,
+      "ticket_info": null,
+      "volunteer_hours": null,
+      "recruit_deadline": null,
+      "description": "第三届海棠音乐节倒计时一天",
+      "source_name": "青春天大",
+      "source_url": "raw/青春天大/[2026-05-28-1837]青春天大精彩艺起来雅观路135号闪耀再出发第三届海棠音乐节倒计时一天.md",
+      "created_at": "2026-07-29 16:40:16"
     }
   ]
 }
