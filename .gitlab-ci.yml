@@ -1,0 +1,11 @@
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    - cp frontend/index.html public/
+    - cp frontend/events.json public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
