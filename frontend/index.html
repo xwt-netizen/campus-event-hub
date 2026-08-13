@@ -134,7 +134,12 @@
   .date-sep {
     font-size: 13px; font-weight: 600; color: #555;
     padding: 12px 0 6px; margin-top: 4px;
+    cursor: pointer; user-select: none;
   }
+  .date-sep:hover { color: #b71c1c; }
+  .fold-arrow { display: inline-block; width: 16px; color: #b71c1c; }
+  .fold-count { font-weight: normal; color: #999; font-size: 12px; }
+  .date-group { }
 
   .empty-state {
     text-align: center; padding: 60px 20px; color: #86868b;
@@ -298,8 +303,10 @@ function filterEvents() {
   });
 
   filtered.sort((a, b) => {
-    if (a.date !== b.date) return (a.date || '').localeCompare(b.date || '');
-    return (a.start_time || '').localeCompare(b.start_time || '');
+    const da = a.date || '9999-99-99';
+    const db = b.date || '9999-99-99';
+    if (da !== db) return db.localeCompare(da);  // 从新到旧，无日期排最后
+    return (b.start_time || '').localeCompare(a.start_time || '');
   });
 
   if (filtered.length === 0) {
@@ -323,17 +330,44 @@ function filterEvents() {
   if (ticketCnt.theme) statsParts.push('｜📗主题教育 ' + ticketCnt.theme);
   document.getElementById('statsBar').textContent = statsParts.join(' ');
 
+  // 按日期分组，每组可折叠
   let html = '';
   let lastDate = '';
   for (const ev of filtered) {
     const d = ev.date || '待定';
     if (d !== lastDate) {
-      html += '<div class="date-sep">' + formatDate(d) + '</div>';
+      if (lastDate !== '') html += '</div>';
+      const groupId = 'g' + d.replace(/[^0-9]/g, '');
+      const isCollapsed = collapsedDates.has(d);
+      html += '<div class="date-sep" onclick="toggleDate(\'' + d + '\', this)">' +
+        '<span class="fold-arrow">' + (isCollapsed ? '▸' : '▾') + '</span> ' +
+        formatDate(d) + ' <span class="fold-count">(' + groupCount(filtered, d) + ')</span></div>';
+      html += '<div class="date-group" id="' + groupId + '" style="' + (isCollapsed ? 'display:none' : '') + '">';
       lastDate = d;
     }
     html += renderCard(ev);
   }
+  if (lastDate !== '') html += '</div>';
   list.innerHTML = html;
+}
+
+const collapsedDates = new Set();
+
+function groupCount(events, date) {
+  return events.filter(e => (e.date || '待定') === date).length;
+}
+
+function toggleDate(date, el) {
+  if (collapsedDates.has(date)) {
+    collapsedDates.delete(date);
+  } else {
+    collapsedDates.add(date);
+  }
+  const groupId = 'g' + date.replace(/[^0-9]/g, '');
+  const group = document.getElementById(groupId);
+  if (group) group.style.display = (group.style.display === 'none') ? '' : 'none';
+  const arrow = el.querySelector('.fold-arrow');
+  if (arrow) arrow.textContent = (collapsedDates.has(date)) ? '▸' : '▾';
 }
 
 function renderCard(ev) {

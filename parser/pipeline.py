@@ -209,17 +209,33 @@ def dedup_events(events: list) -> list:
     return result
 
 
-EXCLUDE_KEYWORDS = ("安全提醒", "防诈骗", "反诈", "防骗", "谨防", "预警", "辟谣", "诈骗")
+EXCLUDE_KEYWORDS = (
+    "安全提醒", "防诈骗", "反诈", "防骗", "谨防", "预警", "辟谣", "诈骗",
+    # 实践总结/纪实类报告（已完成活动的记录，非招募）
+    "实践总结", "实践纪实", "纪实", "总结报告", "实践记录", "支教日记", "行记",
+    "调研", "考察",
+)
+
+
+def is_practice_report(text: str) -> bool:
+    """实践队内容：只要招募/纳新/报名，不要总结报告"""
+    if "实践队" not in text:
+        return False
+    if any(k in text for k in ("招募", "纳新", "报名")):
+        return False
+    return True
 
 
 def filter_events(events: list) -> list:
-    """过滤掉无需展示的内容（安全提醒、防诈骗等）"""
+    """过滤掉无需展示的内容（安全提醒、实践总结/纪实报告等）"""
     result = []
     for ev in events:
         title = ev.get("title", "") or ""
         desc = ev.get("description", "") or ""
         text = title + desc
         if any(kw in text for kw in EXCLUDE_KEYWORDS):
+            continue
+        if is_practice_report(text):
             continue
         result.append(ev)
     return result
