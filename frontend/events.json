@@ -1,12 +1,12 @@
 {
   "updated_at": "2026-08-13",
   "stats": {
-    "notice": 129,
+    "notice": 101,
     "movie": 12,
-    "event": 71,
+    "event": 62,
     "lecture": 3,
-    "volunteer": 10,
-    "total": 225,
+    "volunteer": 9,
+    "total": 187,
     "account_count": 22
   },
   "events": [
@@ -149,32 +149,6 @@
         {
           "name": "天津大学场馆中心",
           "url": "下载/天津大学场馆中心/[2026-08-11-1807]求实影院8月15日最新电影放映安排.md"
-        }
-      ]
-    },
-    {
-      "id": 104,
-      "article_id": 125,
-      "category": "notice",
-      "title": "天津大学登上《中国教育报》头版头条",
-      "organizer": "天津大学",
-      "date": "2026-08-10",
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "天津大学探索“综合性大学+师范院校+优质中学”协同育人新路，被《中国教育报》头版头条报道。",
-      "source_name": "天津大学",
-      "source_url": "下载/天津大学/[2026-08-10-1500]天津大学登上头版头条.md",
-      "created_at": "2026-08-13 20:40:52",
-      "sources": [
-        {
-          "name": "天津大学",
-          "url": "下载/天津大学/[2026-08-10-1500]天津大学登上头版头条.md"
         }
       ]
     },
@@ -611,40 +585,6 @@
       ]
     },
     {
-      "id": 266,
-      "article_id": 279,
-      "category": "notice",
-      "title": "《人民日报》整版聚焦天津大学",
-      "organizer": "人民日报",
-      "date": "2026-07-24",
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "《人民日报》今日整版报道天津大学，聚焦人才自主培养和科技自立自强之路。",
-      "source_name": "天津大学教务处",
-      "source_url": "下载/天津大学教务处/[2026-07-24-1220]人民日报整版聚焦天大.md",
-      "created_at": "2026-08-13 20:45:27",
-      "sources": [
-        {
-          "name": "天津大学教务处",
-          "url": "下载/天津大学教务处/[2026-07-24-1220]人民日报整版聚焦天大.md"
-        },
-        {
-          "name": "天津大学招生办",
-          "url": "下载/天津大学招生办/[2026-07-24-1005]人民日报整版聚焦天大.md"
-        },
-        {
-          "name": "天津大学",
-          "url": "下载/天津大学/[2026-07-24-0931]人民日报整版聚焦天大.md"
-        }
-      ]
-    },
-    {
       "id": 196,
       "article_id": 200,
       "category": "notice",
@@ -969,32 +909,6 @@
       ]
     },
     {
-      "id": 323,
-      "article_id": 347,
-      "category": "event",
-      "title": "天津大学学生骨干培养“星火班”赴红土古田寻根铸魂",
-      "organizer": "天津大学",
-      "date": "2026-07-14",
-      "start_time": "15:00",
-      "end_time": null,
-      "location": "龙岩上杭古田会议旧址群",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "星火班学员赴古田会议旧址群开展红色实践研学活动",
-      "source_name": "耀北洋",
-      "source_url": "下载/耀北洋/[2026-07-16-1945]天津大学学生骨干培养星火班赴红土古田寻根铸魂以青年星火续写时代新篇.md",
-      "created_at": "2026-08-13 20:47:19",
-      "sources": [
-        {
-          "name": "耀北洋",
-          "url": "下载/耀北洋/[2026-07-16-1945]天津大学学生骨干培养星火班赴红土古田寻根铸魂以青年星火续写时代新篇.md"
-        }
-      ]
-    },
-    {
       "id": 382,
       "article_id": 403,
       "category": "event",
@@ -1069,32 +983,6 @@
         {
           "name": "天津大学学生社团团委",
           "url": "下载/天津大学学生社团团委/[2026-08-05-2038]三下乡中的青春故事之创新中国行昱见青蓝走进海信触摸科技脉搏.md"
-        }
-      ]
-    },
-    {
-      "id": 1,
-      "article_id": 1,
-      "category": "notice",
-      "title": "北洋军乐团2026-2027团队长、声部长名单公示",
-      "organizer": "北洋军乐团",
-      "date": "2026-07-14",
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": "2026-07-17",
-      "description": "公示新一届团队长、声部长名单，公示期为四个工作日。",
-      "source_name": "北洋军乐团",
-      "source_url": "下载/北洋军乐团/[2026-07-14-2006]北洋军乐团20262027团队长声部长名单.md",
-      "created_at": "2026-08-13 20:35:33",
-      "sources": [
-        {
-          "name": "北洋军乐团",
-          "url": "下载/北洋军乐团/[2026-07-14-2006]北洋军乐团20262027团队长声部长名单.md"
         }
       ]
     },
@@ -1787,112 +1675,6 @@
       ]
     },
     {
-      "id": 172,
-      "article_id": 188,
-      "category": "notice",
-      "title": "财务处2026年暑期值班安排",
-      "organizer": "财务处",
-      "date": null,
-      "start_time": "08:30",
-      "end_time": "16:30",
-      "location": "卫津路校区、北洋园校区",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "财务处暑假轮休值班安排，包括报账大厅办公时间和投递系统开放信息。",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-13-1930]棠小果资讯财务处2026年暑期值班安排.md",
-      "created_at": "2026-08-13 20:42:45",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-13-1930]棠小果资讯财务处2026年暑期值班安排.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-10-1930]棠小果资讯一卡通办公室2026年暑假值班安排.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-09-1930]棠小果资讯2026年暑假校园生活指南.md"
-        }
-      ]
-    },
-    {
-      "id": 168,
-      "article_id": 184,
-      "category": "notice",
-      "title": "天津大学就业指导中心2026年暑假值班安排",
-      "organizer": "天津大学就业指导中心",
-      "date": null,
-      "start_time": "08:30",
-      "end_time": "16:30",
-      "location": "卫津路校区大活101；北洋园校区大通学生中心C109",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "暑假期间就业指导中心值班时间及地点安排，包括档案室值班和档案集中寄送安排。",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-10-1930]棠小果资讯天津大学就业指导中心2026年暑假值班安排.md",
-      "created_at": "2026-08-13 20:42:38",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-10-1930]棠小果资讯天津大学就业指导中心2026年暑假值班安排.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-11-2100]棠小果资讯天津大学一站式学生社区综合服务中心2026年暑期值班安排.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-10-1930]棠小果资讯天津大学心理健康教育中心2026年暑假安排.md"
-        }
-      ]
-    },
-    {
-      "id": 161,
-      "article_id": 179,
-      "category": "notice",
-      "title": "暑期医保服务指南",
-      "organizer": "天津大学",
-      "date": null,
-      "start_time": "08:30",
-      "end_time": "16:30",
-      "location": "卫津路校区综合服务大厅14号窗口",
-      "campus": "卫津路",
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "暑假期间教职工及学生医疗保险服务安排，包括异地就医备案和医保报销指南。",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-08-1930]棠小果资讯暑期医保不打烊异地就医医保报销指南.md",
-      "created_at": "2026-08-13 20:42:27",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-08-1930]棠小果资讯暑期医保不打烊异地就医医保报销指南.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-11-2100]棠小果资讯暑假服务不打烊校园指南快收藏.md"
-        }
-      ]
-    },
-    {
       "id": 395,
       "article_id": 419,
       "category": "notice",
@@ -1945,32 +1727,6 @@
       ]
     },
     {
-      "id": 386,
-      "article_id": 409,
-      "category": "event",
-      "title": "青海湖自然课",
-      "organizer": null,
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": "青海湖",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "去青海湖上一堂自然课",
-      "source_name": "青春智算",
-      "source_url": "下载/青春智算/[2026-07-23-2215]今天我们去青海湖上了一堂自然课.md",
-      "created_at": "2026-08-13 20:49:08",
-      "sources": [
-        {
-          "name": "青春智算",
-          "url": "下载/青春智算/[2026-07-23-2215]今天我们去青海湖上了一堂自然课.md"
-        }
-      ]
-    },
-    {
       "id": 380,
       "article_id": 401,
       "category": "notice",
@@ -1993,88 +1749,6 @@
         {
           "name": "青春智算",
           "url": "下载/青春智算/[2026-07-11-1101]软件学院关于通信库创新大赛赛事报名的通知.md"
-        }
-      ]
-    },
-    {
-      "id": 379,
-      "article_id": 400,
-      "category": "event",
-      "title": "传承周邓精神 树牢正确政绩观 主题研学活动",
-      "organizer": "计算机科学与技术学院",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": "周恩来邓颖超纪念馆",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "组织支部党员赴周恩来邓颖超纪念馆开展实地参观与联学研讨，感悟先辈精神，树牢正确政绩观。",
-      "source_name": "青春智算",
-      "source_url": "下载/青春智算/[2026-07-04-1009]追寻先辈足迹感悟初心使命深学细悟正确政绩观计算机科学与技术学院开展参观联学活动.md",
-      "created_at": "2026-08-13 20:48:52",
-      "sources": [
-        {
-          "name": "青春智算",
-          "url": "下载/青春智算/[2026-07-04-1009]追寻先辈足迹感悟初心使命深学细悟正确政绩观计算机科学与技术学院开展参观联学活动.md"
-        }
-      ]
-    },
-    {
-      "id": 377,
-      "article_id": 398,
-      "category": "notice",
-      "title": "同学去哪儿｜计算机科学与技术学院2026届优秀毕业生风采（一）",
-      "organizer": "计算机科学与技术学院",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "展示2026届优秀毕业生风采，介绍毕业去向和荣誉。",
-      "source_name": "青春智算",
-      "source_url": "下载/青春智算/[2026-07-02-1957]同学去哪儿计算机科学与技术学院2026届优秀毕业生风采一.md",
-      "created_at": "2026-08-13 20:48:48",
-      "sources": [
-        {
-          "name": "青春智算",
-          "url": "下载/青春智算/[2026-07-02-1957]同学去哪儿计算机科学与技术学院2026届优秀毕业生风采一.md"
-        }
-      ]
-    },
-    {
-      "id": 376,
-      "article_id": 397,
-      "category": "notice",
-      "title": "人工智能学院2026届优秀毕业生风采展(三)",
-      "organizer": "人工智能学院",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "展示优秀毕业生张冰点的风采与经验分享。",
-      "source_name": "青春智算",
-      "source_url": "下载/青春智算/[2026-06-28-1040]毕业季未来可期人工智能学院2026届优秀毕业生风采展三.md",
-      "created_at": "2026-08-13 20:48:46",
-      "sources": [
-        {
-          "name": "青春智算",
-          "url": "下载/青春智算/[2026-06-28-1040]毕业季未来可期人工智能学院2026届优秀毕业生风采展三.md"
-        },
-        {
-          "name": "青春智算",
-          "url": "下载/青春智算/[2026-06-26-1512]毕业季未来可期人工智能学院2026届优秀毕业生风采展一.md"
         }
       ]
     },
@@ -2183,88 +1857,6 @@
       ]
     },
     {
-      "id": 366,
-      "article_id": 386,
-      "category": "event",
-      "title": "“春满海棠 职向未来” 职业生涯规划嘉年华",
-      "organizer": "天津大学职业导航协会（本科生部）",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "十佳活动案例评比，职业生涯规划嘉年华活动。",
-      "source_name": "青春天大",
-      "source_url": "下载/青春天大/[2026-08-10-0900]青春天大十佳活动案例评比春满海棠职向未来职业生涯规划嘉年华.md",
-      "created_at": "2026-08-13 20:48:25",
-      "sources": [
-        {
-          "name": "青春天大",
-          "url": "下载/青春天大/[2026-08-10-0900]青春天大十佳活动案例评比春满海棠职向未来职业生涯规划嘉年华.md"
-        }
-      ]
-    },
-    {
-      "id": 365,
-      "article_id": 385,
-      "category": "event",
-      "title": "“祖国的需要就是我的志愿”就业观大讨论",
-      "organizer": "天津大学就业指导中心、天津大学职业导航协会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": "双校区",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "以班级、党支部、课题组为单位开展就业价值专题研讨，引导学生投身国家重点领域与艰苦地区。",
-      "source_name": "青春天大",
-      "source_url": "下载/青春天大/[2026-08-09-0900]青春天大十佳活动案例评比祖国的需要就是我的志愿就业观大讨论.md",
-      "created_at": "2026-08-13 20:48:24",
-      "sources": [
-        {
-          "name": "青春天大",
-          "url": "下载/青春天大/[2026-08-09-0900]青春天大十佳活动案例评比祖国的需要就是我的志愿就业观大讨论.md"
-        }
-      ]
-    },
-    {
-      "id": 364,
-      "article_id": 384,
-      "category": "event",
-      "title": "十佳活动案例评比",
-      "organizer": null,
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "十佳活动案例评比活动",
-      "source_name": "青春天大",
-      "source_url": "下载/青春天大/[2026-08-08-0900]青春天大十佳活动案例评比南缘北至.md",
-      "created_at": "2026-08-13 20:48:21",
-      "sources": [
-        {
-          "name": "青春天大",
-          "url": "下载/青春天大/[2026-08-08-0900]青春天大十佳活动案例评比南缘北至.md"
-        },
-        {
-          "name": "青春天大",
-          "url": "下载/青春天大/[2026-07-24-0900]青春天大十佳活动案例评比北洋书画大赛.md"
-        }
-      ]
-    },
-    {
       "id": 363,
       "article_id": 383,
       "category": "event",
@@ -2313,36 +1905,6 @@
         {
           "name": "青春天大",
           "url": "下载/青春天大/[2026-08-06-1842]青春天大十佳活动案例评比周末音乐会.md"
-        }
-      ]
-    },
-    {
-      "id": 361,
-      "article_id": 381,
-      "category": "notice",
-      "title": "天津大学2025-2026学年学生社团、育人实践基地十佳标兵初评公示",
-      "organizer": "天津大学社团中心",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "公示学生社团和育人实践基地十佳标兵初评结果，公示期至2026年8月6日24:00。",
-      "source_name": "青春天大",
-      "source_url": "下载/青春天大/[2026-08-05-1059]天津大学20252026学年学生社团育人实践基地十佳标兵初评公示.md",
-      "created_at": "2026-08-13 20:48:16",
-      "sources": [
-        {
-          "name": "青春天大",
-          "url": "下载/青春天大/[2026-08-05-1059]天津大学20252026学年学生社团育人实践基地十佳标兵初评公示.md"
-        },
-        {
-          "name": "青春天大",
-          "url": "下载/青春天大/[2026-07-15-1726]天津大学20252026学年学生社团育人实践基地十佳活动案例初评公示.md"
         }
       ]
     },
@@ -2559,32 +2121,6 @@
       ]
     },
     {
-      "id": 349,
-      "article_id": 374,
-      "category": "event",
-      "title": "中华雅韵系列活动",
-      "organizer": "天津大学学生国际交流协会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "十佳活动案例评比中的中华雅韵系列活动",
-      "source_name": "青春天大",
-      "source_url": "下载/青春天大/[2026-07-29-0900]青春天大十佳活动案例评比中华雅韵系列活动.md",
-      "created_at": "2026-08-13 20:48:00",
-      "sources": [
-        {
-          "name": "青春天大",
-          "url": "下载/青春天大/[2026-07-29-0900]青春天大十佳活动案例评比中华雅韵系列活动.md"
-        }
-      ]
-    },
-    {
       "id": 348,
       "article_id": 373,
       "category": "event",
@@ -2637,32 +2173,6 @@
       ]
     },
     {
-      "id": 341,
-      "article_id": 367,
-      "category": "event",
-      "title": "冬夜音乐节",
-      "organizer": "北洋吉他协会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "十佳活动案例评比中的冬夜音乐节活动",
-      "source_name": "青春天大",
-      "source_url": "下载/青春天大/[2026-07-22-0900]青春天大十佳活动案例评比冬夜音乐节.md",
-      "created_at": "2026-08-13 20:47:48",
-      "sources": [
-        {
-          "name": "青春天大",
-          "url": "下载/青春天大/[2026-07-22-0900]青春天大十佳活动案例评比冬夜音乐节.md"
-        }
-      ]
-    },
-    {
       "id": 340,
       "article_id": 366,
       "category": "event",
@@ -2685,70 +2195,6 @@
         {
           "name": "青春天大",
           "url": "下载/青春天大/[2026-07-21-0900]青春天大十佳活动案例评比第十四届SummerHoliday专场音乐会.md"
-        }
-      ]
-    },
-    {
-      "id": 336,
-      "article_id": 362,
-      "category": "notice",
-      "title": "天津大学“思想领航”研究生党员理论宣讲团赴固原市西吉县将台堡开展红色研学活动",
-      "organizer": "天津大学“思想领航”研究生党员理论宣讲团",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": "宁夏固原市西吉县将台堡红军会师纪念园",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "宣讲团赴将台堡开展红色研学实践，学习党的光辉历史，传承长征精神。",
-      "source_name": "耀北洋",
-      "source_url": "下载/耀北洋/[2026-08-11-1422]天津大学思想领航研究生党员理论宣讲团赴固原市西吉县将台堡开展红色研学活动.md",
-      "created_at": "2026-08-13 20:47:41",
-      "sources": [
-        {
-          "name": "耀北洋",
-          "url": "下载/耀北洋/[2026-08-11-1422]天津大学思想领航研究生党员理论宣讲团赴固原市西吉县将台堡开展红色研学活动.md"
-        },
-        {
-          "name": "耀北洋",
-          "url": "下载/耀北洋/[2026-08-10-1901]雨赴六盘寻初心声传长征铸信仰天津大学思想领航研究生党员理论宣讲团宁夏红色研学纪实.md"
-        }
-      ]
-    },
-    {
-      "id": 334,
-      "article_id": 360,
-      "category": "notice",
-      "title": "天津大学第三十五期院级入党积极分子培训优秀心得展示",
-      "organizer": "天津大学学生党校",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "展示入党积极分子培训优秀心得，总结培训成果。",
-      "source_name": "耀北洋",
-      "source_url": "下载/耀北洋/[2026-08-10-1901]展示入党积极分子培训优秀心得二.md",
-      "created_at": "2026-08-13 20:47:37",
-      "sources": [
-        {
-          "name": "耀北洋",
-          "url": "下载/耀北洋/[2026-08-10-1901]展示入党积极分子培训优秀心得二.md"
-        },
-        {
-          "name": "耀北洋",
-          "url": "下载/耀北洋/[2026-08-10-1901]展示入党积极分子培训优秀心得三.md"
-        },
-        {
-          "name": "耀北洋",
-          "url": "下载/耀北洋/[2026-08-10-1901]展示入党积极分子培训优秀心得一.md"
         }
       ]
     },
@@ -2801,32 +2247,6 @@
         {
           "name": "耀北洋",
           "url": "下载/耀北洋/[2026-07-19-2225]西行镜界丝路寻迹领略喀什万象.md"
-        }
-      ]
-    },
-    {
-      "id": 321,
-      "article_id": 345,
-      "category": "notice",
-      "title": "2025年度“经管榜样”评选结果公示",
-      "organizer": "天津大学管理与经济学部",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "公示2025年度经管榜样获评名单，包括年度人物、创新榜样、奉献榜样、实践榜样和文体榜样。",
-      "source_name": "经管学生工作",
-      "source_url": "下载/经管学生工作/[2026-08-03-2208]公示2025年度经管榜样评选结果公示.md",
-      "created_at": "2026-08-13 20:47:16",
-      "sources": [
-        {
-          "name": "经管学生工作",
-          "url": "下载/经管学生工作/[2026-08-03-2208]公示2025年度经管榜样评选结果公示.md"
         }
       ]
     },
@@ -3303,32 +2723,6 @@
       ]
     },
     {
-      "id": 269,
-      "article_id": 283,
-      "category": "volunteer",
-      "title": "2026北洋青禾支教队成员介绍",
-      "organizer": "天津大学青年志愿者协会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "介绍2026北洋青禾支教队成员，展示支教队风采。",
-      "source_name": "天津大学青年志愿者协会",
-      "source_url": "下载/天津大学青年志愿者协会/[2026-07-19-1952]北洋青禾山野相逢互为光亮2026北洋青禾支教队成员介绍.md",
-      "created_at": "2026-08-13 20:45:33",
-      "sources": [
-        {
-          "name": "天津大学青年志愿者协会",
-          "url": "下载/天津大学青年志愿者协会/[2026-07-19-1952]北洋青禾山野相逢互为光亮2026北洋青禾支教队成员介绍.md"
-        }
-      ]
-    },
-    {
       "id": 268,
       "article_id": 282,
       "category": "volunteer",
@@ -3411,44 +2805,6 @@
         {
           "name": "天津大学教务处",
           "url": "下载/天津大学教务处/[2026-07-15-1005]教务处2026年暑假业务办理指南.md"
-        }
-      ]
-    },
-    {
-      "id": 259,
-      "article_id": 271,
-      "category": "notice",
-      "title": "教务处2026年暑假业务办理指南",
-      "organizer": "天津大学教务处",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "教务处暑假期间各项业务办理说明，包括招生咨询、成绩单、选课等。",
-      "source_name": "天津大学教务处",
-      "source_url": "下载/天津大学教务处/[2026-07-15-1005]教务处2026年暑假业务办理指南.md",
-      "created_at": "2026-08-13 20:45:14",
-      "sources": [
-        {
-          "name": "天津大学教务处",
-          "url": "下载/天津大学教务处/[2026-07-15-1005]教务处2026年暑假业务办理指南.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-15-1930]棠小果资讯教务处2026年暑假业务办理指南.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-14-2100]棠小果资讯资产处2026年暑假业务办理指南.md"
         }
       ]
     },
@@ -3911,58 +3267,6 @@
       ]
     },
     {
-      "id": 190,
-      "article_id": 198,
-      "category": "notice",
-      "title": "棠小果资讯丨暑假服务不打烊，校园指南快收藏！",
-      "organizer": "天津大学学生会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "暑假校园服务指南汇总",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md",
-      "created_at": "2026-08-13 20:43:12",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        }
-      ]
-    },
-    {
-      "id": 189,
-      "article_id": 198,
-      "category": "notice",
-      "title": "棠小果资讯丨天津大学一站式学生社区综合服务中心2026年暑期值班安排",
-      "organizer": "天津大学学生会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "一站式学生社区综合服务中心暑期值班安排",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md",
-      "created_at": "2026-08-13 20:43:12",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        }
-      ]
-    },
-    {
       "id": 188,
       "article_id": 198,
       "category": "notice",
@@ -3978,114 +3282,6 @@
       "volunteer_hours": null,
       "recruit_deadline": null,
       "description": "台风来袭，图书馆晚间闭馆通知",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md",
-      "created_at": "2026-08-13 20:43:12",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        }
-      ]
-    },
-    {
-      "id": 186,
-      "article_id": 198,
-      "category": "notice",
-      "title": "棠小果资讯丨一卡通办公室2026年暑假值班安排",
-      "organizer": "天津大学学生会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "一卡通办公室暑假值班安排",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md",
-      "created_at": "2026-08-13 20:43:12",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        }
-      ]
-    },
-    {
-      "id": 184,
-      "article_id": 198,
-      "category": "notice",
-      "title": "棠小果资讯丨保卫部户籍科暑假期间值班安排",
-      "organizer": "天津大学学生会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": "北洋园校区安保中心202室（上午）；卫津路校区第2教学楼122室（下午）",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "保卫部户籍科暑假值班安排",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md",
-      "created_at": "2026-08-13 20:43:12",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        },
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-10-1930]棠小果资讯保卫部户籍科暑假期间值班安排.md"
-        }
-      ]
-    },
-    {
-      "id": 183,
-      "article_id": 198,
-      "category": "notice",
-      "title": "棠小果资讯丨2026年暑假校园生活指南",
-      "organizer": "天津大学学生会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "提供2026年暑假校园生活指南",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md",
-      "created_at": "2026-08-13 20:43:12",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md"
-        }
-      ]
-    },
-    {
-      "id": 182,
-      "article_id": 198,
-      "category": "notice",
-      "title": "棠小果资讯丨暑期医保不打烊——异地就医/医保报销指南",
-      "organizer": "天津大学学生会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "提供暑期异地就医和医保报销指南",
       "source_name": "天津大学学生会",
       "source_url": "下载/天津大学学生会/[2026-07-20-1930]来啦棠小果在行动.md",
       "created_at": "2026-08-13 20:43:12",
@@ -4205,32 +3401,6 @@
         {
           "name": "天津大学学生会",
           "url": "下载/天津大学学生会/[2026-07-09-1930]棠小果资讯2026年暑假校园生活指南.md"
-        }
-      ]
-    },
-    {
-      "id": 159,
-      "article_id": 177,
-      "category": "notice",
-      "title": "2026年暑假期间天津大学图书馆服务指南",
-      "organizer": "天津大学图书馆",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": "北洋园校区郑东图书馆、卫津路校区春水图书馆、卫津路校区科学图书馆",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "暑假期间图书馆开放时间、区域及服务调整通知",
-      "source_name": "天津大学学生会",
-      "source_url": "下载/天津大学学生会/[2026-07-07-1930]棠小果资讯2026年暑假期间天津大学图书馆服务指南.md",
-      "created_at": "2026-08-13 20:42:23",
-      "sources": [
-        {
-          "name": "天津大学学生会",
-          "url": "下载/天津大学学生会/[2026-07-07-1930]棠小果资讯2026年暑假期间天津大学图书馆服务指南.md"
         }
       ]
     },
@@ -4447,32 +3617,6 @@
       ]
     },
     {
-      "id": 126,
-      "article_id": 152,
-      "category": "notice",
-      "title": "天津大学研究生支教团在宕昌支教成果报道",
-      "organizer": "天津大学团委",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "报道天津大学研究生支教团在甘肃宕昌的支教成果，四位学生考入天津大学。",
-      "source_name": "天津大学团委",
-      "source_url": "下载/天津大学团委/[2026-08-04-1534]老师我也考上天大了.md",
-      "created_at": "2026-08-13 20:41:32",
-      "sources": [
-        {
-          "name": "天津大学团委",
-          "url": "下载/天津大学团委/[2026-08-04-1534]老师我也考上天大了.md"
-        }
-      ]
-    },
-    {
       "id": 125,
       "article_id": 150,
       "category": "notice",
@@ -4551,32 +3695,6 @@
         {
           "name": "天津大学",
           "url": "下载/天津大学/[2026-07-22-1152]喜报天大辩论队再夺全国总冠军.md"
-        }
-      ]
-    },
-    {
-      "id": 112,
-      "article_id": 136,
-      "category": "event",
-      "title": "天津大学“青年卓越成长营”第四期赴合肥研学实践",
-      "organizer": "天津大学团委",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": "安徽合肥（安徽创新馆、科学岛、中国科学技术大学、科大硅谷等）",
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "天津大学青年卓越成长营第四期学员赴合肥开展为期五天的科创研学实践活动，走进大科学装置、前沿企业及顶尖高校。",
-      "source_name": "天津大学团委",
-      "source_url": "下载/天津大学团委/[2026-07-19-1937]天大学子合肥追光在人造太阳校准报国航向.md",
-      "created_at": "2026-08-13 20:41:07",
-      "sources": [
-        {
-          "name": "天津大学团委",
-          "url": "下载/天津大学团委/[2026-07-19-1937]天大学子合肥追光在人造太阳校准报国航向.md"
         }
       ]
     },
@@ -4733,32 +3851,6 @@
         {
           "name": "天津大学",
           "url": "下载/天津大学/[2026-08-09-1943]连续两年赴晋祠天大人让文化遗产活起来.md"
-        }
-      ]
-    },
-    {
-      "id": 102,
-      "article_id": 123,
-      "category": "notice",
-      "title": "致信习近平主席的天大“巴铁”，这样践行青春誓言！",
-      "organizer": null,
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "报道天津大学巴基斯坦留学生践行中巴友谊的事迹。",
-      "source_name": "天津大学",
-      "source_url": "下载/天津大学/[2026-08-08-1517]致信习近平主席的天大巴铁这样践行青春誓言.md",
-      "created_at": "2026-08-13 20:40:48",
-      "sources": [
-        {
-          "name": "天津大学",
-          "url": "下载/天津大学/[2026-08-08-1517]致信习近平主席的天大巴铁这样践行青春誓言.md"
         }
       ]
     },
@@ -4941,32 +4033,6 @@
         {
           "name": "天津大学",
           "url": "下载/天津大学/[2026-07-30-1223]梅兵同志任天津大学党委书记.md"
-        }
-      ]
-    },
-    {
-      "id": 92,
-      "article_id": 112,
-      "category": "notice",
-      "title": "福布斯中国入选！天大的他，要打造“人体4s店”",
-      "organizer": null,
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "介绍天津大学校友成诗宇的创业经历和成就，属于人物报道，非校园活动。",
-      "source_name": "天津大学",
-      "source_url": "下载/天津大学/[2026-07-29-1503]福布斯中国入选天大的他要打造人体4s店.md",
-      "created_at": "2026-08-13 20:40:24",
-      "sources": [
-        {
-          "name": "天津大学",
-          "url": "下载/天津大学/[2026-07-29-1503]福布斯中国入选天大的他要打造人体4s店.md"
         }
       ]
     },
@@ -5261,32 +4327,6 @@
       ]
     },
     {
-      "id": 72,
-      "article_id": 89,
-      "category": "notice",
-      "title": "天津大学2026-2027学年校园地贷款申请指南",
-      "organizer": "天津大学学生资助管理中心",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "校园地国家助学贷款申请指南，包括申请资格、时间安排、办理流程等。",
-      "source_name": "天大学生资助",
-      "source_url": "下载/天大学生资助/[2026-08-02-2023]天津大学20262027学年校园地贷款申请指南.md",
-      "created_at": "2026-08-13 20:39:43",
-      "sources": [
-        {
-          "name": "天大学生资助",
-          "url": "下载/天大学生资助/[2026-08-02-2023]天津大学20262027学年校园地贷款申请指南.md"
-        }
-      ]
-    },
-    {
       "id": 71,
       "article_id": 88,
       "category": "notice",
@@ -5399,32 +4439,6 @@
       ]
     },
     {
-      "id": 57,
-      "article_id": 69,
-      "category": "notice",
-      "title": "天津大学第十四期至善留学基金评审结果公示",
-      "organizer": "天津大学学生资助管理中心",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "公示第十四期至善留学基金评审结果，公示期至7月24日。",
-      "source_name": "天大学生资助",
-      "source_url": "下载/天大学生资助/[2026-07-19-2000]天津大学第十四期至善留学基金评审结果公示.md",
-      "created_at": "2026-08-13 20:39:07",
-      "sources": [
-        {
-          "name": "天大学生资助",
-          "url": "下载/天大学生资助/[2026-07-19-2000]天津大学第十四期至善留学基金评审结果公示.md"
-        }
-      ]
-    },
-    {
       "id": 55,
       "article_id": 67,
       "category": "notice",
@@ -5473,32 +4487,6 @@
         {
           "name": "天大学生资助",
           "url": "下载/天大学生资助/[2026-07-17-1142]卫津路经管学部EDP中心助理招聘.md"
-        }
-      ]
-    },
-    {
-      "id": 52,
-      "article_id": 64,
-      "category": "notice",
-      "title": "2025年度天津大学单项优秀学生奖评审结果补充公示",
-      "organizer": "天津大学单项优秀学生奖管理委员会",
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "公示2025年度天津大学单项优秀学生奖获奖学生名单，公示期至2026年7月21日。",
-      "source_name": "天大学生资助",
-      "source_url": "下载/天大学生资助/[2026-07-15-1802]关于2025年度天津大学单项优秀学生奖评审结果的补充公示.md",
-      "created_at": "2026-08-13 20:38:56",
-      "sources": [
-        {
-          "name": "天大学生资助",
-          "url": "下载/天大学生资助/[2026-07-15-1802]关于2025年度天津大学单项优秀学生奖评审结果的补充公示.md"
         }
       ]
     },
@@ -5655,32 +4643,6 @@
         {
           "name": "天大后勤",
           "url": "下载/天大后勤/[2026-07-16-2217]兰园二层新口味大决战寿司VS排骨你Pick谁.md"
-        }
-      ]
-    },
-    {
-      "id": 27,
-      "article_id": 32,
-      "category": "notice",
-      "title": "【我的体育故事】获奖运动员专访 || 碧波逐梦展风采，泳者笃行向未来——王瑛楠",
-      "organizer": null,
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "专访获奖运动员王瑛楠，介绍其体育荣誉与风采。",
-      "source_name": "天大体育",
-      "source_url": "下载/天大体育/[2026-08-13-1434]我的体育故事获奖运动员专访碧波逐梦展风采泳者笃行向未来王瑛楠.md",
-      "created_at": "2026-08-13 20:36:29",
-      "sources": [
-        {
-          "name": "天大体育",
-          "url": "下载/天大体育/[2026-08-13-1434]我的体育故事获奖运动员专访碧波逐梦展风采泳者笃行向未来王瑛楠.md"
         }
       ]
     },
@@ -5975,44 +4937,6 @@
         {
           "name": "天大体育",
           "url": "下载/天大体育/[2026-07-29-1022]我的体育故事获奖运动员专访享受运动遇见更好的自己李昕航.md"
-        }
-      ]
-    },
-    {
-      "id": 13,
-      "article_id": 14,
-      "category": "notice",
-      "title": "2025年体质健康测试优秀学生风采展示（七）",
-      "organizer": null,
-      "date": null,
-      "start_time": null,
-      "end_time": null,
-      "location": null,
-      "campus": null,
-      "ticket_type": null,
-      "ticket_info": null,
-      "volunteer_hours": null,
-      "recruit_deadline": null,
-      "description": "展示体质健康测试优秀学生风采",
-      "source_name": "天大体育",
-      "source_url": "下载/天大体育/[2026-07-26-1002]体育人物2025年体质健康测试优秀学生风采展示七.md",
-      "created_at": "2026-08-13 20:35:57",
-      "sources": [
-        {
-          "name": "天大体育",
-          "url": "下载/天大体育/[2026-07-26-1002]体育人物2025年体质健康测试优秀学生风采展示七.md"
-        },
-        {
-          "name": "天大体育",
-          "url": "下载/天大体育/[2026-07-24-1206]体育人物2025年体质健康测试优秀学生风采展示五.md"
-        },
-        {
-          "name": "天大体育",
-          "url": "下载/天大体育/[2026-07-21-1216]体育人物2025年体质健康测试优秀学生风采展示三.md"
-        },
-        {
-          "name": "天大体育",
-          "url": "下载/天大体育/[2026-07-19-1954]体育人物2025年体质健康测试优秀学生风采展示一.md"
         }
       ]
     },

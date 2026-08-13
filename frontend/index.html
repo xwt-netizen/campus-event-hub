@@ -139,6 +139,10 @@
   .date-sep:hover { color: #b71c1c; }
   .fold-arrow { display: inline-block; width: 16px; color: #b71c1c; }
   .fold-count { font-weight: normal; color: #999; font-size: 12px; }
+  .pending-sep {
+    color: #999; border-top: 1px dashed #ddd; padding-top: 14px; margin-top: 8px;
+  }
+  .pending-sep:hover { color: #666; }
   .date-group { }
 
   .empty-state {
@@ -330,28 +334,46 @@ function filterEvents() {
   if (ticketCnt.theme) statsParts.push('｜📗主题教育 ' + ticketCnt.theme);
   document.getElementById('statsBar').textContent = statsParts.join(' ');
 
-  // 按日期分组，每组可折叠
+  // 分离有日期和待定事件
+  const dated = filtered.filter(ev => ev.date);
+  const noDate = filtered.filter(ev => !ev.date);
+
+  // 有日期事件：按日期分组，每组可折叠
   let html = '';
   let lastDate = '';
-  for (const ev of filtered) {
-    const d = ev.date || '待定';
+  for (const ev of dated) {
+    const d = ev.date;
     if (d !== lastDate) {
       if (lastDate !== '') html += '</div>';
       const groupId = 'g' + d.replace(/[^0-9]/g, '');
       const isCollapsed = collapsedDates.has(d);
       html += '<div class="date-sep" onclick="toggleDate(\'' + d + '\', this)">' +
         '<span class="fold-arrow">' + (isCollapsed ? '▸' : '▾') + '</span> ' +
-        formatDate(d) + ' <span class="fold-count">(' + groupCount(filtered, d) + ')</span></div>';
+        formatDate(d) + ' <span class="fold-count">(' + groupCount(dated, d) + ')</span></div>';
       html += '<div class="date-group" id="' + groupId + '" style="' + (isCollapsed ? 'display:none' : '') + '">';
       lastDate = d;
     }
     html += renderCard(ev);
   }
   if (lastDate !== '') html += '</div>';
+
+  // 待定事件：单独一栏，默认折叠
+  if (noDate.length > 0) {
+    const noDateCollapsed = collapsedDates.has('__待定__');
+    html += '<div class="date-sep pending-sep" onclick="toggleDate(\'__待定__\', this)">' +
+      '<span class="fold-arrow">' + (noDateCollapsed ? '▸' : '▾') + '</span> ' +
+      '⏳ 待定（未标注具体时间） <span class="fold-count">(' + noDate.length + ')</span></div>';
+    html += '<div class="date-group" id="g_pending" style="' + (noDateCollapsed ? 'display:none' : '') + '">';
+    for (const ev of noDate) {
+      html += renderCard(ev);
+    }
+    html += '</div>';
+  }
+
   list.innerHTML = html;
 }
 
-const collapsedDates = new Set();
+const collapsedDates = new Set(['__待定__']);
 
 function groupCount(events, date) {
   return events.filter(e => (e.date || '待定') === date).length;
@@ -363,7 +385,7 @@ function toggleDate(date, el) {
   } else {
     collapsedDates.add(date);
   }
-  const groupId = 'g' + date.replace(/[^0-9]/g, '');
+  const groupId = (date === '__待定__') ? 'g_pending' : ('g' + date.replace(/[^0-9]/g, ''));
   const group = document.getElementById(groupId);
   if (group) group.style.display = (group.style.display === 'none') ? '' : 'none';
   const arrow = el.querySelector('.fold-arrow');
