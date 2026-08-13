@@ -127,3 +127,11 @@ class Database:
         stats = {r["category"]: r["cnt"] for r in row}
         stats["total"] = total["n"] if total else 0
         return stats
+
+    def get_account_count(self):
+        conn = self._get_conn()
+        row = conn.execute(
+            "SELECT COUNT(DISTINCT source_name) as n FROM events"
+        ).fetchone()
+        conn.close()
+        return row["n"] if row else 0

@@ -156,13 +156,70 @@ def run_pipeline(cfg, force_all: bool = False):
     export_events_json(db, output_json)
 
 
+def normalize_title(t: str) -> str:
+    """归一化标题用于去重比较：去标点、去空格、去常见尾部词"""
+    if not t:
+        return ""
+    for ch in "【】[]（）()《》<>「」“”‘’！!？?。.,，、：:；;|/\\·　 ":
+        t = t.replace(ch, "")
+    for suffix in ("来啦", "预告", "通知", "报名", "倒计时", "倒计时一天", "重磅", "火热"):
+        if t.endswith(suffix):
+            t = t[: -len(suffix)]
+    return t.strip().lower()
+
+
+def is_same_event(a: dict, b: dict) -> bool:
+    """判断两个活动是否为同一活动（内容大致相同、来源不同）"""
+    if a.get("category") != b.get("category"):
+        return False
+    # 都有明确日期时，日期必须相同
+    da, db_ = a.get("date"), b.get("date")
+    if da and db_ and da != db_:
+        return False
+    # 标题归一化后相似度阈值
+    na, nb = normalize_title(a.get("title", "")), normalize_title(b.get("title", ""))
+    if not na or not nb:
+        return False
+    import difflib
+    ratio = difflib.SequenceMatcher(None, na, nb).ratio()
+    return ratio >= 0.62
+
+
+def dedup_events(events: list) -> list:
+    """去重：相同活动合并，来源聚合到 sources 列表"""
+    result = []
+    for ev in events:
+        # 确保每个活动都有 sources 列表
+        primary = {"name": ev.get("source_name", ""), "url": ev.get("source_url", "")}
+        merged = False
+        for existing in result:
+            if is_same_event(existing, ev):
+                sources = existing.setdefault("sources", [])
+                if primary not in sources:
+                    sources.append(primary)
+                # 用信息更全的一条补充空字段
+                for k in ("location", "campus", "start_time", "end_time", "ticket_type", "ticket_info", "volunteer_hours", "recruit_deadline", "description", "date"):
+                    if not existing.get(k) and ev.get(k):
+                        existing[k] = ev[k]
+                merged = True
+                break
+        if not merged:
+            ev["sources"] = [primary]
+            result.append(ev)
+    return result
+
+
 def export_events_json(db: Database, output_path: str):
     from datetime import date
 
     today = date.today().isoformat()
-    events = db.get_all_events()
+    raw_events = db.get_all_events()
+
+    events = dedup_events(raw_events)
 
     stats = db.get_stats()
+    stats["total"] = len(events)  # 去重后的总数
+    stats["account_count"] = db.get_account_count()
 
     data = {
         "updated_at": today,
@@ -174,7 +231,7 @@ def export_events_json(db: Database, output_path: str):
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"\n已导出 {len(events)} 个活动到: {output_path}")
+    print(f"\n已导出 {len(events)} 个活动（去重前 {len(raw_events)} 个）到: {output_path}")
 
 
 def show_stats(cfg):
@@ -185,7 +242,10 @@ def show_stats(cfg):
     print(f"  讲座 (lecture):   {stats.get('lecture', 0)}")
     print(f"  活动 (event):     {stats.get('event', 0)}")
     print(f"  志愿 (volunteer): {stats.get('volunteer', 0)}")
+    print(f"  电影 (movie):     {stats.get('movie', 0)}")
+    print(f"  通知 (notice):    {stats.get('notice', 0)}")
     print(f"  其他 (other):     {stats.get('other', 0)}")
+    print(f"  公众号数:         {stats.get('account_count', 0)}")
 
 
 def main():

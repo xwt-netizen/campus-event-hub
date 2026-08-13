@@ -79,7 +79,17 @@
   .event-card.lecture { border-left-color: #1976d2; }
   .event-card.event { border-left-color: #c2185b; }
   .event-card.volunteer { border-left-color: #388e3c; }
+  .event-card.movie { border-left-color: #7b1fa2; }
+  .event-card.notice { border-left-color: #f57c00; }
   .event-card.other { border-left-color: #a0a0a0; }
+
+  .banner {
+    background: #fff8e1; border: 1px solid #ffe082; border-radius: 12px;
+    padding: 10px 14px; margin-bottom: 12px; font-size: 13px; color: #6d4c00;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .banner a { color: #b71c1c; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .banner a:hover { text-decoration: underline; }
 
   .event-header {
     display: flex; justify-content: space-between; align-items: flex-start;
@@ -98,6 +108,8 @@
   .badge-lecture { background: #e3f2fd; color: #1565c0; }
   .badge-event { background: #fce4ec; color: #c2185b; }
   .badge-volunteer { background: #e8f5e9; color: #2e7d32; }
+  .badge-movie { background: #f3e5f5; color: #7b1fa2; }
+  .badge-notice { background: #fff3e0; color: #e65100; }
   .badge-other { background: #f0f0f0; color: #555; }
   .badge-campus-wj { background: #fff3e0; color: #e65100; }
   .badge-campus-by { background: #e8f5e9; color: #1b5e20; }
@@ -162,6 +174,13 @@
     <div class="tab" data-category="lecture" onclick="switchTab('lecture', this)">📚 讲座</div>
     <div class="tab" data-category="event" onclick="switchTab('event', this)">🎭 活动</div>
     <div class="tab" data-category="volunteer" onclick="switchTab('volunteer', this)">🤝 志愿</div>
+    <div class="tab" data-category="movie" onclick="switchTab('movie', this)">🎬 电影</div>
+    <div class="tab" data-category="notice" onclick="switchTab('notice', this)">📢 通知</div>
+  </div>
+
+  <div class="banner" id="banner" style="display:none">
+    <span id="bannerText">当前收录的公众号可能不完整</span>
+    <a href="https://github.com/xwt-netizen/campus-event-hub/issues/new" target="_blank" rel="noopener">补充公众号 →</a>
   </div>
 
   <div class="filter-row">
@@ -223,6 +242,14 @@ async function loadData() {
     const updatedAt = data.updated_at || '未知';
     document.getElementById('footer').textContent =
       '数据更新于 ' + updatedAt + ' · 共 ' + allEvents.length + ' 个活动';
+
+    const accountCount = stats.account_count || 0;
+    const banner = document.getElementById('banner');
+    if (accountCount > 0) {
+      banner.style.display = 'flex';
+      document.getElementById('bannerText').textContent =
+        '已收录 ' + accountCount + ' 个公众号，可能不完整，欢迎补充';
+    }
 
     filterEvents();
   } catch (e) {
@@ -310,11 +337,19 @@ function filterEvents() {
 }
 
 function renderCard(ev) {
-  const catLabel = {lecture:'📚讲座', event:'🎭活动', volunteer:'🤝志愿', other:'📄其他'}[ev.category] || '📄其他';
-  const catClass = ['lecture','event','volunteer'].includes(ev.category) ? ev.category : 'other';
+  const catMap = {
+    lecture: {label:'📚讲座', cls:'lecture'},
+    event: {label:'🎭活动', cls:'event'},
+    volunteer: {label:'🤝志愿', cls:'volunteer'},
+    movie: {label:'🎬电影', cls:'movie'},
+    notice: {label:'📢通知', cls:'notice'},
+    other: {label:'📄其他', cls:'other'},
+  };
+  const c = catMap[ev.category] || catMap.other;
+  const catClass = c.cls;
 
   let badges = '<div class="badge-row">';
-  badges += '<span class="badge badge-' + catClass + '">' + catLabel + '</span>';
+  badges += '<span class="badge badge-' + catClass + '">' + c.label + '</span>';
 
   const campusMap = {'卫津路':'badge-campus-wj','北洋园':'badge-campus-by','线上':'badge-campus-online'};
   if (ev.campus && campusMap[ev.campus]) {
@@ -346,6 +381,20 @@ function renderCard(ev) {
     ticketNote = ' <span style="color:#e65100;font-size:11px">🎫 ' + escapeHtml(ev.ticket_info) + '</span>';
   }
 
+  // 多来源显示
+  const sources = ev.sources || [];
+  let sourceHtml = '';
+  if (sources.length > 1) {
+    const parts = sources.map(s => {
+      return s.url && s.url.startsWith('http')
+        ? '<a href="' + escapeHtml(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + '</a>'
+        : escapeHtml(s.name);
+    });
+    sourceHtml = '<span style="color:#aaa">来源：' + parts.join('、') + '</span>';
+  } else {
+    sourceHtml = '<span>' + escapeHtml(ev.organizer || ev.source_name) + ticketNote + '</span>';
+  }
+
   return '<div class="event-card ' + catClass + '">' +
     '<div class="event-header">' +
       '<div class="event-title">' + escapeHtml(ev.title) + '</div>' +
@@ -354,10 +403,10 @@ function renderCard(ev) {
     '<div class="event-meta">' + meta.join('') + '</div>' +
     desc +
     '<div class="event-footer">' +
-      '<span>' + escapeHtml(ev.organizer || ev.source_name) + ticketNote + '</span>' +
-      (ev.source_url && ev.source_url.startsWith('http') 
+      sourceHtml +
+      (sources.length <= 1 && ev.source_url && ev.source_url.startsWith('http')
         ? '<a href="' + escapeHtml(ev.source_url) + '" target="_blank" rel="noopener">查看原文 →</a>'
-        : '<span style="color:#aaa">' + escapeHtml(ev.source_name) + ' 发布</span>') +
+        : '') +
     '</div>' +
   '</div>';
 }
