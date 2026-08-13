@@ -19,8 +19,10 @@
 """
 
 import argparse
+import glob
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -34,6 +36,10 @@ from pipeline import run_pipeline
 STATE_FILE = os.path.join(os.path.dirname(__file__), "..", ".autopilot_state.json")
 SETTLE_SECONDS = 5  # 文件最后修改后等 5 秒再处理，避免下载到一半就读
 DOWNLOAD_WAIT = 30  # 触发 MCP 下载后等待的秒数
+DETECT_WAIT = 12  # 检测下载活动前等待的秒数
+
+LOG_TS_RE = re.compile(r'\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]')
+KEY_ERROR_KEYWORDS = ("失效", "过期", "获取不到密钥", "密钥失败", "invalid", "expired")
 
 
 def scan_md_files(input_dir: str) -> dict[str, float]:
@@ -66,6 +72,48 @@ def find_new_files(current: dict[str, float], state: dict[str, float], now: floa
         if rel not in state or state[rel] != mtime:
             new_files.append(rel)
     return new_files
+
+
+def check_log_activity(input_dir: str, marker_time: float) -> tuple[str, str]:
+    """
+    检查 wechatDownload 日志，判断下载是否真的发生 / 密钥是否失效。
+    返回 (状态, 说明)，状态：ok | error | no_activity | unknown
+    """
+    logs = sorted(glob.glob(os.path.join(input_dir, "log*.txt")))
+    if not logs:
+        return "unknown", "未找到 wechatDownload 日志文件"
+
+    log_path = logs[-1]
+    try:
+        with open(log_path, encoding="utf-8", errors="ignore") as f:
+            lines = f.readlines()
+    except Exception:
+        return "unknown", "无法读取日志"
+
+    recent = []
+    for line in lines:
+        m = LOG_TS_RE.search(line)
+        if not m:
+            continue
+        try:
+            ts = time.mktime(time.strptime(m.group(1), "%Y-%m-%d %H:%M:%S"))
+        except ValueError:
+            continue
+        if ts >= marker_time:
+            recent.append(line)
+
+    if not recent:
+        return "no_activity", "日志无新活动"
+
+    activity = "".join(recent)
+    has_download = ("开始下载" in activity) or ("下载完成" in activity)
+    has_error = any(kw in activity for kw in KEY_ERROR_KEYWORDS)
+
+    if has_download:
+        return "ok", "下载正常进行中"
+    if has_error:
+        return "error", "下载报错，密钥可能已失效"
+    return "no_activity", "无下载活动，密钥可能已失效"
 
 
 def trigger_download(cfg) -> bool:
@@ -126,11 +174,23 @@ def run_once(cfg, do_download: bool):
     ts = time.strftime('%H:%M:%S')
     input_dir = cfg["data"]["input_dir"]
 
-    # 1. 触发下载
+    # 1. 触发下载 + 密钥状态检测
     if do_download:
         if trigger_download(cfg):
-            print(f"[{ts}] 等待 {DOWNLOAD_WAIT}s 让文章下载完成...")
-            time.sleep(DOWNLOAD_WAIT)
+            print(f"[{ts}] 等待 {DETECT_WAIT}s 检测下载活动...")
+            time.sleep(DETECT_WAIT)
+            status, msg = check_log_activity(input_dir, time.time() - DETECT_WAIT - 3)
+            if status == "ok":
+                print(f"  ✓ {msg}")
+                print(f"  等待剩余 {DOWNLOAD_WAIT - DETECT_WAIT}s 让文章下载...")
+                time.sleep(max(0, DOWNLOAD_WAIT - DETECT_WAIT))
+            elif status == "error":
+                print(f"  ✗ {msg}")
+                print("  ⚠️  请到 wechatDownload 重新获取密钥（微信里打开链接）")
+            else:  # no_activity / unknown
+                print(f"  ? {msg}")
+                print("  ⚠️  如持续无下载活动，请到 wechatDownload 刷新密钥")
+                time.sleep(max(0, DOWNLOAD_WAIT - DETECT_WAIT))
 
     # 2. 扫描新文件
     current = scan_md_files(input_dir)
