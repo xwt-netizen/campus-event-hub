@@ -45,9 +45,10 @@ def batch_download(endpoint=LOCAL_MCP_ENDPOINT):
     return _call(endpoint, "batch_download_articles", {}, req_id=1)
 
 
-def get_account_id(endpoint=LOCAL_MCP_ENDPOINT):
+def get_account_id(url: str = "", endpoint=LOCAL_MCP_ENDPOINT):
     """获取公众号 ID，返回结果里含需要在微信里打开的链接"""
-    return _call(endpoint, "get_public_account_id", {}, req_id=2)
+    args = {"url": url} if url else {}
+    return _call(endpoint, "get_public_account_id", args, req_id=2)
 
 
 def export_article_data(endpoint=LOCAL_MCP_ENDPOINT):
