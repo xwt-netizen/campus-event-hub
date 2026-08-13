@@ -209,17 +209,37 @@ def dedup_events(events: list) -> list:
     return result
 
 
+EXCLUDE_KEYWORDS = ("安全提醒", "防诈骗", "反诈", "防骗", "谨防", "预警", "辟谣", "诈骗")
+
+
+def filter_events(events: list) -> list:
+    """过滤掉无需展示的内容（安全提醒、防诈骗等）"""
+    result = []
+    for ev in events:
+        title = ev.get("title", "") or ""
+        desc = ev.get("description", "") or ""
+        text = title + desc
+        if any(kw in text for kw in EXCLUDE_KEYWORDS):
+            continue
+        result.append(ev)
+    return result
+
+
 def export_events_json(db: Database, output_path: str):
     from datetime import date
+    from collections import Counter
 
     today = date.today().isoformat()
     raw_events = db.get_all_events()
 
     events = dedup_events(raw_events)
+    events = filter_events(events)
 
-    stats = db.get_stats()
-    stats["total"] = len(events)  # 去重后的总数
-    stats["account_count"] = db.get_account_count()
+    # 统计基于去重过滤后的活动
+    cnt = Counter(e.get("category", "other") for e in events)
+    stats = {k: v for k, v in cnt.items()}
+    stats["total"] = len(events)
+    stats["account_count"] = len({e.get("source_name") for e in events if e.get("source_name")})
 
     data = {
         "updated_at": today,
