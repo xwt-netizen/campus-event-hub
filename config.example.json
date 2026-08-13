@@ -11,7 +11,10 @@
     "output_json": "frontend/events.json"
   },
   "wechat_download": {
-    "export_format": "csv",
+    "export_format": "md",
     "export_dir": "data/raw"
+  },
+  "mcp": {
+    "endpoint": "http://127.0.0.1:4545/mcp"
   }
 }
