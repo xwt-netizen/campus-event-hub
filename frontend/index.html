@@ -132,7 +132,7 @@
   .date-sep:hover { color: var(--blue); }
   .fold-arrow { display: inline-block; width: 16px; color: var(--blue); }
   .fold-count { font-weight: normal; color: #9a9384; font-size: 12px; }
-  .pending-sep { color: #9a9384; border-top: 1px dashed var(--line); border-bottom: none; margin-top: 10px; }
+  .pending-sep { color: #9a9384; border-bottom: 1px dashed var(--line); margin-bottom: 4px; }
   .pending-sep:hover { color: var(--ink-2); }
 
   /* ===== 活动卡片 ===== */
@@ -369,6 +369,19 @@ function filterEvents() {
   const noDate = filtered.filter(ev => !ev.date);
 
   let html = '';
+
+  // 待定事件：放最上面，默认折叠
+  if (noDate.length > 0) {
+    const noDateCollapsed = collapsedDates.has('__待定__');
+    html += '<div class="date-sep pending-sep" onclick="toggleDate(\'__待定__\', this)">' +
+      '<span class="fold-arrow">' + (noDateCollapsed ? '▸' : '▾') + '</span> ' +
+      '待定 · 未标注具体时间 <span class="fold-count">' + noDate.length + ' 条</span></div>';
+    html += '<div class="date-group" id="g_pending" style="' + (noDateCollapsed ? 'display:none' : '') + '">';
+    for (const ev of noDate) html += renderCard(ev);
+    html += '</div>';
+  }
+
+  // 有日期事件：按日期分组，每组可折叠
   let lastDate = '';
   for (const ev of dated) {
     const d = ev.date;
@@ -385,16 +398,6 @@ function filterEvents() {
     html += renderCard(ev);
   }
   if (lastDate !== '') html += '</div>';
-
-  if (noDate.length > 0) {
-    const noDateCollapsed = collapsedDates.has('__待定__');
-    html += '<div class="date-sep pending-sep" onclick="toggleDate(\'__待定__\', this)">' +
-      '<span class="fold-arrow">' + (noDateCollapsed ? '▸' : '▾') + '</span> ' +
-      '待定 · 未标注具体时间 <span class="fold-count">' + noDate.length + ' 条</span></div>';
-    html += '<div class="date-group" id="g_pending" style="' + (noDateCollapsed ? 'display:none' : '') + '">';
-    for (const ev of noDate) html += renderCard(ev);
-    html += '</div>';
-  }
 
   list.innerHTML = html;
 }
