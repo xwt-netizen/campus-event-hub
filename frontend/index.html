@@ -3,188 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>校园活动聚合 - 天津大学</title>
+<title>天津大学 · 校园活动聚合</title>
 <style>
+  :root {
+    --blue: #1a4d7e;        /* 北洋蓝 */
+    --blue-dark: #123a5e;
+    --red: #9e3b3b;         /* 海棠红 */
+    --gold: #b08d3f;        /* 金 */
+    --green: #3f6d4e;       /* 松绿 */
+    --purple: #6b5a8a;      /* 紫 */
+    --cream: #f6f3ec;       /* 米色底 */
+    --ink: #2c3440;         /* 墨色 */
+    --ink-2: #5a6472;       /* 次级墨色 */
+    --line: #e5dfd3;        /* 分隔线 */
+  }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
   }
-  .container { max-width: 800px; margin: 0 auto; padding: 16px; }
+  .container { max-width: 760px; margin: 0 auto; padding: 16px; }
 
+  /* ===== 顶栏 ===== */
   header {
-    text-align: center; padding: 24px 0 16px;
-    background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 100%);
-    color: #fff; margin-bottom: 16px; border-radius: 0 0 20px 20px;
+    position: relative;
+    text-align: center;
+    padding: 34px 16px 26px;
+    background: linear-gradient(160deg, var(--blue-dark) 0%, var(--blue) 60%, #2a6395 100%);
+    color: #fff;
+    margin-bottom: 20px;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 16px rgba(18, 58, 94, .18);
+    overflow: hidden;
   }
-  header h1 { font-size: 24px; font-weight: 700; }
-  header p { font-size: 13px; opacity: .85; margin-top: 4px; }
+  header::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red), var(--gold), var(--red));
+    opacity: .85;
+  }
+  .motto {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-size: 14px;
+    letter-spacing: 12px;
+    color: rgba(255,255,255,.72);
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .divider {
+    width: 56px; height: 1px;
+    background: rgba(255,255,255,.4);
+    margin: 12px auto;
+  }
+  .subtitle { font-size: 13px; opacity: .85; letter-spacing: 1px; }
+  .heritage {
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,.5);
+    margin-top: 10px;
+  }
 
-  .search-bar {
-    display: flex; gap: 8px; margin-bottom: 12px;
-  }
+  /* ===== 搜索 ===== */
+  .search-bar { display: flex; gap: 8px; margin-bottom: 14px; }
   .search-bar input {
-    flex: 1; padding: 10px 14px; border: 1px solid #d2d2d7; border-radius: 10px;
-    font-size: 14px; outline: none; background: #fff;
+    flex: 1; padding: 10px 16px; border: 1px solid var(--line); border-radius: 8px;
+    font-size: 14px; outline: none; background: #fff; color: var(--ink);
   }
-  .search-bar input:focus { border-color: #b71c1c; box-shadow: 0 0 0 3px rgba(183,28,28,.15); }
+  .search-bar input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,77,126,.12); }
   .search-bar button {
-    padding: 10px 18px; border: none; border-radius: 10px; background: #b71c1c;
-    color: #fff; font-size: 14px; cursor: pointer; white-space: nowrap;
+    padding: 10px 18px; border: none; border-radius: 8px; background: var(--blue);
+    color: #fff; font-size: 14px; cursor: pointer; white-space: nowrap; letter-spacing: 1px;
   }
-  .search-bar button:hover { background: #a31515; }
+  .search-bar button:hover { background: var(--blue-dark); }
 
-  .tabs {
-    display: flex; gap: 6px; margin-bottom: 8px; overflow-x: auto; padding-bottom: 4px;
-  }
+  /* ===== 分类标签 ===== */
+  .tabs { display: flex; gap: 6px; margin-bottom: 10px; overflow-x: auto; padding-bottom: 4px; }
   .tab {
-    padding: 8px 16px; border-radius: 20px; border: 1px solid #d2d2d7;
+    padding: 7px 15px; border-radius: 20px; border: 1px solid var(--line);
     background: #fff; cursor: pointer; font-size: 13px; white-space: nowrap;
-    transition: all .15s;
+    transition: all .15s; color: var(--ink-2);
   }
-  .tab:hover { border-color: #b71c1c; }
-  .tab.active { background: #b71c1c; color: #fff; border-color: #b71c1c; }
-  .tab .count { font-size: 11px; opacity: .6; margin-left: 4px; }
+  .tab:hover { border-color: var(--blue); color: var(--blue); }
+  .tab.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .tab .count { font-size: 11px; opacity: .6; margin-left: 3px; }
   .tab.active .count { opacity: .8; }
 
-  .filter-row {
-    display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; align-items: center;
-  }
-  .filter-label { font-size: 12px; color: #86868b; margin-right: 4px; }
-  .filters {
-    display: flex; gap: 10px; margin-bottom: 8px; align-items: center; font-size: 13px;
-  }
-  .filters label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
-  .filters input[type="checkbox"] { accent-color: #b71c1c; }
+  /* ===== 筛选行 ===== */
+  .filter-row { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+  .filter-label { font-size: 12px; color: var(--ink-2); margin-right: 4px; }
+  .filters { display: flex; gap: 12px; margin-bottom: 8px; align-items: center; font-size: 13px; }
+  .filters label { display: flex; align-items: center; gap: 4px; cursor: pointer; color: var(--ink-2); }
+  .filters input[type="checkbox"] { accent-color: var(--blue); }
   .chip {
-    padding: 4px 12px; border-radius: 14px; border: 1px solid #d2d2d7;
+    padding: 4px 13px; border-radius: 14px; border: 1px solid var(--line);
     background: #fff; cursor: pointer; font-size: 12px; white-space: nowrap;
-    transition: all .15s;
+    transition: all .15s; color: var(--ink-2);
   }
-  .chip:hover { border-color: #b71c1c; }
-  .chip.active { background: #b71c1c; color: #fff; border-color: #b71c1c; }
-
-  .stats-bar {
-    font-size: 12px; color: #86868b; margin-bottom: 12px; text-align: center; line-height: 1.6;
-  }
-
-  .event-card {
-    background: #fff; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.06); transition: box-shadow .15s;
-    border-left: 4px solid #667eea;
-  }
-  .event-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,.1); }
-  .event-card.lecture { border-left-color: #1976d2; }
-  .event-card.event { border-left-color: #c2185b; }
-  .event-card.volunteer { border-left-color: #388e3c; }
-  .event-card.movie { border-left-color: #7b1fa2; }
-  .event-card.notice { border-left-color: #f57c00; }
-  .event-card.other { border-left-color: #a0a0a0; }
+  .chip:hover { border-color: var(--blue); }
+  .chip.active { background: var(--blue); color: #fff; border-color: var(--blue); }
 
   .banner {
-    background: #fff8e1; border: 1px solid #ffe082; border-radius: 12px;
-    padding: 10px 14px; margin-bottom: 12px; font-size: 13px; color: #6d4c00;
+    background: #fbf7ee; border: 1px solid #e7d9b8; border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 12px; font-size: 13px; color: #6d5a2e;
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
   }
-  .banner a { color: #b71c1c; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .banner a { color: var(--red); font-weight: 600; text-decoration: none; white-space: nowrap; }
   .banner a:hover { text-decoration: underline; }
 
-  .event-header {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    gap: 8px; margin-bottom: 6px;
-  }
-  .event-title {
-    font-size: 15px; font-weight: 600; line-height: 1.3;
-  }
-  .badge-row {
-    display: flex; gap: 4px; flex-wrap: wrap; flex-shrink: 0; justify-content: flex-end;
-  }
-  .badge {
-    font-size: 11px; padding: 2px 8px; border-radius: 10px;
-    white-space: nowrap;
-  }
-  .badge-lecture { background: #e3f2fd; color: #1565c0; }
-  .badge-event { background: #fce4ec; color: #c2185b; }
-  .badge-volunteer { background: #e8f5e9; color: #2e7d32; }
-  .badge-movie { background: #f3e5f5; color: #7b1fa2; }
-  .badge-notice { background: #fff3e0; color: #e65100; }
-  .badge-other { background: #f0f0f0; color: #555; }
-  .badge-campus-wj { background: #fff3e0; color: #e65100; }
-  .badge-campus-by { background: #e8f5e9; color: #1b5e20; }
-  .badge-campus-online { background: #e3f2fd; color: #0d47a1; }
-  .badge-ticket-academic { background: #fce4ec; color: #b71c1c; }
-  .badge-ticket-theme { background: #f3e5f5; color: #7b1fa2; }
+  .stats-bar { font-size: 12px; color: var(--ink-2); margin-bottom: 14px; text-align: center; line-height: 1.6; }
 
-  .event-meta {
-    font-size: 12px; color: #666; margin-bottom: 6px;
+  /* ===== 日期分隔 ===== */
+  .date-sep {
+    font-size: 13px; font-weight: 600; color: var(--ink);
+    padding: 14px 0 8px; margin-top: 2px;
+    cursor: pointer; user-select: none;
+    border-bottom: 1px solid var(--line);
   }
-  .event-meta span { margin-right: 12px; }
-  .event-desc {
-    font-size: 13px; color: #444; margin-bottom: 6px;
+  .date-sep:hover { color: var(--blue); }
+  .fold-arrow { display: inline-block; width: 16px; color: var(--blue); }
+  .fold-count { font-weight: normal; color: #9a9384; font-size: 12px; }
+  .pending-sep { color: #9a9384; border-top: 1px dashed var(--line); border-bottom: none; margin-top: 10px; }
+  .pending-sep:hover { color: var(--ink-2); }
+
+  /* ===== 活动卡片 ===== */
+  .event-card {
+    background: #fff; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 2px rgba(28,38,50,.04);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--blue);
+    transition: box-shadow .15s;
   }
+  .event-card:hover { box-shadow: 0 3px 10px rgba(28,38,50,.08); }
+  .event-card.lecture { border-left-color: var(--blue); }
+  .event-card.event { border-left-color: var(--red); }
+  .event-card.volunteer { border-left-color: var(--green); }
+  .event-card.movie { border-left-color: var(--purple); }
+  .event-card.notice { border-left-color: var(--gold); }
+  .event-card.other { border-left-color: #9a9384; }
+
+  .event-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+  .event-title {
+    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+    font-size: 15.5px; font-weight: 600; line-height: 1.45; color: var(--ink);
+  }
+  .badge-row { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; justify-content: flex-end; }
+  .badge {
+    font-size: 11px; padding: 2px 9px; border-radius: 4px; white-space: nowrap;
+    letter-spacing: .5px;
+  }
+  .badge-lecture { background: #eaf1f8; color: var(--blue); }
+  .badge-event { background: #f7ecec; color: var(--red); }
+  .badge-volunteer { background: #ebf3ed; color: var(--green); }
+  .badge-movie { background: #f0edf6; color: var(--purple); }
+  .badge-notice { background: #f7f0e0; color: #8a6d26; }
+  .badge-other { background: #f0efed; color: #777; }
+  .badge-campus { background: #eef1f4; color: var(--ink-2); }
+  .badge-ticket-academic { background: #f7ecec; color: var(--red); font-weight: 600; }
+  .badge-ticket-theme { background: #f0edf6; color: var(--purple); }
+  .badge-volhour { background: #ebf3ed; color: var(--green); }
+
+  .event-meta { font-size: 12.5px; color: var(--ink-2); margin-bottom: 6px; }
+  .event-meta span { margin-right: 14px; white-space: nowrap; }
+  .event-meta .dot { color: #c5bdad; margin: 0 4px; }
+  .event-desc { font-size: 13px; color: #4a5563; margin-bottom: 6px; }
+
   .event-footer {
     display: flex; justify-content: space-between; align-items: center;
-    font-size: 11px; color: #86868b; padding-top: 6px; border-top: 1px solid #f0f0f0;
+    font-size: 11.5px; color: #9a9384; padding-top: 8px; border-top: 1px solid #f1ede4;
   }
-  .event-footer a { color: #b71c1c; text-decoration: none; }
+  .event-footer a { color: var(--blue); text-decoration: none; }
   .event-footer a:hover { text-decoration: underline; }
 
-  .date-sep {
-    font-size: 13px; font-weight: 600; color: #555;
-    padding: 12px 0 6px; margin-top: 4px;
-    cursor: pointer; user-select: none;
-  }
-  .date-sep:hover { color: #b71c1c; }
-  .fold-arrow { display: inline-block; width: 16px; color: #b71c1c; }
-  .fold-count { font-weight: normal; color: #999; font-size: 12px; }
-  .pending-sep {
-    color: #999; border-top: 1px dashed #ddd; padding-top: 14px; margin-top: 8px;
-  }
-  .pending-sep:hover { color: #666; }
-  .date-group { }
-
-  .empty-state {
-    text-align: center; padding: 60px 20px; color: #86868b;
-  }
-  .empty-state .emoji { font-size: 48px; margin-bottom: 12px; }
-
-  .loading { text-align: center; padding: 40px; color: #86868b; }
+  .empty-state { text-align: center; padding: 70px 20px; color: #9a9384; }
+  .empty-state .emoji { font-size: 44px; margin-bottom: 14px; }
+  .loading { text-align: center; padding: 50px; color: #9a9384; }
 
   .page-footer {
-    text-align: center; padding: 20px 0 30px;
-    font-size: 11px; color: #a0a0a0;
+    text-align: center; padding: 22px 0 30px;
+    font-size: 11px; color: #b0a895;
+  }
+  .page-footer .seal {
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    color: var(--red); letter-spacing: 2px;
   }
 
   @media (max-width: 480px) {
     .container { padding: 10px; }
-    header { padding: 18px 0 12px; }
-    header h1 { font-size: 20px; }
-    .event-title { font-size: 14px; }
+    header { padding: 26px 14px 20px; }
+    header h1 { font-size: 22px; }
+    .event-title { font-size: 14.5px; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>📅 校园活动聚合</h1>
-  <p>天津大学 · 讲座 · 活动 · 志愿招募 &mdash; 一目了然</p>
+  <div class="motto">实事求是</div>
+  <h1>天津大学 · 校园活动聚合</h1>
+  <div class="divider"></div>
+  <div class="subtitle">讲座 · 活动 · 志愿 · 电影 · 通知</div>
+  <div class="heritage">北洋 · 一八九五</div>
 </header>
 
 <div class="container">
   <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="搜索活动、地点、组织..." oninput="filterEvents()">
+    <input type="text" id="searchInput" placeholder="搜索活动、地点、主办方…" oninput="filterEvents()">
     <button onclick="refreshData()">刷新</button>
   </div>
 
   <div class="tabs" id="tabContainer">
     <div class="tab active" data-category="all" onclick="switchTab('all', this)">全部</div>
-    <div class="tab" data-category="lecture" onclick="switchTab('lecture', this)">📚 讲座</div>
-    <div class="tab" data-category="event" onclick="switchTab('event', this)">🎭 活动</div>
-    <div class="tab" data-category="volunteer" onclick="switchTab('volunteer', this)">🤝 志愿</div>
-    <div class="tab" data-category="movie" onclick="switchTab('movie', this)">🎬 电影</div>
-    <div class="tab" data-category="notice" onclick="switchTab('notice', this)">📢 通知</div>
+    <div class="tab" data-category="lecture" onclick="switchTab('lecture', this)">讲座</div>
+    <div class="tab" data-category="event" onclick="switchTab('event', this)">活动</div>
+    <div class="tab" data-category="volunteer" onclick="switchTab('volunteer', this)">志愿</div>
+    <div class="tab" data-category="movie" onclick="switchTab('movie', this)">电影</div>
+    <div class="tab" data-category="notice" onclick="switchTab('notice', this)">通知</div>
+  </div>
+
+  <div class="filter-row">
+    <span class="filter-label">校区</span>
+    <div class="chip active" data-campus="" onclick="switchCampus('', this)">全部</div>
+    <div class="chip" data-campus="卫津路" onclick="switchCampus('卫津路', this)">卫津路</div>
+    <div class="chip" data-campus="北洋园" onclick="switchCampus('北洋园', this)">北洋园</div>
+    <div class="chip" data-campus="线上" onclick="switchCampus('线上', this)">线上</div>
+  </div>
+
+  <div class="filter-row">
+    <span class="filter-label">讲座单</span>
+    <div class="chip active" data-ticket="" onclick="switchTicket('', this)">全部</div>
+    <div class="chip" data-ticket="academic" onclick="switchTicket('academic', this)">人文学术 · 必修</div>
+    <div class="chip" data-ticket="theme" onclick="switchTicket('theme', this)">主题教育 · 选修</div>
+  </div>
+
+  <div class="filters">
+    <label><input type="checkbox" id="upcomingFilter" onchange="filterEvents()"> 只看近期</label>
   </div>
 
   <div class="banner" id="banner" style="display:none">
@@ -192,28 +254,9 @@
     <a href="https://github.com/xwt-netizen/campus-event-hub/issues/new" target="_blank" rel="noopener">补充公众号 →</a>
   </div>
 
-  <div class="filter-row">
-    <span class="filter-label">校区</span>
-    <div class="chip active" data-campus="" onclick="switchCampus('', this)">全部</div>
-    <div class="chip" data-campus="卫津路" onclick="switchCampus('卫津路', this)">📍卫津路</div>
-    <div class="chip" data-campus="北洋园" onclick="switchCampus('北洋园', this)">📍北洋园</div>
-    <div class="chip" data-campus="线上" onclick="switchCampus('线上', this)">💻线上</div>
-  </div>
-
-  <div class="filter-row">
-    <span class="filter-label">讲座单</span>
-    <div class="chip active" data-ticket="" onclick="switchTicket('', this)">全部</div>
-    <div class="chip" data-ticket="academic" onclick="switchTicket('academic', this)">📕人文学术（必修）</div>
-    <div class="chip" data-ticket="theme" onclick="switchTicket('theme', this)">📗主题教育（选修）</div>
-  </div>
-
-  <div class="filters">
-    <label><input type="checkbox" id="upcomingFilter" onchange="filterEvents()"> 只看近期</label>
-  </div>
-
   <div class="stats-bar" id="statsBar"></div>
   <div id="eventList"></div>
-  <div class="page-footer" id="footer"></div>
+  <div class="page-footer" id="footer"><span class="seal">实事求是</span> · 天津大学</div>
 </div>
 
 <script>
@@ -222,10 +265,11 @@ let allEvents = [];
 let currentTab = 'all';
 let currentCampus = '';
 let currentTicket = '';
+const collapsedDates = new Set(['__待定__']);
 
 async function loadData() {
   const list = document.getElementById('eventList');
-  list.innerHTML = '<div class="loading">加载中...</div>';
+  list.innerHTML = '<div class="loading">加载中…</div>';
 
   try {
     const resp = await fetch(DATA_URL + '?t=' + Date.now());
@@ -236,33 +280,25 @@ async function loadData() {
     const stats = data.stats || {};
     document.querySelectorAll('.tab').forEach(tab => {
       const cat = tab.dataset.category;
-      const cnt = stats[cat] || 0;
+      const cnt = cat === 'all' ? (stats.total || 0) : (stats[cat] || 0);
       const span = tab.querySelector('.count');
       if (!span) {
         const s = document.createElement('span');
         s.className = 'count';
-        s.textContent = '(' + (cat === 'all' ? (stats.total || 0) : cnt) + ')';
+        s.textContent = '(' + cnt + ')';
         tab.appendChild(s);
       } else {
-        span.textContent = '(' + (cat === 'all' ? (stats.total || 0) : cnt) + ')';
+        span.textContent = '(' + cnt + ')';
       }
     });
 
     const updatedAt = data.updated_at || '未知';
-    document.getElementById('footer').textContent =
-      '数据更新于 ' + updatedAt + ' · 共 ' + allEvents.length + ' 个活动';
-
-    const accountCount = stats.account_count || 0;
-    const banner = document.getElementById('banner');
-    if (accountCount > 0) {
-      banner.style.display = 'flex';
-      document.getElementById('bannerText').textContent =
-        '已收录 ' + accountCount + ' 个公众号，可能不完整，欢迎补充';
-    }
+    document.getElementById('footer').innerHTML =
+      '<span class="seal">实事求是</span> · 数据更新于 ' + updatedAt + ' · 共 ' + allEvents.length + ' 条';
 
     filterEvents();
   } catch (e) {
-    list.innerHTML = '<div class="empty-state"><div class="emoji">😅</div><p>数据加载失败，请确认 events.json 文件存在</p><p style="font-size:12px;margin-top:8px">' + e.message + '</p></div>';
+    list.innerHTML = '<div class="empty-state"><div class="emoji">∅</div><p>数据加载失败，请确认 events.json 文件存在</p><p style="font-size:12px;margin-top:8px">' + e.message + '</p></div>';
   }
 }
 
@@ -295,9 +331,7 @@ function filterEvents() {
   let filtered = allEvents.filter(ev => {
     if (currentTab !== 'all' && ev.category !== currentTab) return false;
     if (currentCampus && ev.campus !== currentCampus) return false;
-    if (currentTicket) {
-      if (ev.ticket_type !== currentTicket) return false;
-    }
+    if (currentTicket && ev.ticket_type !== currentTicket) return false;
     if (upcomingOnly && ev.date && ev.date < getToday()) return false;
     if (search) {
       const haystack = (ev.title + ' ' + ev.location + ' ' + ev.organizer + ' ' + ev.description).toLowerCase();
@@ -309,12 +343,12 @@ function filterEvents() {
   filtered.sort((a, b) => {
     const da = a.date || '9999-99-99';
     const db = b.date || '9999-99-99';
-    if (da !== db) return db.localeCompare(da);  // 从新到旧，无日期排最后
+    if (da !== db) return db.localeCompare(da);
     return (b.start_time || '').localeCompare(a.start_time || '');
   });
 
   if (filtered.length === 0) {
-    list.innerHTML = '<div class="empty-state"><div class="emoji">🔍</div><p>没有匹配的活动</p></div>';
+    list.innerHTML = '<div class="empty-state"><div class="emoji">∅</div><p>没有匹配的内容</p></div>';
     return;
   }
 
@@ -324,21 +358,16 @@ function filterEvents() {
     campusCnt[ev.campus || '未知'] = (campusCnt[ev.campus || '未知'] || 0) + 1;
     if (ev.ticket_type) ticketCnt[ev.ticket_type] = (ticketCnt[ev.ticket_type] || 0) + 1;
   });
-  let statsParts = ['显示 ' + filtered.length + ' / ' + allEvents.length + ' 个活动'];
-  const campusParts = Object.entries(campusCnt).map(([k, v]) => {
-    const labels = {'卫津路':'📍卫津路','北洋园':'📍北洋园','线上':'💻线上'};
-    return (labels[k] || k) + ' ' + v;
-  });
-  if (campusParts.length > 0) statsParts.push('｜' + campusParts.join(' '));
-  if (ticketCnt.academic) statsParts.push('｜📕人文学术 ' + ticketCnt.academic);
-  if (ticketCnt.theme) statsParts.push('｜📗主题教育 ' + ticketCnt.theme);
+  let statsParts = ['共 ' + filtered.length + ' 条'];
+  const campusParts = Object.entries(campusCnt).map(([k, v]) => (k === '未知' ? '' : k + ' ' + v)).filter(Boolean);
+  if (campusParts.length > 0) statsParts.push('· ' + campusParts.join(' · '));
+  if (ticketCnt.academic) statsParts.push('· 人文学术 ' + ticketCnt.academic);
+  if (ticketCnt.theme) statsParts.push('· 主题教育 ' + ticketCnt.theme);
   document.getElementById('statsBar').textContent = statsParts.join(' ');
 
-  // 分离有日期和待定事件
   const dated = filtered.filter(ev => ev.date);
   const noDate = filtered.filter(ev => !ev.date);
 
-  // 有日期事件：按日期分组，每组可折叠
   let html = '';
   let lastDate = '';
   for (const ev of dated) {
@@ -349,7 +378,7 @@ function filterEvents() {
       const isCollapsed = collapsedDates.has(d);
       html += '<div class="date-sep" onclick="toggleDate(\'' + d + '\', this)">' +
         '<span class="fold-arrow">' + (isCollapsed ? '▸' : '▾') + '</span> ' +
-        formatDate(d) + ' <span class="fold-count">(' + groupCount(dated, d) + ')</span></div>';
+        formatDate(d) + ' <span class="fold-count">' + groupCount(dated, d) + ' 条</span></div>';
       html += '<div class="date-group" id="' + groupId + '" style="' + (isCollapsed ? 'display:none' : '') + '">';
       lastDate = d;
     }
@@ -357,34 +386,26 @@ function filterEvents() {
   }
   if (lastDate !== '') html += '</div>';
 
-  // 待定事件：单独一栏，默认折叠
   if (noDate.length > 0) {
     const noDateCollapsed = collapsedDates.has('__待定__');
     html += '<div class="date-sep pending-sep" onclick="toggleDate(\'__待定__\', this)">' +
       '<span class="fold-arrow">' + (noDateCollapsed ? '▸' : '▾') + '</span> ' +
-      '⏳ 待定（未标注具体时间） <span class="fold-count">(' + noDate.length + ')</span></div>';
+      '待定 · 未标注具体时间 <span class="fold-count">' + noDate.length + ' 条</span></div>';
     html += '<div class="date-group" id="g_pending" style="' + (noDateCollapsed ? 'display:none' : '') + '">';
-    for (const ev of noDate) {
-      html += renderCard(ev);
-    }
+    for (const ev of noDate) html += renderCard(ev);
     html += '</div>';
   }
 
   list.innerHTML = html;
 }
 
-const collapsedDates = new Set(['__待定__']);
-
 function groupCount(events, date) {
-  return events.filter(e => (e.date || '待定') === date).length;
+  return events.filter(e => e.date === date).length;
 }
 
 function toggleDate(date, el) {
-  if (collapsedDates.has(date)) {
-    collapsedDates.delete(date);
-  } else {
-    collapsedDates.add(date);
-  }
+  if (collapsedDates.has(date)) collapsedDates.delete(date);
+  else collapsedDates.add(date);
   const groupId = (date === '__待定__') ? 'g_pending' : ('g' + date.replace(/[^0-9]/g, ''));
   const group = document.getElementById(groupId);
   if (group) group.style.display = (group.style.display === 'none') ? '' : 'none';
@@ -394,72 +415,62 @@ function toggleDate(date, el) {
 
 function renderCard(ev) {
   const catMap = {
-    lecture: {label:'📚讲座', cls:'lecture'},
-    event: {label:'🎭活动', cls:'event'},
-    volunteer: {label:'🤝志愿', cls:'volunteer'},
-    movie: {label:'🎬电影', cls:'movie'},
-    notice: {label:'📢通知', cls:'notice'},
-    other: {label:'📄其他', cls:'other'},
+    lecture: {label:'讲座', cls:'lecture'},
+    event: {label:'活动', cls:'event'},
+    volunteer: {label:'志愿', cls:'volunteer'},
+    movie: {label:'电影', cls:'movie'},
+    notice: {label:'通知', cls:'notice'},
+    other: {label:'其他', cls:'other'},
   };
   const c = catMap[ev.category] || catMap.other;
-  const catClass = c.cls;
 
   let badges = '<div class="badge-row">';
-  badges += '<span class="badge badge-' + catClass + '">' + c.label + '</span>';
-
-  const campusMap = {'卫津路':'badge-campus-wj','北洋园':'badge-campus-by','线上':'badge-campus-online'};
-  if (ev.campus && campusMap[ev.campus]) {
-    badges += ' <span class="badge ' + campusMap[ev.campus] + '">📍' + ev.campus + '</span>';
-  }
-
+  badges += '<span class="badge badge-' + c.cls + '">' + c.label + '</span>';
+  if (ev.campus) badges += ' <span class="badge badge-campus">' + escapeHtml(ev.campus) + '</span>';
   if (ev.ticket_type === 'academic') {
-    badges += ' <span class="badge badge-ticket-academic">📕人文学术 ✅必修</span>';
+    badges += ' <span class="badge badge-ticket-academic">人文学术 · 必修</span>';
   } else if (ev.ticket_type === 'theme') {
-    badges += ' <span class="badge badge-ticket-theme">📗主题教育 📌选修</span>';
+    badges += ' <span class="badge badge-ticket-theme">主题教育 · 选修</span>';
   }
-
   if (ev.volunteer_hours) {
-    badges += ' <span class="badge badge-volunteer">⏱' + ev.volunteer_hours + 'h</span>';
+    badges += ' <span class="badge badge-volhour">' + ev.volunteer_hours + ' 小时</span>';
   }
   badges += '</div>';
 
-  const timeStr = [ev.start_time, ev.end_time].filter(Boolean).join(' - ');
+  const timeStr = [ev.start_time, ev.end_time].filter(Boolean).join('–');
   const meta = [];
-  if (ev.date) meta.push('<span>📅 ' + ev.date + '</span>');
-  if (timeStr) meta.push('<span>⏰ ' + timeStr + '</span>');
-  if (ev.location) meta.push('<span>📍 ' + ev.location + '</span>');
+  if (ev.date) meta.push('<span>' + escapeHtml(ev.date) + '</span>');
+  if (timeStr) meta.push('<span>' + escapeHtml(timeStr) + '</span>');
+  if (ev.location) meta.push('<span>' + escapeHtml(ev.location) + '</span>');
 
   let desc = '';
   if (ev.description) desc = '<div class="event-desc">' + escapeHtml(ev.description) + '</div>';
 
   let ticketNote = '';
-  if (ev.ticket_info) {
-    ticketNote = ' <span style="color:#e65100;font-size:11px">🎫 ' + escapeHtml(ev.ticket_info) + '</span>';
-  }
+  if (ev.ticket_info) ticketNote = ' · ' + escapeHtml(ev.ticket_info);
 
-  // 多来源显示
   const sources = ev.sources || [];
   let sourceHtml = '';
   if (sources.length > 1) {
-    const parts = sources.map(s => {
+    const names = sources.map(s => {
       return s.url && s.url.startsWith('http')
         ? '<a href="' + escapeHtml(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + '</a>'
         : escapeHtml(s.name);
     });
-    sourceHtml = '<span style="color:#aaa">来源：' + parts.join('、') + '</span>';
+    sourceHtml = '来源：' + names.join('、');
   } else {
-    sourceHtml = '<span>' + escapeHtml(ev.organizer || ev.source_name) + ticketNote + '</span>';
+    sourceHtml = escapeHtml(ev.organizer || ev.source_name) + ticketNote;
   }
 
-  return '<div class="event-card ' + catClass + '">' +
+  return '<div class="event-card ' + c.cls + '">' +
     '<div class="event-header">' +
       '<div class="event-title">' + escapeHtml(ev.title) + '</div>' +
       badges +
     '</div>' +
-    '<div class="event-meta">' + meta.join('') + '</div>' +
+    '<div class="event-meta">' + meta.join('<span class="dot">·</span>') + '</div>' +
     desc +
     '<div class="event-footer">' +
-      sourceHtml +
+      '<span>' + sourceHtml + '</span>' +
       (sources.length <= 1 && ev.source_url && ev.source_url.startsWith('http')
         ? '<a href="' + escapeHtml(ev.source_url) + '" target="_blank" rel="noopener">查看原文 →</a>'
         : '') +
@@ -499,9 +510,7 @@ function escapeHtml(s) {
   return d.innerHTML;
 }
 
-function refreshData() {
-  loadData();
-}
+function refreshData() { loadData(); }
 
 loadData();
 </script>
