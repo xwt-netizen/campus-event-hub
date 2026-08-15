@@ -96,31 +96,26 @@ def get_current_biz():
         return None
 
 
-def wait_switch(target_biz, timeout=25):
-    """写剪贴板后等待 wechatDownload 自动切换 business_id。
-    用「剪贴板被改写为 confirmation URL 且含目标 biz」作为切换完成的信号。
-    返回 True/False"""
+def wait_switch(target_biz, timeout=30):
+    """写剪贴板后，通过 MCP 轮询确认 business_id 已切换为目标公众号。
+    这是可靠信号（剪贴板改写不稳定，不以它为准）。"""
     for _ in range(timeout):
         time.sleep(1)
-        cb = get_clipboard()
-        if cb and "action=home" in cb:
-            biz = extract_biz(cb)
-            if biz == target_biz:
-                return True
+        biz = get_current_biz()
+        if biz == target_biz:
+            return True
     return False
 
 
 def check_key_status(target_biz):
-    """检查密钥状态。返回 'ok' / 'need_confirm' / 'unknown'"""
-    tail = read_log_tail(60)
+    """检查密钥状态。返回 'ok' / 'need_confirm' / 'unknown'
+    密钥全局共享：只要有'获取密钥成功'即视为有效。"""
+    tail = read_log_tail(100)
     joined = "\n".join(tail)
+    # 只认"获取密钥成功"（全局密钥有效即 ok），忽略"开始获取密钥"（可能是尝试记录）
     if "获取密钥成功" in joined:
         return "ok"
-    if "获取密钥失败" in joined:
-        return "need_confirm"
-    if "开始获取密钥" in joined:
-        return "need_confirm"  # 触发了获取，但未确认成功
-    return "unknown"
+    return "need_confirm"
 
 
 def wait_download(biz_dir_name, before_count, timeout=150):
@@ -174,12 +169,15 @@ def collect_one(acc, index, total):
     key_status = check_key_status(target_biz)
     if key_status == "need_confirm":
         log("  ⚠ 需要微信确认密钥（首次或已过期）")
-        log("    请在微信中打开确认链接完成验证")
-        input("    完成后按 Enter 继续… ")
-        time.sleep(2)
-        key_status = check_key_status(target_biz)
-        if key_status == "need_confirm":
-            log("  ✗ 密钥仍未确认")
+        log("    请在微信中打开剪贴板中的确认链接完成验证")
+        try:
+            input("    完成后按 Enter 继续… ")
+        except EOFError:
+            log("    （非交互模式，等待 15 秒供人工确认…）")
+            time.sleep(15)
+        # 确认后重新检查
+        if check_key_status(target_biz) == "need_confirm":
+            log("  ✗ 密钥仍未确认（微信未完成验证）")
             return {"name": name, "status": "fail", "reason": "密钥未确认"}
 
     # ③ 记录下载前 md 数量
@@ -215,14 +213,16 @@ def check_ready():
     except Exception as e:
         log(f"MCP 不可用 ✗: {e}")
         ok = False
-    # 测试剪贴板监听：写一个已知 URL，看是否被改写
+    # 测试剪贴板监听：写一个已知 URL，通过 MCP 确认 business_id 是否切换
     if ok:
         test_url = "http://mp.weixin.qq.com/s?__biz=MjM5NjI1NjM5Mg==&mid=2652292209&idx=1&sn=f41ef77c79d8872ca1f0f0a834d9b9ad&chksm=bc4045e55e16e8e74f905ade493a9b2b9916061aef5d60c4578fff66502a668a789a3fa13e47&"
+        before = get_current_biz()
         set_clipboard(test_url)
-        if wait_switch("MjM5NjI1NjM5Mg==", timeout=15):
-            log("剪贴板监听 ✓（工具识别并切换）")
+        if wait_switch("MjM5NjI1NjM5Mg==", timeout=20):
+            log("剪贴板监听 ✓（工具识别 URL 并切换 business_id）")
         else:
-            log("剪贴板监听 ✗（请确认已勾选「自动监听剪切板」）")
+            log(f"剪贴板监听 ✗（写入 URL 后 business_id 未切换，当前 {before} → {get_current_biz()}）")
+            log("请确认工具已勾选「自动监听剪切板」且窗口在前台")
             ok = False
     return ok
 
