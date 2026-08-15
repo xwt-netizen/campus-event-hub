@@ -43,10 +43,10 @@
     pointer-events: none;
     z-index: 0;
   }
-  body::before { right: -100px; top: 110px; width: 430px; height: 470px; }
-  body::after { left: -70px; bottom: -80px; width: 210px; height: 230px; opacity: .035; }
+  body::before { right: -100px; top: 110px; width: 430px; height: 470px; opacity: .038; }
+  body::after { left: -70px; bottom: -80px; width: 210px; height: 230px; opacity: .028; }
   .topbar, .wrap, .foot { position: relative; z-index: 1; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 
   /* ============ 顶栏（品牌） ============ */
   .topbar {
@@ -54,7 +54,7 @@
     background: var(--bg);
   }
   .topbar-inner {
-    max-width: 760px; margin: 0 auto; padding: 9px 16px;
+    max-width: 1040px; margin: 0 auto; padding: 9px 20px;
     display: flex; justify-content: space-between; align-items: center;
   }
   .brand { display: flex; align-items: center; gap: 8px; }
@@ -107,17 +107,20 @@
   .nav-item.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
   .nav-item .count { font-size: 11px; color: var(--ink-3); margin-left: 4px; font-weight: normal; }
 
-  /* ============ 筛选栏 ============ */
-  .filter-panel {
-    margin-top: 2px; padding: 7px 2px;
+  /* ============ 校园信息索引（筛选） ============ */
+  .index-bar {
+    margin-top: 6px; padding: 8px 0;
     border-top: 1px solid var(--line);
-    display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center;
-    font-size: 12px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 0;
   }
-  .fgroup { display: flex; align-items: center; gap: 6px; }
-  .flabel { color: var(--ink-3); letter-spacing: 1px; flex-shrink: 0; font-size: 11px; }
+  .ix { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+  .ix-label {
+    color: var(--ink-3); letter-spacing: 2px; font-size: 11px;
+    padding-right: 4px; margin-right: 2px;
+  }
+  .ix-sep { width: 1px; height: 16px; background: var(--line-dark); margin: 0 12px; opacity: .6; }
   .fc {
-    padding: 2px 9px; border: 1px solid var(--line-dark); border-radius: 2px;
+    padding: 2px 10px; border: 1px solid var(--line-dark); border-radius: 2px;
     cursor: pointer; color: var(--ink-2); background: transparent; font-size: 11.5px;
     transition: all .12s; white-space: nowrap;
   }
@@ -126,26 +129,17 @@
   .check-label { display: flex; align-items: center; gap: 5px; cursor: pointer; color: var(--ink-2); font-size: 12px; }
   .check-label input { accent-color: var(--blue); }
 
-  /* ============ 讲座单模块（克制） ============ */
-  .ticket-module {
-    margin-top: 0; border: 1px solid var(--line); border-left: 2px solid var(--red);
-    background: transparent; padding: 6px 12px;
-    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px;
-  }
-  .ticket-module .t-title {
-    font-family: "Noto Serif SC", serif; font-size: 12px; font-weight: 700; color: var(--red);
-    letter-spacing: 1px;
-  }
-  .ticket-module .t-sub { font-size: 10.5px; color: var(--ink-3); }
-  .ticket-module .fc.active { background: var(--red); border-color: var(--red); }
-
   /* ============ 状态条（轻量数据感） ============ */
   .status-line {
     margin-top: 8px; padding: 6px 2px;
     font-size: 11px; color: var(--ink-3); letter-spacing: .5px;
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
   }
-  .status-line b { color: var(--ink-2); font-weight: 600; }
+  .status-line b {
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 15px; font-weight: 700; color: var(--blue);
+    margin: 0 1px;
+  }
 
   .banner {
     margin-top: 8px; padding: 6px 12px; font-size: 11.5px; color: #7a6a3a;
@@ -205,12 +199,26 @@
   }
   .ev-volh { font-size: 11px; color: var(--green); border: 1px solid #9cbfa9; border-radius: 2px; padding: 0 6px; white-space: nowrap; }
 
-  .ev-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-top: 2px; line-height: 1.4; }
-  .ev-loc { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+  .ev-title { font-size: 15.5px; font-weight: 650; color: var(--ink); margin-top: 2px; line-height: 1.4; letter-spacing: .2px; }
+  .ev-loc { font-size: 12px; color: var(--ink-3); margin-top: 2px; letter-spacing: .3px; }
 
-  /* 待定组 */
-  .pending-head { color: var(--ink-3); border-top: 1px dashed var(--line-dark); }
-  .pending-head .day-label { color: var(--ink-3); font-weight: 400; font-size: 13px; }
+  /* 待定组（可展开信息分组） */
+  .pending-wrap {
+    margin-top: 14px; border: 1px dashed var(--line-dark); border-radius: 3px;
+  }
+  .pending-head {
+    color: var(--ink-3); padding: 8px 10px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px dashed var(--line); cursor: pointer; user-select: none;
+  }
+  .pending-head .day-label { color: var(--ink-2); font-weight: 600; font-size: 13px; }
+  .pending-head .day-sub { font-size: 11px; color: var(--ink-3); }
+  .pending-head .day-count {
+    margin-left: auto; font-size: 12px; color: var(--ink-2);
+    font-family: "Noto Serif SC", serif; font-weight: 700;
+  }
+  .pending-head:hover .day-label { color: var(--blue); }
+  .pending-group { padding: 2px 10px; }
 
   /* ============ 详情（档案卡模态） ============ */
   .modal-mask {
@@ -323,29 +331,26 @@
     <button class="nav-item" data-category="notice" onclick="switchTab('notice', this)">通知</button>
   </div>
 
-  <!-- 筛选栏 -->
-  <div class="filter-panel">
-    <div class="fgroup">
-      <span class="flabel">校园</span>
+  <!-- 校园信息索引（筛选） -->
+  <div class="index-bar">
+    <div class="ix">
+      <span class="ix-label">校园</span>
       <span class="fc active" data-campus="" onclick="switchCampus('', this)">全部</span>
       <span class="fc" data-campus="卫津路" onclick="switchCampus('卫津路', this)">卫津路</span>
       <span class="fc" data-campus="北洋园" onclick="switchCampus('北洋园', this)">北洋园</span>
       <span class="fc" data-campus="线上" onclick="switchCampus('线上', this)">线上</span>
     </div>
-    <div class="fgroup">
+    <div class="ix-sep"></div>
+    <div class="ix">
+      <span class="ix-label">讲座单</span>
+      <span class="fc active" data-ticket="" onclick="switchTicket('', this)">全部</span>
+      <span class="fc" data-ticket="academic" onclick="switchTicket('academic', this)">✓ 人文学术 · 必修</span>
+      <span class="fc" data-ticket="theme" onclick="switchTicket('theme', this)">主题教育 · 选修</span>
+    </div>
+    <div class="ix-sep"></div>
+    <div class="ix">
       <label class="check-label"><input type="checkbox" id="upcomingFilter" onchange="filterEvents()"> 只看近期</label>
     </div>
-  </div>
-
-  <!-- 讲座单模块（核心） -->
-  <div class="ticket-module">
-    <div>
-      <span class="t-title">讲座单</span>
-      <span class="t-sub">毕业要求相关讲座</span>
-    </div>
-    <span class="fc active" data-ticket="" onclick="switchTicket('', this)">全部</span>
-    <span class="fc" data-ticket="academic" onclick="switchTicket('academic', this)">✓ 人文学术 · 必修</span>
-    <span class="fc" data-ticket="theme" onclick="switchTicket('theme', this)">主题教育 · 选修</span>
   </div>
 
   <!-- 状态条 -->
@@ -489,16 +494,18 @@ function filterEvents() {
 
   let html = '';
 
-  /* 待定：放最上面 */
+  /* 待定：可展开信息分组，放最上面 */
   if (noDate.length > 0) {
     const collapsed = collapsedDates.has('__待定__');
-    html += '<div class="day-head pending-head" onclick="toggleDate(\'__待定__\', this)">' +
-      '<span class="fold-arrow">' + (collapsed ? '▸' : '▾') + '</span>' +
-      '<span class="day-label">待定</span><span class="day-sub">未标注具体时间</span>' +
-      '<span class="day-count">' + noDate.length + '</span></div>';
-    html += '<div class="day-group" id="g_pending" style="' + (collapsed ? 'display:none' : '') + '">';
+    html += '<div class="pending-wrap">' +
+      '<div class="pending-head" onclick="toggleDate(\'__待定__\', this)">' +
+        '<span class="fold-arrow">' + (collapsed ? '▸' : '▾') + '</span>' +
+        '<span class="day-label">待定</span><span class="day-sub">未标注具体时间</span>' +
+        '<span class="day-count">' + noDate.length + ' 条</span>' +
+      '</div>' +
+      '<div class="pending-group" id="g_pending" style="' + (collapsed ? 'display:none' : '') + '">';
     for (const ev of noDate) html += renderItem(ev);
-    html += '</div>';
+    html += '</div></div>';
   }
 
   /* 有日期：按日分组 */
