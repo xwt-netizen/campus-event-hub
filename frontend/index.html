@@ -75,15 +75,26 @@
   .top-right .motto { font-family: "Noto Serif SC", serif; font-size: 8px; letter-spacing: 2px; color: var(--gold); margin-top: 1px; opacity: .7; }
 
   /* ============ 主视觉 ============ */
-  .hero { padding: 16px 0 12px; text-align: center; border-bottom: 1px solid var(--line); }
+  .hero { padding: 14px 0 10px; text-align: center; border-bottom: 1px solid var(--line); }
   .hero h2 {
     font-family: "Noto Serif SC", "Songti SC", serif;
-    font-size: 21px; font-weight: 700; letter-spacing: 2px; color: var(--ink);
+    font-size: 20px; font-weight: 700; letter-spacing: 2px; color: var(--ink);
   }
-  .hero .date { margin-top: 4px; font-size: 11.5px; color: var(--ink-2); letter-spacing: 1px; }
+  .hero .date { margin-top: 3px; font-size: 11.5px; color: var(--ink-2); letter-spacing: 1px; }
   .hero .date b { color: var(--blue); font-weight: 600; }
 
-  .search-box { margin: 11px auto 0; max-width: 520px; display: flex; }
+  /* 今日状态（克制的信息台提示） */
+  .today-status {
+    margin-top: 7px; font-size: 11.5px; color: var(--ink-3); letter-spacing: .5px;
+    min-height: 18px; line-height: 1.6;
+  }
+  .today-status .sep { margin: 0 8px; color: var(--line-dark); }
+  .today-status b { font-family: "Noto Serif SC", "Songti SC", serif; font-weight: 700; color: var(--ink-2); }
+  .today-status .num { color: var(--blue); font-size: 13px; }
+  .today-status .now { color: var(--red); }
+  .today-status .next { color: var(--ink-2); }
+
+  .search-box { margin: 9px auto 0; max-width: 520px; display: flex; }
   .search-box input {
     flex: 1; padding: 8px 14px; border: 1px solid var(--line-dark); border-right: none;
     border-radius: 2px 0 0 2px; background: var(--card); font-size: 13.5px; color: var(--ink); outline: none;
@@ -149,44 +160,60 @@
   .banner a { color: var(--red); text-decoration: none; font-weight: 600; white-space: nowrap; }
 
   /* ============ 活动列表（日程时间线，页面主体） ============ */
-  .list { margin-top: 12px; }
+  .list { margin-top: 10px; }
 
+  /* 日期分组——章节标题 */
   .day-head {
-    padding: 11px 2px 6px; cursor: pointer; user-select: none;
-    display: flex; align-items: center; gap: 8px;
+    padding: 14px 2px 7px; cursor: pointer; user-select: none;
+    display: flex; align-items: baseline; gap: 10px;
     border-bottom: 1px solid var(--line);
+    position: relative;
   }
   .day-head:hover .day-label { color: var(--blue); }
-  .day-label { font-family: "Noto Serif SC", serif; font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: 1px; }
+  .day-label { font-family: "Noto Serif SC", serif; font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: 1px; }
+  .day-week { font-size: 12px; color: var(--ink-3); letter-spacing: .5px; }
+  .day-mark {
+    font-size: 9.5px; letter-spacing: 1.5px; color: var(--blue);
+    border: 1px solid var(--blue); border-radius: 2px; padding: 0 5px;
+    font-family: inherit;
+  }
+  .day-count { font-size: 11px; color: var(--ink-3); margin-left: auto; }
+  .fold-arrow { color: var(--ink-3); font-size: 11px; width: 12px; align-self: center; }
+
+  /* 今天：左竖线 + 极淡强调 */
+  .day-head.today { border-bottom-color: var(--line-dark); }
+  .day-head.today::before {
+    content: ""; position: absolute; left: -6px; top: 10px; bottom: 7px;
+    width: 2px; background: var(--blue); opacity: .55;
+  }
   .day-label.today { color: var(--blue); }
-  .day-sub { font-size: 11px; color: var(--ink-3); }
-  .day-count { font-size: 11px; color: var(--ink-3); }
-  .fold-arrow { color: var(--ink-3); font-size: 12px; width: 14px; }
 
   .day-group { padding: 2px 0 6px; }
 
+  /* 时间线条目——班次表：时间 | 主体 | 侧栏 */
   .ev-item {
-    display: flex; gap: 0; padding: 9px 2px 9px 0;
-    border-bottom: 1px dashed var(--line);
-    cursor: pointer; transition: background .12s;
+    display: flex; flex-wrap: wrap;
+    padding: 10px 2px; cursor: pointer; transition: background .12s;
   }
   .ev-item:hover { background: #fbfaf6; }
-  .ev-item:last-child { border-bottom: none; }
+  .ev-item + .ev-item { border-top: 1px dashed var(--line); }
 
   .ev-time {
-    flex-shrink: 0; width: 64px; text-align: right; padding-right: 14px;
-    font-family: "Noto Serif SC", serif; font-size: 16px; font-weight: 700; color: var(--ink);
-    border-right: 1px solid var(--line); position: relative;
+    flex-shrink: 0; width: 78px; padding-right: 18px;
+    text-align: right;
+    font-family: "Noto Serif SC", serif; font-size: 17px; font-weight: 700; color: var(--ink);
+    border-right: 1px solid var(--line); position: relative; line-height: 1.4;
   }
   .ev-time::after {
-    content: ""; position: absolute; right: -4px; top: 6px;
+    content: ""; position: absolute; right: -4px; top: 8px;
     width: 7px; height: 7px; border-radius: 50%; background: var(--line-dark);
   }
+  .ev-time.now::after { background: var(--red); }
   .ev-time.no-time { font-size: 12px; font-weight: 400; color: var(--ink-3); line-height: 2.2; }
 
-  .ev-main { flex: 1; padding-left: 16px; min-width: 0; }
-  .ev-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .ev-type { font-size: 11px; color: var(--ink-2); display: flex; align-items: center; gap: 4px; }
+  .ev-body { flex: 1 1 34%; padding-left: 18px; min-width: 0; }
+  .ev-sub { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; font-size: 11px; color: var(--ink-3); }
+  .ev-type { display: flex; align-items: center; gap: 4px; color: var(--ink-2); }
   .ev-type .sym { font-size: 10px; }
   .ev-type.lecture .sym { color: var(--blue); }
   .ev-type.event .sym { color: var(--red); }
@@ -194,13 +221,20 @@
   .ev-type.movie .sym { color: var(--purple); }
   .ev-type.notice .sym { color: var(--gold); }
   .ev-ticket {
-    font-size: 11px; color: var(--red); border: 1px solid var(--red);
+    font-size: 10.5px; color: var(--red); border: 1px solid var(--red);
     border-radius: 2px; padding: 0 6px; letter-spacing: .5px; white-space: nowrap;
   }
-  .ev-volh { font-size: 11px; color: var(--green); border: 1px solid #9cbfa9; border-radius: 2px; padding: 0 6px; white-space: nowrap; }
+  .ev-volh { font-size: 10.5px; color: var(--green); border: 1px solid #9cbfa9; border-radius: 2px; padding: 0 6px; white-space: nowrap; }
 
-  .ev-title { font-size: 15.5px; font-weight: 650; color: var(--ink); margin-top: 2px; line-height: 1.4; letter-spacing: .2px; }
-  .ev-loc { font-size: 12px; color: var(--ink-3); margin-top: 2px; letter-spacing: .3px; }
+  .ev-title { font-size: 15.5px; font-weight: 650; color: var(--ink); margin-top: 2px; line-height: 1.45; letter-spacing: .2px; }
+
+  /* 侧栏：地点 / 主办（弱于标题） */
+  .ev-side {
+    flex: 1 1 200px; text-align: right; padding-left: 22px;
+    min-width: 0; align-self: center;
+  }
+  .ev-side .ev-loc { font-size: 12px; color: var(--ink-3); letter-spacing: .3px; }
+  .ev-side .ev-org { font-size: 11px; color: var(--ink-3); margin-top: 2px; opacity: .85; }
 
   /* 待定组（可展开信息分组） */
   .pending-wrap {
@@ -220,46 +254,47 @@
   .pending-head:hover .day-label { color: var(--blue); }
   .pending-group { padding: 2px 10px; }
 
-  /* ============ 详情（档案卡模态） ============ */
+  /* ============ 详情（校园活动档案） ============ */
   .modal-mask {
     position: fixed; inset: 0; background: rgba(20,30,40,.42);
     display: none; align-items: flex-end; justify-content: center; z-index: 50;
   }
   .modal-mask.open { display: flex; }
   .modal {
-    background: var(--bg); width: 100%; max-width: 520px;
-    border-radius: 6px 6px 0 0; max-height: 86vh; overflow-y: auto;
-    box-shadow: 0 -6px 30px rgba(20,30,40,.15);
+    background: var(--bg); width: 100%; max-width: 560px;
+    border-radius: 0; max-height: 88vh; overflow-y: auto;
+    border-top: 2px solid var(--blue);
+    box-shadow: 0 -4px 24px rgba(20,30,40,.12);
   }
   .modal-head {
-    padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;
+    padding: 11px 20px; display: flex; justify-content: space-between; align-items: center;
     border-bottom: 1px solid var(--line);
   }
   .modal-close {
-    background: none; border: none; font-size: 20px; color: var(--ink-3); cursor: pointer; padding: 4px;
+    background: none; border: none; font-size: 18px; color: var(--ink-3); cursor: pointer; padding: 4px;
   }
-  .modal-body { padding: 20px 22px 24px; }
+  .modal-body { padding: 24px 30px 28px; }
 
-  .arc-cat { font-size: 12px; letter-spacing: 2px; color: var(--ink-2); }
+  .arc-cat { font-size: 11px; letter-spacing: 3px; color: var(--ink-3); }
   .arc-cat span { color: var(--blue); font-weight: 600; }
   .arc-title {
-    font-family: "Noto Serif SC", serif; font-size: 22px; font-weight: 700;
-    color: var(--ink); line-height: 1.4; margin: 8px 0 16px;
+    font-family: "Noto Serif SC", serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); line-height: 1.45; margin: 10px 0 20px; letter-spacing: .5px;
   }
   .arc-date-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
   .arc-big-date { display: flex; align-items: baseline; gap: 3px; }
-  .arc-big-date .d { font-family: "Noto Serif SC", serif; font-size: 44px; font-weight: 700; color: var(--blue); line-height: 1; }
-  .arc-big-date .m { font-size: 15px; color: var(--ink-2); font-family: "Noto Serif SC", serif; }
+  .arc-big-date .d { font-family: "Noto Serif SC", serif; font-size: 34px; font-weight: 700; color: var(--blue); line-height: 1; }
+  .arc-big-date .m { font-size: 14px; color: var(--ink-2); font-family: "Noto Serif SC", serif; }
   .arc-big-date .y { font-size: 11px; color: var(--ink-3); }
   .arc-meta { font-size: 13px; color: var(--ink); line-height: 1.8; }
   .arc-meta .lbl { color: var(--ink-3); margin-right: 8px; letter-spacing: 1px; font-size: 11.5px; }
 
-  .arc-sep { height: 1px; background: var(--line); margin: 18px 0; }
-  .arc-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; font-size: 13px; }
-  .arc-grid .lbl { color: var(--ink-3); font-size: 11.5px; letter-spacing: 1px; padding-top: 1px; }
+  .arc-sep { height: 1px; background: var(--line); margin: 16px 0; }
+  .arc-grid { display: grid; grid-template-columns: auto 1fr; gap: 7px 20px; font-size: 13px; }
+  .arc-grid .lbl { color: var(--ink-3); font-size: 11px; letter-spacing: 1.5px; padding-top: 1px; }
   .arc-grid .val { color: var(--ink); }
   .arc-ticket { color: var(--red); font-weight: 600; }
-  .arc-desc { font-size: 13px; color: var(--ink-2); line-height: 1.8; margin-top: 14px; }
+  .arc-desc { font-size: 13px; color: var(--ink-2); line-height: 1.85; margin-top: 12px; }
 
   .arc-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-3); }
   .arc-foot a { color: var(--blue); text-decoration: none; font-size: 13px; }
@@ -279,13 +314,32 @@
   .foot .yr { font-family: "Noto Serif SC", serif; color: var(--ink-3); letter-spacing: 2px; margin-top: 4px; }
 
   /* ============ 响应式 ============ */
-  @media (max-width: 520px) {
-    .hero h2 { font-size: 21px; }
-    .brand-name { font-size: 15px; }
-    .ev-time { width: 52px; font-size: 14px; }
+  @media (max-width: 640px) {
+    .hero h2 { font-size: 19px; }
+    .brand-name { font-size: 14px; }
+    .topbar-inner { padding: 9px 14px; }
+    .wrap { padding: 0 14px; }
+    .today-status { font-size: 11px; }
+
+    /* 移动端：时间列移到标题上方，优先标题可读性 */
+    .ev-item { flex-wrap: wrap; padding: 9px 0; }
+    .ev-time {
+      width: 100%; text-align: left; padding: 0 0 3px; font-size: 12.5px;
+      border-right: none; color: var(--ink-2); font-weight: 600;
+    }
+    .ev-time::after { display: none; }
+    .ev-time.now { color: var(--red); }
+    .ev-time.no-time { font-size: 11px; line-height: 1; }
+    .ev-body { flex: 1 1 100%; padding-left: 0; }
     .ev-title { font-size: 14px; }
-    .arc-title { font-size: 19px; }
-    .topbar-inner { padding: 12px 14px; }
+    .ev-side { flex: 1 1 100%; text-align: left; padding-left: 0; align-self: flex-start; padding-top: 3px; }
+    .ev-side .ev-loc { font-size: 11.5px; }
+    .ev-side .ev-org { font-size: 10.5px; }
+    .day-label { font-size: 15px; }
+    .day-head { padding: 12px 2px 6px; }
+    .arc-title { font-size: 18px; }
+    .modal-body { padding: 18px 20px 22px; }
+    .arc-big-date .d { font-size: 28px; }
   }
 </style>
 </head>
@@ -315,6 +369,7 @@
   <div class="hero">
     <h2>今天，天大有什么？</h2>
     <div class="date" id="todayDate"></div>
+    <div class="today-status" id="todayStatus"></div>
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="搜索讲座、活动、志愿、地点、主办方…" oninput="filterEvents()">
       <button onclick="refreshData()">搜索</button>
@@ -426,6 +481,8 @@ async function loadData() {
 
     document.getElementById('footer').textContent = '北洋 · 一八九五 · 数据更新于 ' + (data.updated_at || '');
 
+    renderTodayStatus();
+
     const accountCount = stats.account_count || 0;
     const banner = document.getElementById('banner');
     if (accountCount > 0) {
@@ -437,6 +494,38 @@ async function loadData() {
   } catch (e) {
     list.innerHTML = '<div class="empty-state"><p>数据加载失败，请确认 events.json 文件存在</p><p style="font-size:12px;margin-top:8px">' + e.message + '</p></div>';
   }
+}
+
+/* 今日状态：今日数量 + 正在进行 + 接下来 */
+function renderTodayStatus() {
+  const el = document.getElementById('todayStatus');
+  const today = getToday();
+  const todays = allEvents.filter(e => e.date === today);
+  const nowH = new Date().getHours(), nowM = new Date().getMinutes();
+  const nowMin = nowH * 60 + nowM;
+
+  function toMin(t) { if (!t) return null; const p = t.split(':'); return parseInt(p[0],10)*60 + parseInt(p[1],10); }
+
+  let ongoing = null, next = null;
+  for (const e of todays) {
+    const s = toMin(e.start_time), en = toMin(e.end_time);
+    if (s !== null && s <= nowMin && (en === null || en >= nowMin)) { ongoing = e; break; }
+  }
+  if (!ongoing) {
+    const upcoming = todays.filter(e => { const s = toMin(e.start_time); return s !== null && s > nowMin; });
+    upcoming.sort((a,b) => toMin(a.start_time) - toMin(b.start_time));
+    next = upcoming[0] || null;
+  }
+
+  let html = '今日 · <b class="num">' + todays.length + '</b> 场活动';
+  if (ongoing) {
+    html += '<span class="sep">·</span>正在 · <b class="now">' + escapeHtml(ongoing.start_time) + ' ' + escapeHtml(ongoing.title) + '</b>';
+  } else if (next) {
+    html += '<span class="sep">·</span>接下来 · <b class="next">' + escapeHtml(next.start_time) + ' ' + escapeHtml(next.title) + '</b>';
+  } else if (todays.length === 0) {
+    html = '今天暂无活动安排';
+  }
+  el.innerHTML = html;
 }
 
 function switchTab(category, el) {
@@ -508,7 +597,7 @@ function filterEvents() {
     html += '</div></div>';
   }
 
-  /* 有日期：按日分组 */
+  /* 有日期：按日分组（章节标题） */
   let lastDate = '';
   for (const ev of dated) {
     const d = ev.date;
@@ -517,10 +606,11 @@ function filterEvents() {
       const groupId = 'g' + d.replace(/[^0-9]/g, '');
       const collapsed = collapsedDates.has(d);
       const isToday = (d === getToday());
-      html += '<div class="day-head" onclick="toggleDate(\'' + d + '\', this)">' +
+      html += '<div class="day-head' + (isToday ? ' today' : '') + '" onclick="toggleDate(\'' + d + '\', this)">' +
         '<span class="fold-arrow">' + (collapsed ? '▸' : '▾') + '</span>' +
         '<span class="day-label' + (isToday ? ' today' : '') + '">' + formatDay(d) + '</span>' +
-        (isToday ? '<span class="day-sub">今天</span>' : '') +
+        '<span class="day-week">' + weekdayOf(d) + '</span>' +
+        (isToday ? '<span class="day-mark">TODAY</span>' : '') +
         '<span class="day-count">' + groupCount(dated, d) + '</span></div>';
       html += '<div class="day-group" id="' + groupId + '" style="' + (collapsed ? 'display:none' : '') + '">';
       lastDate = d;
@@ -554,12 +644,13 @@ function typeLabel(cat) {
   return m[cat] || '其他';
 }
 
-/* 时间线条目（点击开详情） */
+/* 时间线条目（班次表：时间 | 主体 | 侧栏，点击开详情） */
 function renderItem(ev) {
   const cat = ['lecture','event','volunteer','movie','notice'].includes(ev.category) ? ev.category : 'other';
   const timeStr = [ev.start_time, ev.end_time].filter(Boolean).join('–');
+  const isNow = (ev.date === getToday()) && isOngoingNow(ev);
   const timeHtml = timeStr
-    ? '<div class="ev-time">' + escapeHtml(timeStr) + '</div>'
+    ? '<div class="ev-time' + (isNow ? ' now' : '') + '">' + escapeHtml(timeStr) + '</div>'
     : '<div class="ev-time no-time">—</div>';
 
   let extra = '';
@@ -574,15 +665,32 @@ function renderItem(ev) {
 
   return '<div class="ev-item" onclick="showDetail(\'' + key.replace(/'/g, "\\'") + '\')">' +
     timeHtml +
-    '<div class="ev-main">' +
-      '<div class="ev-top">' +
+    '<div class="ev-body">' +
+      '<div class="ev-sub">' +
         '<span class="ev-type ' + cat + '"><span class="sym">' + typeSym(ev.category) + '</span> ' + typeLabel(ev.category) + '</span>' +
         extra +
       '</div>' +
       '<div class="ev-title">' + escapeHtml(ev.title) + '</div>' +
+    '</div>' +
+    '<div class="ev-side">' +
       (loc ? '<div class="ev-loc">' + escapeHtml(loc) + '</div>' : '') +
+      (ev.organizer ? '<div class="ev-org">' + escapeHtml(ev.organizer) + '</div>' : '') +
     '</div>' +
   '</div>';
+}
+
+function isOngoingNow(ev) {
+  const s = ev.start_time, en = ev.end_time;
+  if (!s) return false;
+  const nowMin = new Date().getHours() * 60 + new Date().getMinutes();
+  function toMin(t) { if (!t) return null; const p = t.split(':'); return parseInt(p[0],10)*60 + parseInt(p[1],10); }
+  const sm = toMin(s), em = toMin(en);
+  return sm !== null && sm <= nowMin && (em === null || em >= nowMin);
+}
+
+function weekdayOf(d) {
+  const wd = ['日','一','二','三','四','五','六'];
+  try { return '星期' + wd[new Date(d + 'T00:00:00').getDay()]; } catch { return ''; }
 }
 
 const evRegistry = {};
