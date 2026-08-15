@@ -550,7 +550,7 @@ function renderItem(ev) {
 
   const loc = [ev.location, ev.campus].filter(Boolean).join(' · ');
 
-  const key = (ev.id !== undefined && ev.id !== null) ? ev.id : (ev.title + '|' + (ev.source_url || ''));
+  const key = String((ev.id !== undefined && ev.id !== null) ? ev.id : (ev.title + '|' + (ev.source_url || '')));
   evRegistry[key] = ev;
 
   return '<div class="ev-item" onclick="showDetail(\'' + key.replace(/'/g, "\\'") + '\')">' +
