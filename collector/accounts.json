@@ -1,0 +1,88 @@
+{
+  "accounts": [
+    {
+      "name": "北洋军乐团",
+      "url": "http://mp.weixin.qq.com/s?__biz=MjM5NjI1NjM5Mg==&mid=2652292209&idx=1&sn=f41ef77c79d8872ca1f0f0a834d9b9ad&chksm=bc4045e55e16e8e74f905ade493a9b2b9916061aef5d60c4578fff66502a668a789a3fa13e47&"
+    },
+    {
+      "name": "天大体育",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzA4NDE1OTE0NA==&mid=2652423216&idx=1&sn=9a11d27d9e74732be167f8c354d15cc1&chksm=85d8a2ecf3c3520a7e879809528cc1fa76ebbdba2acf861512c4c5968b2696d4aa006066a51a&"
+    },
+    {
+      "name": "天大后勤",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzI5OTE0MDAzNg==&mid=2671755472&idx=1&sn=ce7d834c901ab572390493f8e4bbaa11&chksm=f736459a3c18f565074b578abf480db28ad7417863d9102ae3d87ec36d730c26bbe46b7d7544&"
+    },
+    {
+      "name": "天大学工",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzI0NzI0NjU3NA==&mid=2247550273&idx=1&sn=18b2ad56d4709ba6a6c637512c967e10&chksm=e8d46ad41b460e310baaa4fb5398a5bb4a69d35dc25de2c321660efb3ed8d468a9ecff536641&"
+    },
+    {
+      "name": "天大学生资助",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzkxMjQ2MzM2OA==&mid=2247593187&idx=1&sn=1eff20b66896b58e01d871f317adc126&chksm=c0b3c4b54a08c40a1ed87ac5829a70bb9e4af8b10516d34b1accd090b3261e781bfb5517ca13&"
+    },
+    {
+      "name": "天大心理",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzUxMjk1NzUyMg==&mid=2247533777&idx=1&sn=e6dc7218dd7505c34d0a37542725f330&chksm=f8b70bdae8a9271d9f475e6b329d798ed3690ec22eb6efd79bb79148ad86189564c6a4e1e36a&"
+    },
+    {
+      "name": "天大社研会",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzA4ODQxNzIzMg==&mid=2650917566&idx=1&sn=0146f859218002355a96e6a88f4374f0&chksm=8ab4e8c21a0e2d2c9c17dcfb7e4edd4de46c833652408eb652842bf16a4afbaece8c6ce1868e&"
+    },
+    {
+      "name": "天大青年文化促进会",
+      "url": "http://mp.weixin.qq.com/s?__biz=Mzk0NjcyMDQwMg==&mid=2247535597&idx=1&sn=60786eab83f79e2e69b17623b0235ca5&chksm=c20607799c76f6858cc49e46ecb523b53b1f557daaa9fe648bc2aae2e7577ab61abbd96c1024&"
+    },
+    {
+      "name": "天津大学",
+      "url": "http://mp.weixin.qq.com/s?__biz=MjM5NzkwNzU0Mg==&mid=2654833258&idx=1&sn=8083119aff7669e90bf0b2c4dd5ae428&chksm=bcf54b683b69faa7141da6eca87a1aae550c9aedd528b91746b8521d8e773304d8d663386e72&"
+    },
+    {
+      "name": "天津大学一站式学生社区",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzkxNTYxMTQ0Nw==&mid=2247495715&idx=1&sn=79ba9132a9028aac1e446c167ca49b38&chksm=c0520ed0636be2e39623eaa7573c6c5d6677860e262ea41d0fa3bcf399470810ae197c617554&"
+    },
+    {
+      "name": "天津大学团委",
+      "url": "http://mp.weixin.qq.com/s?__biz=MjM5MDA4MTk0MA==&mid=2652785661&idx=1&sn=87d50c0a3e834ee6787452d325526aab&chksm=bcc8c014388c7e30cd968a84e1f403af82dab614500767894ca27b8501c24c2d89863547fd34&"
+    },
+    {
+      "name": "天津大学图书馆",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzA3NzY4NDYxMg==&mid=2650666420&idx=1&sn=5d81cd8566f3726184bbdced8832a7f4&chksm=864a25e61762378a15924942c49b52237a36344b4f19e45da7c3560944c7f34a199741313658&"
+    },
+    {
+      "name": "天津大学场馆中心",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzUzMzcyODY1NA==&mid=2247502968&idx=1&sn=471a46d83179231ce5bb2b84c3b405aa&chksm=fb5fcacb32773d4ab4a846960832533d4e1810d34353111bfeb34a157c51bfe5cd25a4741ea3&"
+    },
+    {
+      "name": "天津大学学生社团团委",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzkyMTQwMDMxOQ==&mid=2247525831&idx=1&sn=1cbb0864ca36227aacc2fbc5feb088a4&chksm=c0f6ba00b0aeaec40fd0d91636529ee118b4c55c8126af5007d8f3852c66b3f8de4f921e2299&"
+    },
+    {
+      "name": "天津大学招生办",
+      "url": "http://mp.weixin.qq.com/s?__biz=MjM5NzkwNzU0Mg==&mid=2654833258&idx=1&sn=8083119aff7669e90bf0b2c4dd5ae428&chksm=bcf54b683b69faa7141da6eca87a1aae550c9aedd528b91746b8521d8e773304d8d663386e72&"
+    },
+    {
+      "name": "天津大学教务处",
+      "url": "http://mp.weixin.qq.com/s?__biz=Mzg2NTExMzQ2Ng==&mid=2247549386&idx=1&sn=137bb6fa1a1dc5d50e7a0a375be14922&chksm=cfea21d3c64827bcdc842cfba0cbb6f7a1f4f1a69f1caec1965571bb32a4e387d1cd948b86be&"
+    },
+    {
+      "name": "天津大学青年志愿者协会",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzkyNjM4NTQ3NA==&mid=2247589064&idx=1&sn=7685c204b41bef76fb1d63643c73ec88&chksm=c384758887fd4bb7c817b641cf774c192e1d0ffa398bf6aada59f6b326e76e8db7a6deccd698&"
+    },
+    {
+      "name": "平安天大",
+      "url": "http://mp.weixin.qq.com/s?__biz=Mzg4MzYzMDQxNw==&mid=2247487675&idx=1&sn=0336ce47fd2f271d92bc1cb50fc0523a&chksm=ce62a6184a6c771972dab2e5551e75c3765d82dd3fa66f21bc2a126910499e242eabfe186b8a&"
+    },
+    {
+      "name": "经管学生工作",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzIwNzg0MDQxMg==&mid=2247525792&idx=1&sn=95e0b5c2b2983cf7e7dd6ba7869988d9&chksm=96bdebf527a07ddb802a01220563efe7f48c8d93a1769b5c1c0ee88cefb7dc9ec0d262d71ab6&"
+    },
+    {
+      "name": "耀北洋",
+      "url": "http://mp.weixin.qq.com/s?__biz=MjM5NjQwNTE5MA==&mid=2650486958&idx=1&sn=45b57f09c438e6396cc3fca4d1d57ac5&chksm=bf359c79a636f3141ee24837f06380a75d488d0161426e0030c4308e64539e46d2619c5c488b&"
+    },
+    {
+      "name": "青春智算",
+      "url": "http://mp.weixin.qq.com/s?__biz=MzAxMjExODg0Nw==&mid=2710057621&idx=1&sn=365c070bd8062d040cc32059fd73a552&chksm=be8d78736822ac4ec4b3b3d07f07687b599314ae2f639fb4014f8f12189aab8575eab0b7e151&"
+    }
+  ]
+}
