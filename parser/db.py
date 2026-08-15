@@ -59,6 +59,16 @@ class Database:
         conn.close()
         return row is not None
 
+    def article_exists_by_title(self, source_name, title):
+        """按 公众号+标题 判断是否已处理（文件改名也不重复解析）"""
+        conn = self._get_conn()
+        row = conn.execute(
+            "SELECT id FROM articles WHERE source_name = ? AND title = ?",
+            (source_name, title),
+        ).fetchone()
+        conn.close()
+        return row is not None
+
     def insert_article(self, source_url, source_name, title, content, publish_date):
         conn = self._get_conn()
         cur = conn.execute(

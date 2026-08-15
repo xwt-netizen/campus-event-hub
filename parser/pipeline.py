@@ -121,12 +121,13 @@ def run_pipeline(cfg, force_all: bool = False):
         rel_path = str(md_file.relative_to(Path(input_dir).parent))
         source_name = guess_source_name(md_file, input_dir)
 
-        if not force_all and db.article_exists(rel_path):
-            continue
-
         pub_date, fn_title = parse_filename(md_file)
         md_title, content = read_md(md_file)
         title = md_title if md_title else fn_title
+
+        # 增量检测：文件路径 或 公众号+标题 已处理则跳过（防文件改名重复解析）
+        if not force_all and (db.article_exists(rel_path) or db.article_exists_by_title(source_name, title)):
+            continue
 
         print(f"\n{source_name} · {md_file.name}")
         print(f"  标题: {title[:50]}")
