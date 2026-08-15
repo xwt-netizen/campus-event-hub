@@ -245,10 +245,10 @@ def filter_events(events: list) -> list:
 
 
 def export_events_json(db: Database, output_path: str):
-    from datetime import date
+    from datetime import datetime
     from collections import Counter
 
-    today = date.today().isoformat()
+    updated = datetime.now().strftime("%Y-%m-%d %H:%M")
     raw_events = db.get_all_events()
 
     events = dedup_events(raw_events)
@@ -261,7 +261,7 @@ def export_events_json(db: Database, output_path: str):
     stats["account_count"] = len({e.get("source_name") for e in events if e.get("source_name")})
 
     data = {
-        "updated_at": today,
+        "updated_at": updated,
         "stats": stats,
         "events": events,
     }

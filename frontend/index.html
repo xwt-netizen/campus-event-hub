@@ -468,18 +468,18 @@ async function loadData() {
       span.textContent = '(' + cnt + ')';
     });
 
-    // 状态条（数据感）
-    const now = new Date();
-    const hhmm = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+    // 状态条（数据感）：最近更新 = git 提交时间（updated_at）
+    const upd = data.updated_at || '';
+    const updTime = upd.length >= 16 ? upd.slice(11, 16) : '';
     const parts = [];
     parts.push('已收录 <b>' + (stats.total||0) + '</b> 项校园活动');
     if (stats.lecture) parts.push('讲座 <b>' + stats.lecture + '</b>');
     if (stats.event) parts.push('活动 <b>' + stats.event + '</b>');
     if (stats.volunteer) parts.push('志愿 <b>' + stats.volunteer + '</b>');
     document.getElementById('statusLine').innerHTML =
-      '<span>' + parts.join(' · ') + '</span><span>最近更新 ' + hhmm + '</span>';
+      '<span>' + parts.join(' · ') + '</span><span>最近更新 ' + (updTime || upd) + '</span>';
 
-    document.getElementById('footer').textContent = '北洋 · 一八九五 · 数据更新于 ' + (data.updated_at || '');
+    document.getElementById('footer').textContent = '北洋 · 一八九五 · 数据更新于 ' + upd;
 
     renderTodayStatus();
 
