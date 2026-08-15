@@ -3,260 +3,362 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>天津大学 · 校园活动聚合</title>
+<title>北洋校园 · 天津大学校园活动信息台</title>
 <style>
   :root {
     --blue: #1a4d7e;        /* 北洋蓝 */
-    --blue-dark: #123a5e;
-    --red: #9e3b3b;         /* 海棠红 */
-    --gold: #b08d3f;        /* 金 */
-    --green: #3f6d4e;       /* 松绿 */
-    --purple: #6b5a8a;      /* 紫 */
-    --cream: #f6f3ec;       /* 米色底 */
-    --ink: #2c3440;         /* 墨色 */
-    --ink-2: #5a6472;       /* 次级墨色 */
-    --line: #e5dfd3;        /* 分隔线 */
+    --blue-deep: #123a5e;
+    --blue-soft: #eaf0f6;
+    --red: #9e3b3b;         /* 海棠红（点缀） */
+    --red-soft: #f7edec;
+    --gold: #a9853f;        /* 金（点缀） */
+    --green: #3f6d4e;
+    --green-soft: #eaf1ec;
+    --purple: #6b5a8a;
+    --purple-soft: #f0edf6;
+    --bg: #f7f5f0;          /* 象牙白 */
+    --card: #fff;
+    --ink: #2b3440;         /* 深蓝灰 */
+    --ink-2: #6b7480;       /* 次级 */
+    --ink-3: #9aa3ad;       /* 弱化 */
+    --line: #e4ded2;        /* 细线 */
+    --line-dark: #c9c2b2;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: var(--cream);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
     color: var(--ink);
     line-height: 1.6;
-  }
-  .container { max-width: 760px; margin: 0 auto; padding: 16px; }
-
-  /* ===== 顶栏 ===== */
-  header {
-    position: relative;
-    text-align: center;
-    padding: 34px 16px 26px;
-    background: linear-gradient(160deg, var(--blue-dark) 0%, var(--blue) 60%, #2a6395 100%);
-    color: #fff;
-    margin-bottom: 20px;
-    border-radius: 0 0 18px 18px;
-    box-shadow: 0 4px 16px rgba(18, 58, 94, .18);
-    overflow: hidden;
-  }
-  header::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--red), var(--gold), var(--red));
-    opacity: .85;
-  }
-  .motto {
-    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
     font-size: 14px;
-    letter-spacing: 12px;
-    color: rgba(255,255,255,.72);
-    margin-bottom: 10px;
   }
-  header h1 {
-    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
-    font-size: 27px;
-    font-weight: 700;
-    letter-spacing: 2px;
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+  /* ============ 顶栏（品牌） ============ */
+  .topbar {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
   }
-  .divider {
-    width: 56px; height: 1px;
-    background: rgba(255,255,255,.4);
-    margin: 12px auto;
+  .topbar-inner {
+    max-width: 760px; margin: 0 auto; padding: 14px 16px;
+    display: flex; justify-content: space-between; align-items: center;
   }
-  .subtitle { font-size: 13px; opacity: .85; letter-spacing: 1px; }
-  .heritage {
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .shield {
+    width: 34px; height: 38px;
+    background: var(--blue);
+    clip-path: polygon(50% 0%, 88% 10%, 88% 62%, 50% 100%, 12% 62%, 12% 10%);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: "Noto Serif SC", "Songti SC", serif;
+    font-size: 11px; letter-spacing: 1px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .brand-name { font-family: "Noto Serif SC", "Songti SC", serif; font-size: 17px; font-weight: 700; letter-spacing: 2px; color: var(--ink); }
+  .brand-en { font-size: 9.5px; letter-spacing: 2px; color: var(--ink-3); margin-top: 1px; }
+  .top-right { text-align: right; }
+  .top-right .school { font-family: "Noto Serif SC", "Songti SC", serif; font-size: 13px; color: var(--ink-2); }
+  .top-right .years { font-size: 10px; color: var(--ink-3); letter-spacing: 1px; }
+  .top-right .motto { font-family: "Noto Serif SC", serif; font-size: 9.5px; letter-spacing: 3px; color: var(--gold); margin-top: 2px; }
+
+  /* ============ 主视觉 ============ */
+  .hero { padding: 30px 0 22px; text-align: center; border-bottom: 1px solid var(--line); }
+  .hero h2 {
     font-family: "Noto Serif SC", "Songti SC", serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: rgba(255,255,255,.5);
-    margin-top: 10px;
+    font-size: 26px; font-weight: 700; letter-spacing: 3px; color: var(--ink);
   }
+  .hero .date { margin-top: 8px; font-size: 12.5px; color: var(--ink-2); letter-spacing: 1px; }
+  .hero .date b { color: var(--blue); font-weight: 600; }
 
-  /* ===== 搜索 ===== */
-  .search-bar { display: flex; gap: 8px; margin-bottom: 14px; }
-  .search-bar input {
-    flex: 1; padding: 10px 16px; border: 1px solid var(--line); border-radius: 8px;
-    font-size: 14px; outline: none; background: #fff; color: var(--ink);
+  .search-box { margin: 16px auto 0; max-width: 560px; display: flex; }
+  .search-box input {
+    flex: 1; padding: 11px 16px; border: 1px solid var(--line-dark); border-right: none;
+    border-radius: 2px 0 0 2px; background: var(--card); font-size: 14px; color: var(--ink); outline: none;
   }
-  .search-bar input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,77,126,.12); }
-  .search-bar button {
-    padding: 10px 18px; border: none; border-radius: 8px; background: var(--blue);
-    color: #fff; font-size: 14px; cursor: pointer; white-space: nowrap; letter-spacing: 1px;
+  .search-box input:focus { border-color: var(--blue); box-shadow: 0 0 0 2px rgba(26,77,126,.08); }
+  .search-box button {
+    padding: 11px 20px; border: 1px solid var(--blue); background: var(--blue); color: #fff;
+    border-radius: 0 2px 2px 0; font-size: 14px; cursor: pointer; letter-spacing: 2px;
   }
-  .search-bar button:hover { background: var(--blue-dark); }
+  .search-box button:hover { background: var(--blue-deep); }
 
-  /* ===== 分类标签 ===== */
-  .tabs { display: flex; gap: 6px; margin-bottom: 10px; overflow-x: auto; padding-bottom: 4px; }
-  .tab {
-    padding: 7px 15px; border-radius: 20px; border: 1px solid var(--line);
-    background: #fff; cursor: pointer; font-size: 13px; white-space: nowrap;
-    transition: all .15s; color: var(--ink-2);
+  /* ============ 分类导航（文字+细线） ============ */
+  .nav { margin-top: 14px; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .nav-item {
+    flex-shrink: 0; padding: 10px 14px 8px; font-size: 14px; color: var(--ink-2);
+    cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent;
+    transition: color .15s; background: none; border-top: none; border-left: none; border-right: none;
+    letter-spacing: 1px; font-family: inherit;
   }
-  .tab:hover { border-color: var(--blue); color: var(--blue); }
-  .tab.active { background: var(--blue); color: #fff; border-color: var(--blue); }
-  .tab .count { font-size: 11px; opacity: .6; margin-left: 3px; }
-  .tab.active .count { opacity: .8; }
+  .nav-item:hover { color: var(--blue); }
+  .nav-item.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
+  .nav-item .count { font-size: 11px; color: var(--ink-3); margin-left: 4px; font-weight: normal; }
 
-  /* ===== 筛选行 ===== */
-  .filter-row { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
-  .filter-label { font-size: 12px; color: var(--ink-2); margin-right: 4px; }
-  .filters { display: flex; gap: 12px; margin-bottom: 8px; align-items: center; font-size: 13px; }
-  .filters label { display: flex; align-items: center; gap: 4px; cursor: pointer; color: var(--ink-2); }
-  .filters input[type="checkbox"] { accent-color: var(--blue); }
-  .chip {
-    padding: 4px 13px; border-radius: 14px; border: 1px solid var(--line);
-    background: #fff; cursor: pointer; font-size: 12px; white-space: nowrap;
-    transition: all .15s; color: var(--ink-2);
+  /* ============ 筛选栏 ============ */
+  .filter-panel {
+    margin-top: 6px; padding: 12px 2px;
+    border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center;
+    font-size: 12.5px;
   }
-  .chip:hover { border-color: var(--blue); }
-  .chip.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .fgroup { display: flex; align-items: center; gap: 8px; }
+  .flabel { color: var(--ink-3); letter-spacing: 1px; flex-shrink: 0; }
+  .fc {
+    padding: 3px 10px; border: 1px solid var(--line-dark); border-radius: 2px;
+    cursor: pointer; color: var(--ink-2); background: transparent; font-size: 12px;
+    transition: all .12s; white-space: nowrap;
+  }
+  .fc:hover { border-color: var(--blue); color: var(--blue); }
+  .fc.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .check-label { display: flex; align-items: center; gap: 5px; cursor: pointer; color: var(--ink-2); }
+  .check-label input { accent-color: var(--blue); }
+
+  /* ============ 讲座单模块（核心，高权重） ============ */
+  .ticket-module {
+    margin-top: 4px; border: 1px solid var(--line); border-left: 3px solid var(--red);
+    background: #fffdf9; padding: 10px 14px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+  }
+  .ticket-module .t-title {
+    font-family: "Noto Serif SC", serif; font-size: 13px; font-weight: 700; color: var(--red);
+    letter-spacing: 1px;
+  }
+  .ticket-module .t-sub { font-size: 11px; color: var(--ink-3); }
+  .ticket-module .fc.active { background: var(--red); border-color: var(--red); }
+
+  /* ============ 状态条（数据感） ============ */
+  .status-line {
+    margin-top: 12px; padding: 8px 2px;
+    font-size: 11.5px; color: var(--ink-3); letter-spacing: .5px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+  }
+  .status-line b { color: var(--ink-2); font-weight: 600; }
 
   .banner {
-    background: #fbf7ee; border: 1px solid #e7d9b8; border-radius: 8px;
-    padding: 10px 14px; margin-bottom: 12px; font-size: 13px; color: #6d5a2e;
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    margin-top: 12px; padding: 8px 12px; font-size: 12px; color: #7a6a3a;
+    border: 1px solid #e3d3a8; background: #fbf7ea; border-radius: 2px;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
   }
-  .banner a { color: var(--red); font-weight: 600; text-decoration: none; white-space: nowrap; }
-  .banner a:hover { text-decoration: underline; }
+  .banner a { color: var(--red); text-decoration: none; font-weight: 600; white-space: nowrap; }
 
-  .stats-bar { font-size: 12px; color: var(--ink-2); margin-bottom: 14px; text-align: center; line-height: 1.6; }
+  /* ============ 活动列表（日程时间线） ============ */
+  .list { margin-top: 20px; }
 
-  /* ===== 日期分隔 ===== */
-  .date-sep {
-    font-size: 13px; font-weight: 600; color: var(--ink);
-    padding: 14px 0 8px; margin-top: 2px;
-    cursor: pointer; user-select: none;
+  .day-head {
+    padding: 14px 2px 8px; cursor: pointer; user-select: none;
+    display: flex; align-items: center; gap: 8px;
     border-bottom: 1px solid var(--line);
   }
-  .date-sep:hover { color: var(--blue); }
-  .fold-arrow { display: inline-block; width: 16px; color: var(--blue); }
-  .fold-count { font-weight: normal; color: #9a9384; font-size: 12px; }
-  .pending-sep { color: #9a9384; border-bottom: 1px dashed var(--line); margin-bottom: 4px; }
-  .pending-sep:hover { color: var(--ink-2); }
+  .day-head:hover .day-label { color: var(--blue); }
+  .day-label { font-family: "Noto Serif SC", serif; font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: 1px; }
+  .day-label.today { color: var(--blue); }
+  .day-sub { font-size: 11px; color: var(--ink-3); }
+  .day-count { font-size: 11px; color: var(--ink-3); }
+  .fold-arrow { color: var(--ink-3); font-size: 12px; width: 14px; }
 
-  /* ===== 活动卡片 ===== */
-  .event-card {
-    background: #fff; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
-    box-shadow: 0 1px 2px rgba(28,38,50,.04);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--blue);
-    transition: box-shadow .15s;
+  .day-group { padding: 4px 0 8px; }
+
+  .ev-item {
+    display: flex; gap: 0; padding: 11px 2px 11px 0;
+    border-bottom: 1px dashed var(--line);
+    cursor: pointer; transition: background .12s;
   }
-  .event-card:hover { box-shadow: 0 3px 10px rgba(28,38,50,.08); }
-  .event-card.lecture { border-left-color: var(--blue); }
-  .event-card.event { border-left-color: var(--red); }
-  .event-card.volunteer { border-left-color: var(--green); }
-  .event-card.movie { border-left-color: var(--purple); }
-  .event-card.notice { border-left-color: var(--gold); }
-  .event-card.other { border-left-color: #9a9384; }
+  .ev-item:hover { background: #fbfaf6; }
+  .ev-item:last-child { border-bottom: none; }
 
-  .event-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-  .event-title {
-    font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
-    font-size: 15.5px; font-weight: 600; line-height: 1.45; color: var(--ink);
+  .ev-time {
+    flex-shrink: 0; width: 64px; text-align: right; padding-right: 14px;
+    font-family: "Noto Serif SC", serif; font-size: 16px; font-weight: 700; color: var(--ink);
+    border-right: 1px solid var(--line); position: relative;
   }
-  .badge-row { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; justify-content: flex-end; }
-  .badge {
-    font-size: 11px; padding: 2px 9px; border-radius: 4px; white-space: nowrap;
-    letter-spacing: .5px;
+  .ev-time::after {
+    content: ""; position: absolute; right: -4px; top: 6px;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--line-dark);
   }
-  .badge-lecture { background: #eaf1f8; color: var(--blue); }
-  .badge-event { background: #f7ecec; color: var(--red); }
-  .badge-volunteer { background: #ebf3ed; color: var(--green); }
-  .badge-movie { background: #f0edf6; color: var(--purple); }
-  .badge-notice { background: #f7f0e0; color: #8a6d26; }
-  .badge-other { background: #f0efed; color: #777; }
-  .badge-campus { background: #eef1f4; color: var(--ink-2); }
-  .badge-ticket-academic { background: #f7ecec; color: var(--red); font-weight: 600; }
-  .badge-ticket-theme { background: #f0edf6; color: var(--purple); }
-  .badge-volhour { background: #ebf3ed; color: var(--green); }
+  .ev-time.no-time { font-size: 12px; font-weight: 400; color: var(--ink-3); line-height: 2.2; }
 
-  .event-meta { font-size: 12.5px; color: var(--ink-2); margin-bottom: 6px; }
-  .event-meta span { margin-right: 14px; white-space: nowrap; }
-  .event-meta .dot { color: #c5bdad; margin: 0 4px; }
-  .event-desc { font-size: 13px; color: #4a5563; margin-bottom: 6px; }
-
-  .event-footer {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 11.5px; color: #9a9384; padding-top: 8px; border-top: 1px solid #f1ede4;
+  .ev-main { flex: 1; padding-left: 16px; min-width: 0; }
+  .ev-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .ev-type { font-size: 11px; color: var(--ink-2); display: flex; align-items: center; gap: 4px; }
+  .ev-type .sym { font-size: 10px; }
+  .ev-type.lecture .sym { color: var(--blue); }
+  .ev-type.event .sym { color: var(--red); }
+  .ev-type.volunteer .sym { color: var(--green); }
+  .ev-type.movie .sym { color: var(--purple); }
+  .ev-type.notice .sym { color: var(--gold); }
+  .ev-ticket {
+    font-size: 11px; color: var(--red); border: 1px solid var(--red);
+    border-radius: 2px; padding: 0 6px; letter-spacing: .5px; white-space: nowrap;
   }
-  .event-footer a { color: var(--blue); text-decoration: none; }
-  .event-footer a:hover { text-decoration: underline; }
+  .ev-volh { font-size: 11px; color: var(--green); border: 1px solid #9cbfa9; border-radius: 2px; padding: 0 6px; white-space: nowrap; }
 
-  .empty-state { text-align: center; padding: 70px 20px; color: #9a9384; }
-  .empty-state .emoji { font-size: 44px; margin-bottom: 14px; }
-  .loading { text-align: center; padding: 50px; color: #9a9384; }
+  .ev-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-top: 2px; line-height: 1.4; }
+  .ev-loc { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
 
-  .page-footer {
-    text-align: center; padding: 22px 0 30px;
-    font-size: 11px; color: #b0a895;
+  /* 待定组 */
+  .pending-head { color: var(--ink-3); border-top: 1px dashed var(--line-dark); }
+  .pending-head .day-label { color: var(--ink-3); font-weight: 400; font-size: 13px; }
+
+  /* ============ 详情（档案卡模态） ============ */
+  .modal-mask {
+    position: fixed; inset: 0; background: rgba(20,30,40,.42);
+    display: none; align-items: flex-end; justify-content: center; z-index: 50;
   }
-  .page-footer .seal {
-    font-family: "Noto Serif SC", "Songti SC", serif;
-    color: var(--red); letter-spacing: 2px;
+  .modal-mask.open { display: flex; }
+  .modal {
+    background: var(--bg); width: 100%; max-width: 520px;
+    border-radius: 6px 6px 0 0; max-height: 86vh; overflow-y: auto;
+    box-shadow: 0 -6px 30px rgba(20,30,40,.15);
   }
+  .modal-head {
+    padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .modal-close {
+    background: none; border: none; font-size: 20px; color: var(--ink-3); cursor: pointer; padding: 4px;
+  }
+  .modal-body { padding: 20px 22px 24px; }
 
-  @media (max-width: 480px) {
-    .container { padding: 10px; }
-    header { padding: 26px 14px 20px; }
-    header h1 { font-size: 22px; }
-    .event-title { font-size: 14.5px; }
+  .arc-cat { font-size: 12px; letter-spacing: 2px; color: var(--ink-2); }
+  .arc-cat span { color: var(--blue); font-weight: 600; }
+  .arc-title {
+    font-family: "Noto Serif SC", serif; font-size: 22px; font-weight: 700;
+    color: var(--ink); line-height: 1.4; margin: 8px 0 16px;
+  }
+  .arc-date-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .arc-big-date { display: flex; align-items: baseline; gap: 3px; }
+  .arc-big-date .d { font-family: "Noto Serif SC", serif; font-size: 44px; font-weight: 700; color: var(--blue); line-height: 1; }
+  .arc-big-date .m { font-size: 15px; color: var(--ink-2); font-family: "Noto Serif SC", serif; }
+  .arc-big-date .y { font-size: 11px; color: var(--ink-3); }
+  .arc-meta { font-size: 13px; color: var(--ink); line-height: 1.8; }
+  .arc-meta .lbl { color: var(--ink-3); margin-right: 8px; letter-spacing: 1px; font-size: 11.5px; }
+
+  .arc-sep { height: 1px; background: var(--line); margin: 18px 0; }
+  .arc-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; font-size: 13px; }
+  .arc-grid .lbl { color: var(--ink-3); font-size: 11.5px; letter-spacing: 1px; padding-top: 1px; }
+  .arc-grid .val { color: var(--ink); }
+  .arc-ticket { color: var(--red); font-weight: 600; }
+  .arc-desc { font-size: 13px; color: var(--ink-2); line-height: 1.8; margin-top: 14px; }
+
+  .arc-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-3); }
+  .arc-foot a { color: var(--blue); text-decoration: none; font-size: 13px; }
+  .arc-foot a:hover { text-decoration: underline; }
+  .arc-sources { max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .arc-sources a { color: var(--ink-3); text-decoration: none; }
+
+  .empty-state { text-align: center; padding: 70px 20px; color: var(--ink-3); }
+  .loading { text-align: center; padding: 60px 20px; color: var(--ink-3); }
+
+  /* ============ 页脚 ============ */
+  .foot {
+    margin-top: 30px; padding: 22px 0 34px; text-align: center;
+    border-top: 1px solid var(--line); font-size: 11px; color: var(--ink-3); letter-spacing: 1px;
+  }
+  .foot .seal { font-family: "Noto Serif SC", serif; color: var(--red); letter-spacing: 3px; }
+  .foot .yr { font-family: "Noto Serif SC", serif; color: var(--ink-3); letter-spacing: 2px; margin-top: 4px; }
+
+  /* ============ 响应式 ============ */
+  @media (max-width: 520px) {
+    .hero h2 { font-size: 21px; }
+    .brand-name { font-size: 15px; }
+    .ev-time { width: 52px; font-size: 14px; }
+    .ev-title { font-size: 14px; }
+    .arc-title { font-size: 19px; }
+    .topbar-inner { padding: 12px 14px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="motto">实事求是</div>
-  <h1>天津大学 · 校园活动聚合</h1>
-  <div class="divider"></div>
-  <div class="subtitle">讲座 · 活动 · 志愿 · 电影 · 通知</div>
-  <div class="heritage">北洋 · 一八九五</div>
-</header>
+<!-- 顶栏品牌 -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="shield">1895</div>
+      <div>
+        <div class="brand-name">北洋校园</div>
+        <div class="brand-en">CAMPUS EVENT HUB</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <div class="school">天津大学</div>
+      <div class="years">1895 — 2026</div>
+      <div class="motto">实事求是</div>
+    </div>
+  </div>
+</div>
 
-<div class="container">
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="搜索活动、地点、主办方…" oninput="filterEvents()">
-    <button onclick="refreshData()">刷新</button>
+<div class="wrap">
+
+  <!-- 主视觉 -->
+  <div class="hero">
+    <h2>今天，天大有什么？</h2>
+    <div class="date" id="todayDate"></div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索讲座、活动、志愿、地点、主办方…" oninput="filterEvents()">
+      <button onclick="refreshData()">搜索</button>
+    </div>
   </div>
 
-  <div class="tabs" id="tabContainer">
-    <div class="tab active" data-category="all" onclick="switchTab('all', this)">全部</div>
-    <div class="tab" data-category="lecture" onclick="switchTab('lecture', this)">讲座</div>
-    <div class="tab" data-category="event" onclick="switchTab('event', this)">活动</div>
-    <div class="tab" data-category="volunteer" onclick="switchTab('volunteer', this)">志愿</div>
-    <div class="tab" data-category="movie" onclick="switchTab('movie', this)">电影</div>
-    <div class="tab" data-category="notice" onclick="switchTab('notice', this)">通知</div>
+  <!-- 分类导航 -->
+  <div class="nav" id="tabContainer">
+    <button class="nav-item active" data-category="all" onclick="switchTab('all', this)">全部</button>
+    <button class="nav-item" data-category="lecture" onclick="switchTab('lecture', this)">讲座</button>
+    <button class="nav-item" data-category="event" onclick="switchTab('event', this)">活动</button>
+    <button class="nav-item" data-category="volunteer" onclick="switchTab('volunteer', this)">志愿</button>
+    <button class="nav-item" data-category="movie" onclick="switchTab('movie', this)">电影</button>
+    <button class="nav-item" data-category="notice" onclick="switchTab('notice', this)">通知</button>
   </div>
 
-  <div class="filter-row">
-    <span class="filter-label">校区</span>
-    <div class="chip active" data-campus="" onclick="switchCampus('', this)">全部</div>
-    <div class="chip" data-campus="卫津路" onclick="switchCampus('卫津路', this)">卫津路</div>
-    <div class="chip" data-campus="北洋园" onclick="switchCampus('北洋园', this)">北洋园</div>
-    <div class="chip" data-campus="线上" onclick="switchCampus('线上', this)">线上</div>
+  <!-- 筛选栏 -->
+  <div class="filter-panel">
+    <div class="fgroup">
+      <span class="flabel">校园</span>
+      <span class="fc active" data-campus="" onclick="switchCampus('', this)">全部</span>
+      <span class="fc" data-campus="卫津路" onclick="switchCampus('卫津路', this)">卫津路</span>
+      <span class="fc" data-campus="北洋园" onclick="switchCampus('北洋园', this)">北洋园</span>
+      <span class="fc" data-campus="线上" onclick="switchCampus('线上', this)">线上</span>
+    </div>
+    <div class="fgroup">
+      <label class="check-label"><input type="checkbox" id="upcomingFilter" onchange="filterEvents()"> 只看近期</label>
+    </div>
   </div>
 
-  <div class="filter-row">
-    <span class="filter-label">讲座单</span>
-    <div class="chip active" data-ticket="" onclick="switchTicket('', this)">全部</div>
-    <div class="chip" data-ticket="academic" onclick="switchTicket('academic', this)">人文学术 · 必修</div>
-    <div class="chip" data-ticket="theme" onclick="switchTicket('theme', this)">主题教育 · 选修</div>
+  <!-- 讲座单模块（核心） -->
+  <div class="ticket-module">
+    <div>
+      <span class="t-title">讲座单</span>
+      <span class="t-sub">毕业要求相关讲座</span>
+    </div>
+    <span class="fc active" data-ticket="" onclick="switchTicket('', this)">全部</span>
+    <span class="fc" data-ticket="academic" onclick="switchTicket('academic', this)">✓ 人文学术 · 必修</span>
+    <span class="fc" data-ticket="theme" onclick="switchTicket('theme', this)">主题教育 · 选修</span>
   </div>
 
-  <div class="filters">
-    <label><input type="checkbox" id="upcomingFilter" onchange="filterEvents()"> 只看近期</label>
-  </div>
+  <!-- 状态条 -->
+  <div class="status-line" id="statusLine"></div>
 
+  <!-- 补充提示 -->
   <div class="banner" id="banner" style="display:none">
     <span id="bannerText">当前收录的公众号可能不完整</span>
     <a href="https://github.com/xwt-netizen/campus-event-hub/issues/new" target="_blank" rel="noopener">补充公众号 →</a>
   </div>
 
-  <div class="stats-bar" id="statsBar"></div>
-  <div id="eventList"></div>
-  <div class="page-footer" id="footer"><span class="seal">实事求是</span> · 天津大学</div>
+  <!-- 活动时间线 -->
+  <div class="list" id="eventList"></div>
+
+</div>
+
+<!-- 详情档案卡模态 -->
+<div class="modal-mask" id="modalMask" onclick="if(event.target===this)closeDetail()">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<div class="foot">
+  <div class="seal">实事求是</div>
+  <div>天津大学 · 校园活动信息台</div>
+  <div class="yr" id="footer">北洋 · 一八九五</div>
 </div>
 
 <script>
@@ -267,9 +369,17 @@ let currentCampus = '';
 let currentTicket = '';
 const collapsedDates = new Set(['__待定__']);
 
+/* 今天日期 */
+(function () {
+  const d = new Date();
+  const wd = ['日','一','二','三','四','五','六'][d.getDay()];
+  document.getElementById('todayDate').innerHTML =
+    d.getFullYear() + ' 年 ' + (d.getMonth()+1) + ' 月 ' + d.getDate() + ' 日 · 星期' + wd;
+})();
+
 async function loadData() {
   const list = document.getElementById('eventList');
-  list.innerHTML = '<div class="loading">加载中…</div>';
+  list.innerHTML = '<div class="loading">正在载入…</div>';
 
   try {
     const resp = await fetch(DATA_URL + '?t=' + Date.now());
@@ -278,33 +388,43 @@ async function loadData() {
     allEvents = data.events || [];
 
     const stats = data.stats || {};
-    document.querySelectorAll('.tab').forEach(tab => {
+    document.querySelectorAll('.nav-item').forEach(tab => {
       const cat = tab.dataset.category;
       const cnt = cat === 'all' ? (stats.total || 0) : (stats[cat] || 0);
-      const span = tab.querySelector('.count');
-      if (!span) {
-        const s = document.createElement('span');
-        s.className = 'count';
-        s.textContent = '(' + cnt + ')';
-        tab.appendChild(s);
-      } else {
-        span.textContent = '(' + cnt + ')';
-      }
+      let span = tab.querySelector('.count');
+      if (!span) { span = document.createElement('span'); span.className = 'count'; tab.appendChild(span); }
+      span.textContent = '(' + cnt + ')';
     });
 
-    const updatedAt = data.updated_at || '未知';
-    document.getElementById('footer').innerHTML =
-      '<span class="seal">实事求是</span> · 数据更新于 ' + updatedAt + ' · 共 ' + allEvents.length + ' 条';
+    // 状态条（数据感）
+    const now = new Date();
+    const hhmm = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+    const parts = [];
+    parts.push('已收录 <b>' + (stats.total||0) + '</b> 项校园活动');
+    if (stats.lecture) parts.push('讲座 <b>' + stats.lecture + '</b>');
+    if (stats.event) parts.push('活动 <b>' + stats.event + '</b>');
+    if (stats.volunteer) parts.push('志愿 <b>' + stats.volunteer + '</b>');
+    document.getElementById('statusLine').innerHTML =
+      '<span>' + parts.join(' · ') + '</span><span>最近更新 ' + hhmm + '</span>';
+
+    document.getElementById('footer').textContent = '北洋 · 一八九五 · 数据更新于 ' + (data.updated_at || '');
+
+    const accountCount = stats.account_count || 0;
+    const banner = document.getElementById('banner');
+    if (accountCount > 0) {
+      banner.style.display = 'flex';
+      document.getElementById('bannerText').textContent = '已收录 ' + accountCount + ' 个公众号，可能不完整，欢迎补充';
+    }
 
     filterEvents();
   } catch (e) {
-    list.innerHTML = '<div class="empty-state"><div class="emoji">∅</div><p>数据加载失败，请确认 events.json 文件存在</p><p style="font-size:12px;margin-top:8px">' + e.message + '</p></div>';
+    list.innerHTML = '<div class="empty-state"><p>数据加载失败，请确认 events.json 文件存在</p><p style="font-size:12px;margin-top:8px">' + e.message + '</p></div>';
   }
 }
 
 function switchTab(category, el) {
   currentTab = category;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   filterEvents();
 }
@@ -348,63 +468,52 @@ function filterEvents() {
   });
 
   if (filtered.length === 0) {
-    list.innerHTML = '<div class="empty-state"><div class="emoji">∅</div><p>没有匹配的内容</p></div>';
+    list.innerHTML = '<div class="empty-state"><p>没有匹配的内容</p></div>';
     return;
   }
-
-  const campusCnt = {};
-  const ticketCnt = {};
-  filtered.forEach(ev => {
-    campusCnt[ev.campus || '未知'] = (campusCnt[ev.campus || '未知'] || 0) + 1;
-    if (ev.ticket_type) ticketCnt[ev.ticket_type] = (ticketCnt[ev.ticket_type] || 0) + 1;
-  });
-  let statsParts = ['共 ' + filtered.length + ' 条'];
-  const campusParts = Object.entries(campusCnt).map(([k, v]) => (k === '未知' ? '' : k + ' ' + v)).filter(Boolean);
-  if (campusParts.length > 0) statsParts.push('· ' + campusParts.join(' · '));
-  if (ticketCnt.academic) statsParts.push('· 人文学术 ' + ticketCnt.academic);
-  if (ticketCnt.theme) statsParts.push('· 主题教育 ' + ticketCnt.theme);
-  document.getElementById('statsBar').textContent = statsParts.join(' ');
 
   const dated = filtered.filter(ev => ev.date);
   const noDate = filtered.filter(ev => !ev.date);
 
   let html = '';
 
-  // 待定事件：放最上面，默认折叠
+  /* 待定：放最上面 */
   if (noDate.length > 0) {
-    const noDateCollapsed = collapsedDates.has('__待定__');
-    html += '<div class="date-sep pending-sep" onclick="toggleDate(\'__待定__\', this)">' +
-      '<span class="fold-arrow">' + (noDateCollapsed ? '▸' : '▾') + '</span> ' +
-      '待定 · 未标注具体时间 <span class="fold-count">' + noDate.length + ' 条</span></div>';
-    html += '<div class="date-group" id="g_pending" style="' + (noDateCollapsed ? 'display:none' : '') + '">';
-    for (const ev of noDate) html += renderCard(ev);
+    const collapsed = collapsedDates.has('__待定__');
+    html += '<div class="day-head pending-head" onclick="toggleDate(\'__待定__\', this)">' +
+      '<span class="fold-arrow">' + (collapsed ? '▸' : '▾') + '</span>' +
+      '<span class="day-label">待定</span><span class="day-sub">未标注具体时间</span>' +
+      '<span class="day-count">' + noDate.length + '</span></div>';
+    html += '<div class="day-group" id="g_pending" style="' + (collapsed ? 'display:none' : '') + '">';
+    for (const ev of noDate) html += renderItem(ev);
     html += '</div>';
   }
 
-  // 有日期事件：按日期分组，每组可折叠
+  /* 有日期：按日分组 */
   let lastDate = '';
   for (const ev of dated) {
     const d = ev.date;
     if (d !== lastDate) {
       if (lastDate !== '') html += '</div>';
       const groupId = 'g' + d.replace(/[^0-9]/g, '');
-      const isCollapsed = collapsedDates.has(d);
-      html += '<div class="date-sep" onclick="toggleDate(\'' + d + '\', this)">' +
-        '<span class="fold-arrow">' + (isCollapsed ? '▸' : '▾') + '</span> ' +
-        formatDate(d) + ' <span class="fold-count">' + groupCount(dated, d) + ' 条</span></div>';
-      html += '<div class="date-group" id="' + groupId + '" style="' + (isCollapsed ? 'display:none' : '') + '">';
+      const collapsed = collapsedDates.has(d);
+      const isToday = (d === getToday());
+      html += '<div class="day-head" onclick="toggleDate(\'' + d + '\', this)">' +
+        '<span class="fold-arrow">' + (collapsed ? '▸' : '▾') + '</span>' +
+        '<span class="day-label' + (isToday ? ' today' : '') + '">' + formatDay(d) + '</span>' +
+        (isToday ? '<span class="day-sub">今天</span>' : '') +
+        '<span class="day-count">' + groupCount(dated, d) + '</span></div>';
+      html += '<div class="day-group" id="' + groupId + '" style="' + (collapsed ? 'display:none' : '') + '">';
       lastDate = d;
     }
-    html += renderCard(ev);
+    html += renderItem(ev);
   }
   if (lastDate !== '') html += '</div>';
 
   list.innerHTML = html;
 }
 
-function groupCount(events, date) {
-  return events.filter(e => e.date === date).length;
-}
+function groupCount(events, date) { return events.filter(e => e.date === date).length; }
 
 function toggleDate(date, el) {
   if (collapsedDates.has(date)) collapsedDates.delete(date);
@@ -416,69 +525,100 @@ function toggleDate(date, el) {
   if (arrow) arrow.textContent = (collapsedDates.has(date)) ? '▸' : '▾';
 }
 
-function renderCard(ev) {
-  const catMap = {
-    lecture: {label:'讲座', cls:'lecture'},
-    event: {label:'活动', cls:'event'},
-    volunteer: {label:'志愿', cls:'volunteer'},
-    movie: {label:'电影', cls:'movie'},
-    notice: {label:'通知', cls:'notice'},
-    other: {label:'其他', cls:'other'},
-  };
-  const c = catMap[ev.category] || catMap.other;
+/* 类型符号 */
+function typeSym(cat) {
+  const m = {lecture:'◆', event:'●', volunteer:'▲', movie:'◇', notice:'▪'};
+  return m[cat] || '·';
+}
+function typeLabel(cat) {
+  const m = {lecture:'讲座', event:'活动', volunteer:'志愿', movie:'电影', notice:'通知'};
+  return m[cat] || '其他';
+}
 
-  let badges = '<div class="badge-row">';
-  badges += '<span class="badge badge-' + c.cls + '">' + c.label + '</span>';
-  if (ev.campus) badges += ' <span class="badge badge-campus">' + escapeHtml(ev.campus) + '</span>';
-  if (ev.ticket_type === 'academic') {
-    badges += ' <span class="badge badge-ticket-academic">人文学术 · 必修</span>';
-  } else if (ev.ticket_type === 'theme') {
-    badges += ' <span class="badge badge-ticket-theme">主题教育 · 选修</span>';
-  }
-  if (ev.volunteer_hours) {
-    badges += ' <span class="badge badge-volhour">' + ev.volunteer_hours + ' 小时</span>';
-  }
-  badges += '</div>';
-
+/* 时间线条目（点击开详情） */
+function renderItem(ev) {
+  const cat = ['lecture','event','volunteer','movie','notice'].includes(ev.category) ? ev.category : 'other';
   const timeStr = [ev.start_time, ev.end_time].filter(Boolean).join('–');
-  const meta = [];
-  if (ev.date) meta.push('<span>' + escapeHtml(ev.date) + '</span>');
-  if (timeStr) meta.push('<span>' + escapeHtml(timeStr) + '</span>');
-  if (ev.location) meta.push('<span>' + escapeHtml(ev.location) + '</span>');
+  const timeHtml = timeStr
+    ? '<div class="ev-time">' + escapeHtml(timeStr) + '</div>'
+    : '<div class="ev-time no-time">—</div>';
 
-  let desc = '';
-  if (ev.description) desc = '<div class="event-desc">' + escapeHtml(ev.description) + '</div>';
+  let extra = '';
+  if (ev.ticket_type === 'academic') extra += '<span class="ev-ticket">✓ 人文学术 · 必修</span>';
+  else if (ev.ticket_type === 'theme') extra += '<span class="ev-ticket">主题教育 · 选修</span>';
+  if (ev.volunteer_hours) extra += '<span class="ev-volh">' + ev.volunteer_hours + 'h</span>';
 
-  let ticketNote = '';
-  if (ev.ticket_info) ticketNote = ' · ' + escapeHtml(ev.ticket_info);
+  const loc = [ev.location, ev.campus].filter(Boolean).join(' · ');
 
-  const sources = ev.sources || [];
-  let sourceHtml = '';
-  if (sources.length > 1) {
-    const names = sources.map(s => {
-      return s.url && s.url.startsWith('http')
-        ? '<a href="' + escapeHtml(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + '</a>'
-        : escapeHtml(s.name);
-    });
-    sourceHtml = '来源：' + names.join('、');
-  } else {
-    sourceHtml = escapeHtml(ev.organizer || ev.source_name) + ticketNote;
-  }
+  const key = (ev.id !== undefined && ev.id !== null) ? ev.id : (ev.title + '|' + (ev.source_url || ''));
+  evRegistry[key] = ev;
 
-  return '<div class="event-card ' + c.cls + '">' +
-    '<div class="event-header">' +
-      '<div class="event-title">' + escapeHtml(ev.title) + '</div>' +
-      badges +
-    '</div>' +
-    '<div class="event-meta">' + meta.join('<span class="dot">·</span>') + '</div>' +
-    desc +
-    '<div class="event-footer">' +
-      '<span>' + sourceHtml + '</span>' +
-      (sources.length <= 1 && ev.source_url && ev.source_url.startsWith('http')
-        ? '<a href="' + escapeHtml(ev.source_url) + '" target="_blank" rel="noopener">查看原文 →</a>'
-        : '') +
+  return '<div class="ev-item" onclick="showDetail(\'' + key.replace(/'/g, "\\'") + '\')">' +
+    timeHtml +
+    '<div class="ev-main">' +
+      '<div class="ev-top">' +
+        '<span class="ev-type ' + cat + '"><span class="sym">' + typeSym(ev.category) + '</span> ' + typeLabel(ev.category) + '</span>' +
+        extra +
+      '</div>' +
+      '<div class="ev-title">' + escapeHtml(ev.title) + '</div>' +
+      (loc ? '<div class="ev-loc">' + escapeHtml(loc) + '</div>' : '') +
     '</div>' +
   '</div>';
+}
+
+const evRegistry = {};
+
+/* 详情档案卡 */
+function showDetail(key) {
+  const ev = evRegistry[key];
+  if (!ev) return;
+  const mask = document.getElementById('modalMask');
+  const box = document.getElementById('modalBox');
+  const cat = ['lecture','event','volunteer','movie','notice'].includes(ev.category) ? ev.category : 'other';
+
+  let dateBlock = '<span class="lbl">日期</span><span class="val">' + escapeHtml(ev.date || '待定') + '</span>';
+  let timeBlock = '<span class="lbl">时间</span><span class="val">' + escapeHtml([ev.start_time,ev.end_time].filter(Boolean).join(' – ') || '—') + '</span>';
+  let locBlock = '<span class="lbl">地点</span><span class="val">' + escapeHtml(ev.location || '—') + (ev.campus ? ' · ' + escapeHtml(ev.campus) : '') + '</span>';
+  let orgBlock = '<span class="lbl">主办</span><span class="val">' + escapeHtml(ev.organizer || ev.source_name || '—') + '</span>';
+  let ticketBlock = '<span class="lbl">讲座单</span><span class="val arc-ticket">' +
+    (ev.ticket_type === 'academic' ? '✓ 人文学术 · 必修' : ev.ticket_type === 'theme' ? '主题教育 · 选修' : '—') + '</span>';
+
+  const sources = ev.sources && ev.sources.length > 1
+    ? ev.sources.map(s => s.url && s.url.startsWith('http') ? '<a href="' + escapeHtml(s.url) + '" target="_blank" rel="noopener">' + escapeHtml(s.name) + '</a>' : escapeHtml(s.name)).join('、')
+    : '';
+
+  const linkHtml = (ev.source_url && ev.source_url.startsWith('http'))
+    ? '<a href="' + escapeHtml(ev.source_url) + '" target="_blank" rel="noopener">查看原文 →</a>'
+    : '<span>来源：' + escapeHtml(ev.source_name || '') + '</span>';
+
+  box.innerHTML =
+    '<div class="modal-head"><span class="arc-cat">' + typeLabel(ev.category) + ' · <span>' + typeSym(ev.category) + '</span> ' + escapeHtml(cat) + '</span>' +
+    '<button class="modal-close" onclick="closeDetail()">×</button></div>' +
+    '<div class="modal-body">' +
+      '<div class="arc-title">' + escapeHtml(ev.title) + '</div>' +
+      '<div class="arc-grid">' + dateBlock + timeBlock + locBlock + orgBlock + ticketBlock + '</div>' +
+      (ev.description ? '<div class="arc-sep"></div><div class="arc-desc">' + escapeHtml(ev.description) + '</div>' : '') +
+      (ev.ticket_info ? '<div class="arc-desc" style="color:#8a6d26">讲座单说明：' + escapeHtml(ev.ticket_info) + '</div>' : '') +
+      (ev.recruit_deadline ? '<div class="arc-desc">报名截止：' + escapeHtml(ev.recruit_deadline) + '</div>' : '') +
+      '<div class="arc-foot">' +
+        '<span class="arc-sources">' + (sources ? '来源：' + sources : '') + '</span>' +
+        linkHtml +
+      '</div>' +
+    '</div>';
+
+  mask.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('modalMask').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function formatDay(d) {
+  const m = parseInt(d.slice(5,7), 10);
+  const day = parseInt(d.slice(8,10), 10);
+  return m + ' 月 ' + day + ' 日';
 }
 
 function formatDate(d) {
