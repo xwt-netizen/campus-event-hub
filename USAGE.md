@@ -64,26 +64,30 @@ API Key 获取：
 
 ## 二、日常操作
 
-### 2.1 采集文章（手动，偶尔）
+### 2.1 采集文章（手动，唯一手动步骤）
 
-1. 打开 wechatDownload
-2. 在已添加的公众号列表中，选择要更新的公众号
-3. 设置下载页数（一般 1-3 页就够了，只看新文章）
-4. 点击下载，导出 **Markdown (MD)** 格式到默认下载目录
+在 wechatDownload 里逐个公众号操作（每个账号 3 个动作）：
 
-> pipeline 已配置为直接读取 wechatDownload 的默认下载目录，无需手动搬文件。
+1. 粘贴该公众号一篇文章链接
+2. 点「获取公众号ID」（微信打开确认链接刷密钥，密钥全局，每天一次）
+3. 点「批量下载」（一次下载该账号全部历史文章）
 
-### 2.2 解析活动信息
+> 账号切换无法自动化（工具限制），但"批量下载"一次 = 全历史，比逐篇点省力 30 倍。
+
+### 2.2 一键更新（自动解析 + 上线）
 
 ```bash
 cd campus-event-hub
-.venv/bin/python parser/pipeline.py
+python update.py          # 解析新文章 → 去重过滤 → 更新 → 自动推送上线
+python update.py --no-push # 只解析，不推送
 ```
+
+`update.py` 内部是**增量检测**：只把新文章（未处理过的）送给 DeepSeek，已处理的不重复解析，省 token 和时间。
 
 ### 2.3 查看结果
 
-- 打开 `frontend/events.json` 查看导出的数据
-- 或直接用浏览器打开 `frontend/index.html` 预览页面
+- 线上页面：https://xwt-netizen.github.io/campus-event-hub/
+- 本地预览：`frontend/index.html`
 
 ### 2.4 自动刷取（推荐）
 
