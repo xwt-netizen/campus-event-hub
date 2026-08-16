@@ -1,18 +1,28 @@
 #!/usr/bin/env python3
 """
-collect.py — 校园活动采集器（剪贴板驱动公众号切换）
+collect.py — 校园活动采集器（每号重启 + 剪贴板驱动切换）
 
-流程：读取 accounts.json → 写剪贴板 → wechatDownload 自动切换 business_id
-     → 轮询确认切换 → 检查密钥 → MCP batch_download_articles → 等待下载 → 记录结果
+关键机制（已验证）：
+  wechatDownload 每次只能处理一个公众号，切换公众号必须重启应用。
+  重启后第一次设置剪贴板立即生效（外部 Set-Clipboard 即可，无需 GUI 操作）。
+
+流程：对每个公众号：
+  restart_tool()           # 重启 wechatDownload
+  wait_mcp_ready()         # 等待 MCP 服务就绪
+  set_clipboard(url)       # 写剪贴板 → 工具自动切换 business_id
+  wait_switch(biz)         # MCP 轮询确认切换
+  检查密钥（全局，首次需微信确认）
+  MCP batch_download_articles() → 等待下载完成 → 记录结果
 
 依赖：
-  - wechatDownload 已启动（勾选「自动监听剪切板」+「启动MCP」）
+  - wechatDownload 已安装（D:\\...\\微信公众号批量下载工具4.6.exe）
   - 微信桌面版保持登录
+  - 「自动监听剪切板」「启动MCP」设置已保存（重启后自动加载）
 
 用法：
   python collect.py            # 采集全部公众号
   python collect.py --only 0,3 # 只采集指定下标
-  python collect.py --check    # 只检查连接与剪贴板监听是否就绪
+  python collect.py --check    # 检查环境（重启工具并验证剪贴板切换）
 """
 
 import json
@@ -26,6 +36,7 @@ from pathlib import Path
 
 # wechatDownload 下载目录（Windows 路径 → WSL 挂载路径）
 DL_DIR = "/mnt/d/微信公众号文章批量下载工具/微信公众号批量下载工具4.6/下载"
+TOOL_EXE = "D:\\微信公众号文章批量下载工具\\微信公众号批量下载工具4.6\\微信公众号批量下载工具4.6.exe"
 MCP_URL = "http://127.0.0.1:4545/mcp"
 
 SCRIPT_DIR = Path(__file__).parent
@@ -35,6 +46,30 @@ LOG_FILE = Path(DL_DIR) / f"log{datetime.now().strftime('%Y%m%d')}.txt"
 
 def log(msg):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
+
+
+def restart_tool():
+    """彻底重启 wechatDownload（taskkill /T 杀子树，避免旧进程残留）"""
+    subprocess.run(
+        ["powershell.exe", "-Command",
+         "taskkill /IM wechatdownload.exe /F /T 2>$null; "
+         "Start-Sleep 3; "
+         f"Start-Process '{TOOL_EXE}'"],
+        capture_output=True, timeout=30,
+    )
+
+
+def wait_mcp_ready(timeout=90):
+    """等待 MCP 服务就绪（重启后需要时间，端口通后再等 20s 确保 UI/监听激活）"""
+    import socket
+    for _ in range(timeout):
+        try:
+            socket.create_connection(("127.0.0.1", 4545), timeout=2).close()
+            time.sleep(20)
+            return True
+        except Exception:
+            time.sleep(2)
+    return False
 
 
 def set_clipboard(text):
@@ -107,15 +142,30 @@ def wait_switch(target_biz, timeout=30):
     return False
 
 
+KEY_FLAG = SCRIPT_DIR / ".key_confirmed"
+
+
+def read_log():
+    try:
+        with open(LOG_FILE, encoding="utf-8", errors="ignore") as f:
+            return f.read()
+    except Exception:
+        return ""
+
+
+def wait_key_confirmed(before_log, timeout=180):
+    """轮询日志，等待出现"新增的"获取密钥成功（区分本次确认）。返回 True/False"""
+    for _ in range(timeout // 3):
+        time.sleep(3)
+        now = read_log()
+        if "获取密钥成功" in now and now != before_log:
+            return True
+    return False
+
+
 def check_key_status(target_biz):
-    """检查密钥状态。返回 'ok' / 'need_confirm' / 'unknown'
-    密钥全局共享：只要有'获取密钥成功'即视为有效。"""
-    tail = read_log_tail(100)
-    joined = "\n".join(tail)
-    # 只认"获取密钥成功"（全局密钥有效即 ok），忽略"开始获取密钥"（可能是尝试记录）
-    if "获取密钥成功" in joined:
-        return "ok"
-    return "need_confirm"
+    """保留：本函数不再用于跳过，仅作参考（当前每号强制确认）"""
+    return "ok" if "获取密钥成功" in read_log() else "need_confirm"
 
 
 def wait_download(biz_dir_name, before_count, timeout=150):
@@ -156,29 +206,55 @@ def collect_one(acc, index, total):
 
     log(f"\n[{index}/{total}] {name}")
 
-    # ① 写剪贴板，等待工具切换 business_id
-    log("  写入剪贴板…")
+    # ① 写入剪贴板尝试自动切换；失败则请用户手动切号
+    log("  尝试剪贴板切换…")
     set_clipboard(url)
     if wait_switch(target_biz):
         log(f"  ✓ business_id 已切换 ({target_biz})")
     else:
-        log(f"  ✗ 剪贴板切换超时（未识别为 {target_biz}）")
-        return {"name": name, "status": "fail", "reason": "剪贴板切换超时"}
-
-    # ② 检查密钥
-    key_status = check_key_status(target_biz)
-    if key_status == "need_confirm":
-        log("  ⚠ 需要微信确认密钥（首次或已过期）")
-        log("    请在微信中打开剪贴板中的确认链接完成验证")
+        log(f"  ⚠ 剪贴板切换未生效（工具可能不响应自动化）")
+        log(f"    请在 wechatDownload 中手动粘贴链接并点「1.获取公众号id」：")
+        log(f"    {url}")
         try:
             input("    完成后按 Enter 继续… ")
         except EOFError:
-            log("    （非交互模式，等待 15 秒供人工确认…）")
-            time.sleep(15)
-        # 确认后重新检查
-        if check_key_status(target_biz) == "need_confirm":
-            log("  ✗ 密钥仍未确认（微信未完成验证）")
-            return {"name": name, "status": "fail", "reason": "密钥未确认"}
+            log("    （非交互模式，等待 20 秒供人工切换…）")
+            time.sleep(20)
+        if not wait_switch(target_biz, timeout=20):
+            log(f"  ✗ 切换确认失败（business_id 非 {target_biz}）")
+            return {"name": name, "status": "fail", "reason": "账号切换失败"}
+        log(f"  ✓ 已切换到 {name} ({target_biz})")
+
+    # ② 密钥确认（每个公众号都要在微信手动确认一次，每号重启后均需确认）
+    # 关键：先等工具进入"开始获取密钥"监听状态，再提示用户确认（避免用户打开早了没被捕获）
+    before_log = read_log()
+    log("  等待工具进入密钥监听状态…")
+    for _ in range(6):  # 最多等 ~18 秒
+        time.sleep(3)
+        now = read_log()
+        if "开始获取密钥" in now and now != before_log:
+            break
+    time.sleep(2)
+    confirm_url = get_clipboard()
+    log("  ⚠ 请在微信打开确认链接完成验证（每个公众号都需确认）")
+    if confirm_url and "mp.weixin.qq.com" in confirm_url:
+        log(f"    确认链接：{confirm_url}")
+    log("    程序将等待你确认，确认后自动继续下载（不设自动跳过）…")
+    confirmed = False
+    while not confirmed:
+        if wait_key_confirmed(before_log, timeout=60):
+            confirmed = True
+            break
+        log("    尚未检测到确认，请确认已在微信打开上面的链接…")
+        # 等待但不跳过，用户可在微信操作后，程序下一次轮询检测到
+        # 也支持用户按 Enter 手动放行
+        try:
+            r = input("    确认完成后按 Enter 继续（或 Ctrl+C 中断）… ")
+            if check_key_status(target_biz) == "ok":
+                confirmed = True
+        except EOFError:
+            pass  # 非交互：继续轮询等待，不自动跳过
+    log("  ✓ 密钥已确认")
 
     # ③ 记录下载前 md 数量
     before_count = len(list((Path(DL_DIR) / download_dir_name(name)).glob("*.md"))) if (Path(DL_DIR) / download_dir_name(name)).exists() else 0
@@ -249,11 +325,26 @@ def main():
         accounts = [accounts[i] for i in idxs]
 
     total = len(accounts)
-    log(f"开始采集 {total} 个公众号")
+    log(f"开始采集 {total} 个公众号（每号重启工具）")
     results = []
+
+    # 第一个号前先重启一次，保证干净状态
+    log("重启 wechatDownload…")
+    restart_tool()
+    if not wait_mcp_ready():
+        log("MCP 未就绪，中止")
+        sys.exit(1)
+    log("就绪 ✓")
 
     for i, acc in enumerate(accounts, 1):
         try:
+            if i > 1:
+                log("\n重启 wechatDownload（换号）…")
+                restart_tool()
+                if not wait_mcp_ready():
+                    results.append({"name": acc["name"], "status": "fail", "reason": "MCP 重启未就绪"})
+                    continue
+                log("就绪 ✓")
             r = collect_one(acc, i, total)
         except Exception as e:
             r = {"name": acc["name"], "status": "fail", "reason": str(e)}

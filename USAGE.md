@@ -89,31 +89,34 @@ python update.py --no-push # 只解析，不推送
 - 线上页面：https://xwt-netizen.github.io/campus-event-hub/
 - 本地预览：`frontend/index.html`
 
-### 2.4 自动刷取（推荐）
+### 2.4 一键更新（推荐）
 
-`autopilot.py` 监听下载目录，发现新文章自动解析 + 推送上线：
+`update.py` 解析下载目录里的新文章，自动去重过滤并推送上线：
 
 ```bash
 cd campus-event-hub
-# 持续监听模式（每 5 分钟一轮，自动触发 MCP 下载 + 解析 + 推送）
-.venv/bin/python parser/autopilot.py
-
-# 只跑一轮（适合 Windows 定时任务）
-.venv/bin/python parser/autopilot.py --once
-
-# 只解析+推送，不触发下载
-.venv/bin/python parser/autopilot.py --once --no-download
+python update.py          # 解析新文章 → 更新 events.json → 自动推送
+python update.py --no-push # 只解析，不推送
 ```
 
-### 2.5 全自动（B 方案，需配合 MCP）
+`update.py` 内部是**增量检测**：只把新文章送给 DeepSeek，已处理的不重复解析。
 
-前提：Windows 上 wechatDownload 勾选"启动MCP"（监听 0.0.0.0:4545）。
+### 2.5 采集（半自动，需配合 wechatDownload）
 
+前提：wechatDownload 勾选「自动监听剪切板」「启动MCP」，微信桌面版登录。
+
+`collector/collect.py` 每号自动重启工具 + 剪贴板切换公众号 + 自动批量下载，**每个公众号需在微信手动确认一次**（密钥确认，微信机制无法绕过）：
+
+```bash
+cd campus-event-hub
+python collector/collect.py            # 采集全部
+python collector/collect.py --only 0,3 # 指定下标
+python collector/collect.py --check    # 检查环境就绪
 ```
-wechatDownload MCP 批量下载 → autopilot 解析 → git push 上线
-```
 
-唯一手动步骤：微信密钥过期时，在微信桌面版打开 wechatDownload 生成的链接刷新密钥（每天约 1 次）。
+> 注意：wechatDownload 每次只能处理一个公众号，`collect.py` 会自动在每号间重启工具。
+
+唯一手动步骤：每个公众号在微信中打开确认链接（密钥确认，微信机制无法绕过）。
 
 ## 三、前端部署
 
@@ -122,7 +125,7 @@ wechatDownload MCP 批量下载 → autopilot 解析 → git push 上线
 ## 四、日常检查清单
 
 - [ ] 微信是否登录（wechatDownload 需要微信桌面版）
-- [ ] wechatDownload 是否勾选"启动MCP"（全自动模式需要）
-- [ ] wechatDownload 密钥是否过期（下载失败时重新获取一次密钥）
+- [ ] wechatDownload 是否勾选"启动MCP"「自动监听剪切板」
+- [ ] wechatDownload 密钥确认是否成功（工具日志出现"获取密钥成功"）
 - [ ] API key 余额是否充足（DeepSeek 官网查看）
 - [ ] autopilot 是否在运行

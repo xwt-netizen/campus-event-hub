@@ -7,3 +7,4 @@ data/raw/*
 *.egg-info/
 .DS_Store
 .autopilot_state.json
+缓存/
